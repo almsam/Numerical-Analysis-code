@@ -1,8 +1,15 @@
-import pandas as pd; import numpy as np; import seaborn as sns # type: ignore
-import statsmodels.api as sm; import statsmodels.formula.api as smf # type: ignore
+import pandas as pd
+import numpy as np
+import seaborn as sns  # type: ignore
+import statsmodels.api as sm
+import statsmodels.formula.api as smf  # type: ignore
 
 # Lets start out by adding a dataset
-df = pd.read_csv('possum.csv'); print(df.head(10))
+df = pd.read_csv(
+    "c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv"
+)
+print(df.head(10))
+print("ran success")
 
 # Then we can do a linear regression
 # And then measure how accurate it is
