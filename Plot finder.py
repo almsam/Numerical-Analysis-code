@@ -12,7 +12,13 @@ print(df.head(10))
 print("ran success")
 
 # Then we can do a linear regression
+y = df["hdlngth"].dropna()
+y = y.iloc[:100]  # y = list(y)
+x = df["age"].dropna()
+x = x.iloc[:100]  # x = list(x)
+model = sm.OLS(y, sm.add_constant(x)).fit()
 # And then measure how accurate it is
+print(model.summary2())
 
 # Then we can do a quadratic regression
 # And then measure how accurate it is
