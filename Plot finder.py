@@ -46,6 +46,24 @@ print("cube reg error: ", CubeError)
 
 
 
+# Then we can do a poly regression
+
+x_4 = np.power(x, 4); x_5 = np.power(x, 5); x_6 = np.power(x, 6); x_7 = np.power(x, 7)
+
+X_4 = pd.DataFrame({"age": x, "age_4": x_4}); X_4 = sm.add_constant(X_4); model_4 = sm.OLS(y, X_4).fit()
+pred_4 = model_4.predict(X_4); residuals_4 = y - pred_4; Error_4 = np.mean(np.abs(residuals_4))
+X_5 = pd.DataFrame({"age": x, "age_5": x_5}); X_5 = sm.add_constant(X_5); model_5 = sm.OLS(y, X_5).fit()
+pred_5 = model_5.predict(X_5); residuals_5 = y - pred_5; Error_5 = np.mean(np.abs(residuals_5))
+X_6 = pd.DataFrame({"age": x, "age_6": x_6}); X_6 = sm.add_constant(X_6); model_6 = sm.OLS(y, X_6).fit()
+pred_6 = model_6.predict(X_6); residuals_6 = y - pred_6; Error_6 = np.mean(np.abs(residuals_6))
+X_7 = pd.DataFrame({"age": x, "age_7": x_7}); X_7 = sm.add_constant(X_7); model_7 = sm.OLS(y, X_7).fit()
+pred_7 = model_7.predict(X_7); residuals_7 = y - pred_7; Error_7 = np.mean(np.abs(residuals_7))
+
+print("Polynomial regression (x^4) error: ", Error_4); print("Polynomial regression (x^5) error: ", Error_5)
+print("Polynomial regression (x^6) error: ", Error_6); print("Polynomial regression (x^7) error: ", Error_7)
+
+
+
 # Then we can do an exp regression
 # And then measure how accurate it is
 
