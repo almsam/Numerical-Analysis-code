@@ -15,12 +15,14 @@ print("ran success")
 df_filtered = df[["hdlngth", "age"]].dropna()
 y = df_filtered["hdlngth"]
 x = df_filtered["age"]
-model = sm.OLS(y, sm.add_constant(x)).fit()
+sm.add_constant(x)
+model = sm.OLS(y, x).fit()
 # And then measure how accurate it is
 print(model.summary2())
 pred = model.predict(x)
 residuals = y - pred
 mae = np.mean(np.abs(residuals))
+print("lin reg error: ", mae)
 
 
 # Then we can do a quadratic regression
