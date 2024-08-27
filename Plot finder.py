@@ -20,7 +20,20 @@ print("lin reg error: ", LinearError)
 
 
 # Then we can do a quadratic regression
+x_quad = np.power(x, 2)
+X = pd.DataFrame({"age": x, "age_squared": x_quad})
+X = sm.add_constant(X)
+model_quad = sm.OLS(y, X).fit()
+
 # And then measure how accurate it is
+pred_quad = model_quad.predict(X)
+residuals_quad = y - pred_quad
+QuadraticError = np.mean(np.abs(residuals_quad))
+print("quad reg error: ", QuadraticError)
+
+
+
+
 
 # Then we can do an exp regression
 # And then measure how accurate it is
