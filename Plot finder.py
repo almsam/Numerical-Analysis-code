@@ -7,18 +7,15 @@ import statsmodels.formula.api as smf  # type: ignore
 # Lets start out by adding a dataset
 df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv")
 # print(df.head(10)); print("ran success")
-
-#   Then we can do a linear regression
 df_filtered = df[["hdlngth", "age"]].dropna()
 y = df_filtered["hdlngth"]; x = df_filtered["age"]
 
+#   Then we can do a linear regression
 sm.add_constant(x)
 model = sm.OLS(y, x).fit()
-
-# And then measure how accurate it is
+#   And then measure how accurate it is
 pred = model.predict(x); residuals = y - pred
 LinearError = np.mean(np.abs(residuals))
-
 print("lin reg error: ", LinearError)
 
 
