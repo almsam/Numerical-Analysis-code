@@ -19,12 +19,12 @@ LinearError = np.mean(np.abs(residuals))
 print("lin reg error: ", LinearError)
 
 
+
 # Then we can do a quadratic regression
 x_quad = np.power(x, 2)
 X = pd.DataFrame({"age": x, "age_squared": x_quad})
 X = sm.add_constant(X)
 model_quad = sm.OLS(y, X).fit()
-
 # And then measure how accurate it is
 pred_quad = model_quad.predict(X)
 residuals_quad = y - pred_quad
@@ -32,6 +32,17 @@ QuadraticError = np.mean(np.abs(residuals_quad))
 print("quad reg error: ", QuadraticError)
 
 
+
+# Then we can do a cubic regression
+x_cube = np.power(x, 3)
+X = pd.DataFrame({"age": x, "age_cubed": x_cube})
+X = sm.add_constant(X)
+model_cube = sm.OLS(y, X).fit()
+# And then measure how accurate it is
+pred_cube = model_cube.predict(X)
+residuals_cube = y - pred_cube
+CubeError = np.mean(np.abs(residuals_cube))
+print("cube reg error: ", CubeError)
 
 
 
