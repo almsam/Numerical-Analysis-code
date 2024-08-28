@@ -95,14 +95,85 @@ def exp_regression(x, y):
 
 
 
+# Log reg
+def logarithmic_regression(x, y):
+    log_x = np.log(x); X = sm.add_constant(log_x); model_log = sm.OLS(y, X).fit()
+    # And then measure how accurate it is
+    pred_log = model_log.predict(X); residuals_log = y - pred_log
+    LogarithmicError = np.mean(np.abs(residuals_log))
+    print("log regression error: ", LogarithmicError)
+    return LogarithmicError
+
+
+
+
 # & then a sign wave regression
+def sin_regression(x, y):
+    sin_x = np.sin(x); X = sm.add_constant(sin_x); model_sin = sm.OLS(y, X).fit()
 # And then measure how accurate it is
+    pred_sin = model_sin.predict(X)
+    residuals_sine = y - pred_sin
+    SinError = np.mean(np.abs(residuals_sine))
+    print("sine regression error: ", SinError)
+    return SinError
+
+
+
+# Logistic
+def logistic_regression(x, y):
+    y_transformed = (y - np.min(y)) / (np.max(y) - np.min(y))
+    X = sm.add_constant(x)
+    model_logistic = sm.Logit(y_transformed, X).fit()
+    # how accurate
+    pred_logistic = model_logistic.predict(X)
+    residuals_logistic = y_transformed - pred_logistic
+    LogisticError = np.mean(np.abs(residuals_logistic))
+    print("logistic regression error: ", LogisticError)
+    return LogisticError
+
+
+
+
+# Loess
+def loess_regression(x, y, frac=0.3):
+    loess_model = sm.nonparametric.lowess(y, x, frac=frac)
+    # accuracy
+    pred_loess = loess_model[:, 1]; residuals_loess = y - pred_loess
+    LoessError = np.mean(np.abs(residuals_loess))
+    print("loess regression error: ", LoessError)
+    return LoessError
 
 
 
 # Then compare how accurate all of the above is
-# & designate the most accurate
 
+def main(x,y):
+    error_list = []
+
+    linear_error = linear_regression(x, y); error_list.append(("Linear", linear_error))
+    quadratic_error = quadratic_regression(x, y); error_list.append(("Quadratic", quadratic_error))
+    cubic_error = cubic_regression(x, y); error_list.append(("Cubic", cubic_error))
+    polynomial_errors = poly_regression(x, y)
+    for i, poly_error in enumerate(polynomial_errors, start=4):
+        error_list.append((f"Polynomial (x^{i})", poly_error))
+    exp_error = exp_regression(x, y); error_list.append(("Exponential", exp_error))
+    logarithmic_error = logarithmic_regression(x, y); error_list.append(("Logarithmic", logarithmic_error))
+    sine_error = sin_regression(x, y); error_list.append(("Sine", sine_error))
+    # logistic_error = logistic_regression(x, y); error_list.append(("Logistic Regression", logistic_error))
+    loess_error = loess_regression(x, y); error_list.append(("LOESS", loess_error))
+
+    # Print all errors
+    print("\n--- Regression Errors ---")
+    for method_name, error in error_list:
+        print(f"{method_name} Error: {error}")
+
+    # & designate the most accurate
+    min_error_method = min(error_list, key=lambda x: x[1])
+    print(f"\nThe method with the smallest error is: {min_error_method[0]} Regression with an error of {min_error_method[1]}")
+    print(f"\nTherefore, the function is likely a {min_error_method[0]} function")
+
+
+main(x,y)
 
 
 # print(linear_regression(x, y))
