@@ -104,8 +104,18 @@ def logarithmic_regression(x, y):
     print("log regression error: ", LogarithmicError)
     return LogarithmicError
 
+
+
+
 # & then a sign wave regression
+def sin_regression(x, y):
+    sin_x = np.sin(x); X = sm.add_constant(sin_x); model_sin = sm.OLS(y, X).fit()
 # And then measure how accurate it is
+    pred_sin = model_sin.predict(X)
+    residuals_sine = y - pred_sin
+    SinError = np.mean(np.abs(residuals_sine))
+    print("sine regression error: ", SinError)
+    return SinError
 
 
 
