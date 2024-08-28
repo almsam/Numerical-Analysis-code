@@ -3,11 +3,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="YOUR_PROJECT_REPO_LINK">
-    <img src="YOUR_LOGO_URL" alt="Logo" width="180" height="180">
+  <a href="https://github.com/almsam/Numerical-Analysis-code.git">
+    <img src="https://github.com/almsam/Numerical-Analysis-code/blob/main/images/logo.png" alt="Logo" width="180" height="180">
   </a>
 
-<h1 align="center">YOUR_PROJECT_NAME</h1>
+<h1 align="center">Numerically Analysing my Data</h1>
 
 <p align="center">
   <strong>Mission Statement</strong><br>
