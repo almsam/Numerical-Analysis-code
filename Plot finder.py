@@ -119,6 +119,26 @@ def sin_regression(x, y):
 
 
 
+# Logistic
+def logistic_regression(x, y):
+    y_transformed = (y - np.min(y)) / (np.max(y) - np.min(y))
+    X = sm.add_constant(x)
+    model_logistic = sm.Logit(y_transformed, X).fit()
+    # how accurate
+    pred_logistic = model_logistic.predict(X)
+    residuals_logistic = y_transformed - pred_logistic
+    LogisticError = np.mean(np.abs(residuals_logistic))
+    print("logistic regression error: ", LogisticError)
+    return LogisticError
+
+
+
+
+# Loess
+
+# accuracy
+
+
 # Then compare how accurate all of the above is
 # & designate the most accurate
 
