@@ -95,6 +95,15 @@ def exp_regression(x, y):
 
 
 
+# Log reg
+def logarithmic_regression(x, y):
+    log_x = np.log(x); X = sm.add_constant(log_x); model_log = sm.OLS(y, X).fit()
+    # And then measure how accurate it is
+    pred_log = model_log.predict(X); residuals_log = y - pred_log
+    LogarithmicError = np.mean(np.abs(residuals_log))
+    print("log regression error: ", LogarithmicError)
+    return LogarithmicError
+
 # & then a sign wave regression
 # And then measure how accurate it is
 
