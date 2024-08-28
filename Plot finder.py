@@ -47,7 +47,6 @@ print("cube reg error: ", CubeError)
 
 
 # Then we can do a poly regression
-
 x_4 = np.power(x, 4); x_5 = np.power(x, 5); x_6 = np.power(x, 6); x_7 = np.power(x, 7)
 
 X_4 = pd.DataFrame({"age": x, "age_4": x_4}); X_4 = sm.add_constant(X_4); model_4 = sm.OLS(y, X_4).fit()
@@ -64,8 +63,15 @@ print("Polynomial regression (x^6) error: ", Error_6); print("Polynomial regress
 
 
 
+
+
+
 # Then we can do an exp regression
+log_y = np.log(y); X = sm.add_constant(x); model_exp = sm.OLS(log_y, X).fit()
 # And then measure how accurate it is
+log_pred = model_exp.predict(X); pred_exp = np.exp(log_pred)
+residuals_exp = y - pred_exp; ExponentialError = np.mean(np.abs(residuals_exp))
+print("exp regression error: ", ExponentialError)
 
 # & then a sign wave regression
 # And then measure how accurate it is
