@@ -150,17 +150,17 @@ def loess_regression(x, y, frac=0.3):
 def main(x,y):
     error_list = []
 
-    linear_error = linear_regression(x, y); error_list.append(("Linear Regression", linear_error))
-    quadratic_error = quadratic_regression(x, y); error_list.append(("Quadratic Regression", quadratic_error))
-    cubic_error = cubic_regression(x, y); error_list.append(("Cubic Regression", cubic_error))
+    linear_error = linear_regression(x, y); error_list.append(("Linear", linear_error))
+    quadratic_error = quadratic_regression(x, y); error_list.append(("Quadratic", quadratic_error))
+    cubic_error = cubic_regression(x, y); error_list.append(("Cubic", cubic_error))
     polynomial_errors = poly_regression(x, y)
     for i, poly_error in enumerate(polynomial_errors, start=4):
-        error_list.append((f"Polynomial Regression (x^{i})", poly_error))
-    exp_error = exp_regression(x, y); error_list.append(("Exponential Regression", exp_error))
-    logarithmic_error = logarithmic_regression(x, y); error_list.append(("Logarithmic Regression", logarithmic_error))
-    sine_error = sin_regression(x, y); error_list.append(("Sine Regression", sine_error))
+        error_list.append((f"Polynomial (x^{i})", poly_error))
+    exp_error = exp_regression(x, y); error_list.append(("Exponential", exp_error))
+    logarithmic_error = logarithmic_regression(x, y); error_list.append(("Logarithmic", logarithmic_error))
+    sine_error = sin_regression(x, y); error_list.append(("Sine", sine_error))
     # logistic_error = logistic_regression(x, y); error_list.append(("Logistic Regression", logistic_error))
-    loess_error = loess_regression(x, y); error_list.append(("LOESS Regression", loess_error))
+    loess_error = loess_regression(x, y); error_list.append(("LOESS", loess_error))
 
     # Print all errors
     print("\n--- Regression Errors ---")
@@ -168,6 +168,9 @@ def main(x,y):
         print(f"{method_name} Error: {error}")
 
     # & designate the most accurate
+    min_error_method = min(error_list, key=lambda x: x[1])
+    print(f"\nThe method with the smallest error is: {min_error_method[0]} Regression with an error of {min_error_method[1]}")
+    print(f"\nTherefore, the function is likely a {min_error_method[0]} function")
 
 
 main(x,y)
