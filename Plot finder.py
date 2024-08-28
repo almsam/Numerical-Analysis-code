@@ -135,8 +135,14 @@ def logistic_regression(x, y):
 
 
 # Loess
+def loess_regression(x, y, frac=0.3):
+    loess_model = sm.nonparametric.lowess(y, x, frac=frac)
+    # accuracy
+    pred_loess = loess_model[:, 1]; residuals_loess = y - pred_loess
+    LoessError = np.mean(np.abs(residuals_loess))
+    print("loess regression error: ", LoessError)
+    return LoessError
 
-# accuracy
 
 
 # Then compare how accurate all of the above is
