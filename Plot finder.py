@@ -150,26 +150,17 @@ def loess_regression(x, y, frac=0.3):
 def main(x,y):
     error_list = []
 
-    linear_error = linear_regression(x, y); error_list.append(linear_error)
-    quadratic_error = quadratic_regression(x, y); error_list.append(quadratic_error)
-    cubic_error = cubic_regression(x, y); error_list.append(cubic_error)
-    polynomial_errors = poly_regression(x, y); error_list.append(polynomial_errors)
-    exp_error = exp_regression(x, y); error_list.append(exp_error)
-    logarithmic_error = logarithmic_regression(x, y); error_list.append(logarithmic_error)
-    sine_error = sin_regression(x, y); error_list.append(sine_error)
-    # logistic_error = logistic_regression(x, y); error_list.append(logistic_error)
-    loess_error = loess_regression(x, y); error_list.append(loess_error)
-
-    # print("\n--- Regression Errors ---")
-    # print(f"Linear Regression Error: {linear_error}")
-    # print(f"Quadratic Regression Error: {quadratic_error}")
-    # print(f"Cubic Regression Error: {cubic_error}")
-    # print(f"Polynomial Regression Errors (x^4 to x^7): {polynomial_errors}")
-    # print(f"Exponential Regression Error: {exp_error}")
-    # print(f"Logarithmic Regression Error: {logarithmic_error}")
-    # print(f"Sine Regression Error: {sine_error}")
-    # # print(f"Logistic Regression Error: {logistic_error}")
-    # print(f"LOESS Regression Error: {loess_error}")
+    linear_error = linear_regression(x, y); error_list.append(("Linear Regression", linear_error))
+    quadratic_error = quadratic_regression(x, y); error_list.append(("Quadratic Regression", quadratic_error))
+    cubic_error = cubic_regression(x, y); error_list.append(("Cubic Regression", cubic_error))
+    polynomial_errors = poly_regression(x, y)
+    for i, poly_error in enumerate(polynomial_errors, start=4):
+        error_list.append((f"Polynomial Regression (x^{i})", poly_error))
+    exp_error = exp_regression(x, y); error_list.append(("Exponential Regression", exp_error))
+    logarithmic_error = logarithmic_regression(x, y); error_list.append(("Logarithmic Regression", logarithmic_error))
+    sine_error = sin_regression(x, y); error_list.append(("Sine Regression", sine_error))
+    # logistic_error = logistic_regression(x, y); error_list.append(("Logistic Regression", logistic_error))
+    loess_error = loess_regression(x, y); error_list.append(("LOESS Regression", loess_error))
 
     # Print all errors
     print("\n--- Regression Errors ---")
