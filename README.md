@@ -11,7 +11,7 @@
 
 <p align="center">
   <strong>Mission Statement</strong><br>
-  "YOUR_MISSION_STATEMENT"
+  "My mission is to implement various mathmatical algorithms in Python for practice, to test my skills, to doccument the methods, and just for fun"
 </p>
 
 <p align="center">
