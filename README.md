@@ -16,7 +16,7 @@
 
 <p align="center">
   <strong>Project Summary</strong><br>
-  Brief summary of the project, its purpose, and what it aims to accomplish.
+  During my third year of post secondary, I learnt a ton of algorithms for solving problems in my numerical analysis course, however I have only implemented them in Python thusfar. Hence: my goal here is to implement algorithms, including but not limited to Newtons Method, the Bisection Method, Lagrange Interpolation, Trapezoid & Simpsons Integration, & Lipshitz Algorithm, as well as Eulers & Heuns Methods for aproximating ODE's
 </p>
 
 </div>
