@@ -24,7 +24,25 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The project was built with [TECHNOLOGIES_USED].
+The project was built with [![Py][Py]][PyUrl]
+
+
+[Py]: https://img.shields.io/badge/Python%20-%20%233e50b5?logo=python&logoColor=%23FFDE57&logoSize=auto
+[PyUrl]: https://www.python.org
+
+[Numpy]: https://img.shields.io/badge/NumPy-%20%23013243?logo=numpy&logoColor=%23FFFFFF&logoSize=auto
+[Numpy-url]: https://numpy.org/
+[Matplotlib]: https://img.shields.io/badge/MatPlotLib-%20%2345ca9a?logo=python&logoColor=%23FFFFFF&logoSize=auto
+[Matplotlib-url]: https://matplotlib.org/
+[Seaborn]: https://img.shields.io/badge/SeaBorn-%20%2365baea?logo=python&logoColor=%23FFFFFF&logoSize=auto
+[Seaborn-url]: https://seaborn.pydata.org/
+[Pandas]: https://img.shields.io/badge/Pandas%20-%20%23150458?logo=pandas&logoColor=%23FFFFFF&logoSize=auto
+[Pandas-url]: https://pandas.pydata.org/
+[Statsmodels]: https://img.shields.io/badge/StatsModels%20-%20%231e3095?logo=python&logoColor=%23FFFFFF&logoSize=auto
+[Statsmodels-url]: https://www.statsmodels.org/stable/index.html
+[Flask]: https://img.shields.io/badge/Flask%20-%20%23000000?logo=flask&logoColor=%23FFFFFF&logoSize=auto
+[Flask-Url]: https://flask.palletsprojects.com/en/3.0.x/
+
 
 ### Built By [YOUR_NAME](YOUR_PORTFOLIO_LINK) With: [![Technology1][Tech1]][Tech1-url] [![Technology2][Tech2]][Tech2-url] ...
 
