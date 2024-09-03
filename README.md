@@ -44,7 +44,7 @@ The project was built with [![Py][Py]][PyUrl]
 [Flask-Url]: https://flask.palletsprojects.com/en/3.0.x/
 
 
-### Built By [YOUR_NAME](YOUR_PORTFOLIO_LINK) With: [![Technology1][Tech1]][Tech1-url] [![Technology2][Tech2]][Tech2-url] ...
+### Built By [Samira](https://github.com/almsam) With: [![Technology1][Tech1]][Tech1-url] [![Technology2][Tech2]][Tech2-url] ...
 
 [Tech1]: YOUR_SHIELD_URL_1
 [Tech1-url]: YOUR_TECH_URL_1
