@@ -24,7 +24,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The project was built with [![Py][Py]][PyUrl]
+### Built By [Samira](https://github.com/almsam) With: [![Py][Py]][PyUrl] & [![Statsmodels][Statsmodels]][Statsmodels-url]
 
 
 [Py]: https://img.shields.io/badge/Python%20-%20%233e50b5?logo=python&logoColor=%23FFDE57&logoSize=auto
@@ -44,7 +44,6 @@ The project was built with [![Py][Py]][PyUrl]
 [Flask-Url]: https://flask.palletsprojects.com/en/3.0.x/
 
 
-### Built By [Samira](https://github.com/almsam) With: [![Technology1][Tech1]][Tech1-url] [![Technology2][Tech2]][Tech2-url] ...
 
 [Tech1]: YOUR_SHIELD_URL_1
 [Tech1-url]: YOUR_TECH_URL_1
