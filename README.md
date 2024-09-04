@@ -55,6 +55,7 @@
 <!-- FEATURES -->
 ## Project Features
 
-#### Feature 1
-- Brief description of feature 1.
-- Brief description of feature 2.
+#### Plot finder
+- After completing a lab in 1st year physics to derive a formula for a tenis balls flight by collecting data in a video, I realzied the lack of frameworks in place to detrmine the relationship between variables
+- Enter Plot finder: [Plot finder.py](https://github.com/almsam/Numerical-Analysis-code/blob/main/Plot%20finder.py) runs a linear, quadratic, cubic, higher polynomial, exponential, logarithmic, Loess, & sinosudial regressions, then using the smallest error case to determine the best guess for the best fit line of the graph
+
