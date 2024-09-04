@@ -16,7 +16,7 @@
 
 <p align="center">
   <strong>Project Summary</strong><br>
-  During my third year of post secondary, I learnt a ton of algorithms for solving problems in my numerical analysis course, however I have only implemented them in Python thusfar. Hence: my goal here is to implement algorithms, including but not limited to Newtons Method, the Bisection Method, Lagrange Interpolation, Trapezoid & Simpsons Integration, & Lipshitz Algorithm, as well as Eulers & Heuns Methods for aproximating ODE's. Also Just for fun im going to sprinkle in some of my own creations i've wanted for a while - such as using multiple regression techniques to find the best fit function on a dataset.
+  During my third year of post secondary, I learnt a ton of algorithms for solving problems in my numerical analysis course, however I have only implemented them in MATLAB thusfar. Hence: my goal here is to implement algorithms - including but not limited to Newtons Method, the Bisection Method, Lagrange Interpolation, Trapezoid & Simpsons Integration, & Lipshitz Algorithm, as well as Eulers & Heuns Methods for aproximating ODE's - in Python. Also Just for fun im going to sprinkle in some of my own creations i've wanted for a while - such as using multiple regression techniques to find the best fit function on a dataset.
 </p>
 
 </div>
