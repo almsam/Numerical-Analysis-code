@@ -24,7 +24,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-### Built By [Samira](https://github.com/almsam) With: [![Py][Py]][PyUrl] & [![Statsmodels][Statsmodels]][Statsmodels-url]
+### Built By [Samira](https://github.com/almsam) With: [![Py][Py]][PyUrl] using [![Numpy][Numpy]][Numpy-url][![Pandas][Pandas]][Pandas-url][![Scikit-learn][Scikit-learn]][Scikit-learn-url] & [![Statsmodels][Statsmodels]][Statsmodels-url]
 
 
 [Py]: https://img.shields.io/badge/Python%20-%20%233e50b5?logo=python&logoColor=%23FFDE57&logoSize=auto
@@ -42,6 +42,8 @@
 [Statsmodels-url]: https://www.statsmodels.org/stable/index.html
 [Flask]: https://img.shields.io/badge/Flask%20-%20%23000000?logo=flask&logoColor=%23FFFFFF&logoSize=auto
 [Flask-Url]: https://flask.palletsprojects.com/en/3.0.x/
+[Scikit-learn]: https://img.shields.io/badge/SciKit%20Learn%20-%20%2344a9dd?logo=scikitlearn&logoColor=%23FFFFFF&logoSize=auto
+[Scikit-learn-url]: https://scikit-learn.org/stable/
 
 
 
@@ -49,7 +51,6 @@
 [Tech1-url]: YOUR_TECH_URL_1
 [Tech2]: YOUR_SHIELD_URL_2
 [Tech2-url]: YOUR_TECH_URL_2
-...
 
 <!-- FEATURES -->
 ## Project Features
