@@ -45,13 +45,6 @@
 [Scikit-learn]: https://img.shields.io/badge/SciKit%20Learn%20-%20%2344a9dd?logo=scikitlearn&logoColor=%23FFFFFF&logoSize=auto
 [Scikit-learn-url]: https://scikit-learn.org/stable/
 
-
-
-[Tech1]: YOUR_SHIELD_URL_1
-[Tech1-url]: YOUR_TECH_URL_1
-[Tech2]: YOUR_SHIELD_URL_2
-[Tech2-url]: YOUR_TECH_URL_2
-
 <!-- FEATURES -->
 ## Project Features
 
