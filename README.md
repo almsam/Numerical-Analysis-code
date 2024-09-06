@@ -7,16 +7,16 @@
     <img src="https://github.com/almsam/Numerical-Analysis-code/blob/main/images/logo.png" alt="Logo" width="270" height="270">
   </a>
 
-<h1 align="center">Numerically Analysing my Data</h1>
+<h1 align="center">Numerically Analyzing my Data</h1>
 
 <p align="center">
   <strong>Mission Statement</strong><br>
-  "My mission is to implement various mathmatical algorithms in Python for practice, to test my skills, to doccument the methods, and just for fun"
+  "My mission is to implement various mathematical algorithms in Python for practice, to test my skills, to document the methods, and just for fun"
 </p>
 
 <p align="center">
   <strong>Project Summary</strong><br>
-  During my third year of post secondary, I learnt a ton of algorithms for solving problems in my numerical analysis course, however I have only implemented them in MATLAB thusfar. Hence: my goal here is to implement algorithms - including but not limited to Newtons Method, the Bisection Method, Lagrange Interpolation, Trapezoid & Simpsons Integration, & Lipshitz Algorithm, as well as Eulers & Heuns Methods for aproximating ODE's - in Python. Also Just for fun im going to sprinkle in some of my own creations i've wanted for a while - such as using multiple regression techniques to find the best fit function on a dataset.
+  During my third year of post secondary, I learnt a ton of algorithms for solving problems in my numerical analysis course, however I have only implemented them in MATLAB thus-far. Hence: my goal here is to implement algorithms - including but not limited to Newtons Method, the Bisection Method, Lagrange Interpolation, Trapezoid & Simpsons Integration, & Lipchitz Algorithm, as well as Euler's & Heun's Methods for approximating ODE's - in Python. Also Just for fun im going to sprinkle in some of my own creations i've wanted for a while - such as using multiple regression techniques to find the best fit function on a dataset.
 </p>
 
 </div>
