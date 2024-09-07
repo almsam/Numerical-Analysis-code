@@ -105,7 +105,7 @@ def logistic_regression(x, y):
 
 # LOESS Regression
 def loess_regression(x, y, frac=0.3):
-    loess_model = lowess.lowess(y, x, frac=frac)  # Used lowess from statsmodels
+    loess_model = sm.nonparametric.lowess(y, x, frac=frac)  # Used lowess from statsmodels
     pred_loess = loess_model[:, 1]
     residuals_loess = y - pred_loess
     LoessError = np.mean(np.abs(residuals_loess))
