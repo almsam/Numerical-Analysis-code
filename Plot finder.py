@@ -138,8 +138,8 @@ def main(x, y):
     sine_error = sin_regression(x, y)
     error_list.append(("Sine", sine_error))
 
-    logistic_error = logistic_regression(x, y)
-    error_list.append(("Logistic", logistic_error))
+    # logistic_error = logistic_regression(x, y)
+    # error_list.append(("Logistic", logistic_error))
 
     loess_error = loess_regression(x, y)
     error_list.append(("LOESS", loess_error))
