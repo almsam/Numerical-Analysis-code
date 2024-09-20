@@ -13,7 +13,7 @@ x = df_filtered["age"].values
 
 # Function input and manipulation
 def input_function():
-    func_str = xinput("Enter a function (e.g., '2*x**2 + 4*x + 1'): ")
+    func_str = input("Enter a function (e.g., '2*x**2 + 4*x + 1'): ")
     x = symbols('x')
     return sympify(func_str)
 
