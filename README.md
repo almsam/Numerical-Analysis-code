@@ -55,3 +55,4 @@
 - The next Iteration of development is to return the function of the line of best fit - as well as error information
 - And the next Iteration after that will involve a Forior series of multiple functions summed togetehr - which theoretically could mean the error of a graph could be chocked up to a sinosudial term in the true function
 
+  The Goal here? I would like to ultimately bridge this section of the project into an open source library/package to serve as an aditional tool in our workforces data science toolboxes
