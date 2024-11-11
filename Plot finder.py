@@ -106,15 +106,6 @@ def loess_regression(x, y, frac=0.3):
     print("LOESS regression error: ", LoessError)
     return LoessError
 
-# user-defined function regression
-def user_defined_regression(x, y, func):
-    x_sym = symbols('x')
-    func_lambda = lambdify(x_sym, func, "numpy")
-    pred = func_lambda(x)
-    residuals = y - pred
-    UserDefinedError = np.mean(np.abs(residuals))
-    print("User-defined function regression error: ", UserDefinedError)
-    return UserDefinedError
 
 # Modified main function
 def main(x, y):
@@ -133,20 +124,7 @@ def main(x, y):
     error_list.append(("Sine", sin_regression(x, y)))
     error_list.append(("LOESS", loess_regression(x, y)))
 
-    # User-defined function regression
-    user_func = input_function()
-    user_func_error = user_defined_regression(x, y, user_func)
-    error_list.append(("User-defined", user_func_error))
 
-    # Find min and max of user-defined function
-    min_val, max_val = find_min_max(user_func, min(x), max(x))
-    print(f"\nMin value of user-defined function: {min_val}")
-    print(f"Max value of user-defined function: {max_val}")
-
-    # Calculate derivative at mean x
-    mean_x = np.mean(x)
-    deriv_at_mean = calculate_derivative(user_func, mean_x)
-    print(f"Derivative of user-defined function at mean x ({mean_x}): {deriv_at_mean}")
 
     
     print("\n--- Regression Errors ---")
