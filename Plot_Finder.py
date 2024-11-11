@@ -11,28 +11,6 @@ df_filtered = df[["hdlngth", "age"]].dropna()
 y = df_filtered["hdlngth"].values
 x = df_filtered["age"].values
 
-# Function input and manipulation
-def input_function():
-    func_str = input("Enter a function (e.g., '2*x**2 + 4*x + 1'): ")
-    x = symbols('x')
-    return sympify(func_str)
-
-def evaluate_function(func, x_val):
-    x = symbols('x')
-    return float(func.subs(x, x_val))
-
-def find_min_max(func, range_start, range_end):
-    x = symbols('x')
-    critical_points = solve(diff(func, x), x)
-    valid_points = [p for p in critical_points if range_start <= p <= range_end]
-    valid_points.extend([range_start, range_end])
-    values = [evaluate_function(func, p) for p in valid_points]
-    return min(values), max(values)
-
-def calculate_derivative(func, x_val):
-    x = symbols('x')
-    deriv = diff(func, x)
-    return float(deriv.subs(x, x_val))
 
 # Original regression methods
 def linear_regression(x, y):
@@ -128,21 +106,11 @@ def loess_regression(x, y, frac=0.3):
     print("LOESS regression error: ", LoessError)
     return LoessError
 
-# user-defined function regression
-def user_defined_regression(x, y, func):
-    x_sym = symbols('x')
-    func_lambda = lambdify(x_sym, func, "numpy")
-    pred = func_lambda(x)
-    residuals = y - pred
-    UserDefinedError = np.mean(np.abs(residuals))
-    print("User-defined function regression error: ", UserDefinedError)
-    return UserDefinedError
 
 # Modified main function
 def main(x, y):
     error_list = []
 
-   
     error_list.append(("Linear", linear_regression(x, y)))
     error_list.append(("Quadratic", quadratic_regression(x, y)))
     error_list.append(("Cubic", cubic_regression(x, y)))
@@ -156,20 +124,7 @@ def main(x, y):
     error_list.append(("Sine", sin_regression(x, y)))
     error_list.append(("LOESS", loess_regression(x, y)))
 
-    # User-defined function regression
-    user_func = input_function()
-    user_func_error = user_defined_regression(x, y, user_func)
-    error_list.append(("User-defined", user_func_error))
 
-    # Find min and max of user-defined function
-    min_val, max_val = find_min_max(user_func, min(x), max(x))
-    print(f"\nMin value of user-defined function: {min_val}")
-    print(f"Max value of user-defined function: {max_val}")
-
-    # Calculate derivative at mean x
-    mean_x = np.mean(x)
-    deriv_at_mean = calculate_derivative(user_func, mean_x)
-    print(f"Derivative of user-defined function at mean x ({mean_x}): {deriv_at_mean}")
 
     
     print("\n--- Regression Errors ---")
