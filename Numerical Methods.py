@@ -6,10 +6,10 @@ import statsmodels.formula.api as smf  # type: ignore
 from sympy import symbols, sympify, solve, diff, lambdify
 
 
-df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv")
-df_filtered = df[["hdlngth", "age"]].dropna()
-y = df_filtered["hdlngth"].values
-x = df_filtered["age"].values
+# df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv")
+# df_filtered = df[["hdlngth", "age"]].dropna()
+# y = df_filtered["hdlngth"].values
+# x = df_filtered["age"].values
 
 
 # Function input and manipulation
@@ -30,16 +30,27 @@ def find_min_max(func, range_start, range_end):
     values = [evaluate_function(func, p) for p in valid_points]
     return min(values), max(values)
 
-def calculate_derivative(func, x_val):
+def calculate_derivative(x_val, func):
     x = symbols('x')
     deriv = diff(func, x)
     return float(deriv.subs(x, x_val))
 
 
 
+def main():
+    user_func = input_function()
+    min, max = find_min_max(user_func, -100, 100)
+
+    # min max
+    print(f"\nMin value of user-defined function: {min}")
+    print(f"Max value of user-defined function: {max}")
+
+    # derivative at x = 0
+    deriv_at_mean = calculate_derivative(0, user_func)
+    print(f"Derivative of user-defined function at mx = ({0}): {deriv_at_mean}")
 
 
-
+main()
 
 
 
