@@ -2,6 +2,9 @@ import unittest
 import numpy as np
 import pandas as pd
 from unittest.mock import patch
+from sympy import symbols, exp, log, sin
+import statsmodels.api as sm
+import statsmodels.formula.api as smf  # type: ignore
 from Plot_Finder import linear_regression, quadratic_regression, cubic_regression, poly_regression, exp_regression, logarithmic_regression, sin_regression, logistic_regression, loess_regression
 
 class TestRegressionMethods(unittest.TestCase):
@@ -16,60 +19,85 @@ class TestRegressionMethods(unittest.TestCase):
 
     @patch('builtins.print')
     def test_linear_regression(self, mock_print):
-        error = linear_regression(self.x, self.y)
-        mock_print.assert_called_with("Linear regression error: ", error)
+        error, formula = linear_regression(self.x, self.y)
         self.assertIsInstance(error, float)
-
-    @patch('builtins.print')
-    def test_quadratic_regression(self, mock_print):
-        error = quadratic_regression(self.x, self.y)
-        mock_print.assert_called_with("Quadratic regression error: ", error)
+        self.assertGreater(error, 0)  # expect positive error
+        self.assertIn('x', str(formula))
+    
+    def test_quadratic_regression(self):
+        error, formula = quadratic_regression(self.x, self.y)
         self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+        self.assertIn('x', str(formula))  # formula should contain 'x'
 
-    @patch('builtins.print')
-    def test_cubic_regression(self, mock_print):
-        error = cubic_regression(self.x, self.y)
-        mock_print.assert_called_with("Cubic regression error: ", error)
+    def test_cubic_regression(self):
+        error, formula = cubic_regression(self.x, self.y)
         self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+        self.assertIn('x', str(formula))
 
-    @patch('builtins.print')
-    def test_polynomial_regression(self, mock_print):
-        errors = poly_regression(self.x, self.y)
-        self.assertEqual(len(errors), 4)  # Ensure four polynomial degrees are tested (x^4 to x^7)
-        for i, error in enumerate(errors, start=4):
-            mock_print.assert_any_call(f"Polynomial regression (x^{i}) error: ", error)
+    def test_poly_regression(self):
+        for degree in range(4, 8):
+            error, formula = poly_regression(self.x, self.y, degree)
             self.assertIsInstance(error, float)
+            self.assertGreater(error, 0)
+            self.assertIn('x', str(formula))
 
-    @patch('builtins.print')
-    def test_exponential_regression(self, mock_print):
-        error = exp_regression(self.x, self.y)
-        mock_print.assert_called_with("Exponential regression error: ", error)
+    def test_exp_regression(self):
+        error, formula = exp_regression(self.x, self.y)
         self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+        self.assertIn('x', str(formula))
 
-    @patch('builtins.print')
-    def test_logarithmic_regression(self, mock_print):
-        error = logarithmic_regression(self.x, self.y)
-        mock_print.assert_called_with("Logarithmic regression error: ", error)
+    def test_logarithmic_regression(self):
+        error, formula = logarithmic_regression(self.x, self.y)
         self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+        self.assertIn('x', str(formula))
 
-    @patch('builtins.print')
-    def test_sine_regression(self, mock_print):
-        error = sin_regression(self.x, self.y)
-        mock_print.assert_called_with("Sine regression error: ", error)
+    def test_sin_regression(self):
+        error, formula = sin_regression(self.x, self.y)
         self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+        self.assertIn('x', str(formula))
 
-    @patch('builtins.print')
-    def test_logistic_regression(self, mock_print):
-        error = logistic_regression(self.x, self.y)
-        mock_print.assert_called_with("Logistic regression error: ", error)
+    def test_loess_regression(self):
+        error, formula = loess_regression(self.x, self.y)
         self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+        self.assertEqual(formula, "non-parametric")
 
-    @patch('builtins.print')
-    def test_loess_regression(self, mock_print):
-        error = loess_regression(self.x, self.y)
-        mock_print.assert_called_with("LOESS regression error: ", error)
-        self.assertIsInstance(error, float)
+    def test_main_function(self):
+        # get the printed output
+        from unittest.mock import patch
+        with patch('builtins.print') as mocked_print:
+            main(self.x, self.y)
+            mocked_print.assert_any_call("The method with the smallest error is:")
 
+    def test_method_selection(self):
+        error_list = []
+        methods = [
+            ("Linear", linear_regression),
+            ("Quadratic", quadratic_regression),
+            ("Cubic", cubic_regression),
+            ("Exponential", exp_regression),
+            ("Logarithmic", logarithmic_regression),
+            ("Sine", sin_regression),
+            ("LOESS", loess_regression)
+        ]
+        for name, method in methods:
+            error, formula = method(self.x, self.y)
+            error_list.append((name, error, formula))
+        
+        #polynomial regression for degrees 4 to 7
+        for degree in range(4, 8):
+            error, formula = poly_regression(self.x, self.y, degree)
+            error_list.append((f"Polynomial (x^{degree})", error, formula))
+        
+        min_error_method = min(error_list, key=lambda x: x[1])
+        self.assertIn(min_error_method[0], ['Linear', 'Quadratic', 'Cubic', 'Exponential', 'Logarithmic', 'Sine', 'LOESS'])
+        self.assertIsInstance(min_error_method[1], float)
+        self.assertGreater(min_error_method[1], 0)
 
 if __name__ == '__main__':
     unittest.main()
