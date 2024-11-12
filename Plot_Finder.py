@@ -3,6 +3,7 @@ import numpy as np
 import seaborn as sns  
 import statsmodels.api as sm
 import statsmodels.formula.api as smf  # type: ignore
+import matplotlib.pyplot as plt
 from sympy import symbols, sympify, solve, diff, lambdify, exp, log, sin
 
 
@@ -90,6 +91,24 @@ def loess_regression(x, y, frac=0.3):
     return error, "non-parametric"
 
 
+def plot_best_fit(x, y, best_fit_method, best_fit_formula):
+    
+    print(f"\nplotting: {best_fit_formula}")
+
+    # data points as scatter plot
+    plt.scatter(x, y, label="Data points", color="blue")
+    
+    # domain for the regression function
+    x_range = np.linspace(min(x), max(x), 100)
+    
+    # best-fit formula over x
+    y_range = lambdify(age, best_fit_formula, 'numpy')(x_range)
+    
+    # plot our regression curve
+    plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
+    plt.xlabel('Age'); plt.ylabel('Head Length')
+    plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
+
 # Modified main function
 def main(x, y):
     # error_list = []
@@ -120,15 +139,20 @@ def main(x, y):
         ("LOESS", loess_regression)
     ]
     
-    error_list = []
+    error_list = []; best_method = None; best_fit_formula = None
+    
     for name, method in methods:
         error, formula = method(x, y)
         error_list.append((name, error, formula))
+        if best_method is None or error < min_error:
+            best_method = name; best_fit_formula = formula; min_error = error
     
     # Polynomial regression for degrees 4 to 7
     for degree in range(4, 8):
         error, formula = poly_regression(x, y, degree)
         error_list.append((f"Polynomial (x^{degree})", error, formula))
+        if best_method is None or error < min_error:
+            best_method = name; best_fit_formula = formula; min_error = error
     
     # Find the method with the least error
     min_error_method = min(error_list, key=lambda x: x[1])
@@ -149,6 +173,9 @@ def main(x, y):
 
     print(f"\nThe method with the smallest error is: {method_name} Regression with an error of {min_error}")
     print(f"\nApproximate function: {min_formula}")
+    
+    plot_best_fit(x, y, best_method, best_fit_formula)
+
 
 
 main(x, y)
