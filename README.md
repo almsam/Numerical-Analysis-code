@@ -52,7 +52,7 @@
 #### Plot finder
 - After completing a lab in 1st year physics to derive a formula for a tenis balls flight by collecting data in a video, I realzied the lack of frameworks in place to detrmine the relationship between variables
 - Enter Plot Finder: [Plot_Finder.py](https://github.com/almsam/Numerical-Analysis-code/blob/main/Plot_Finder.py) runs a linear, quadratic, cubic, higher polynomial, exponential, logarithmic, Loess, & sinosudial regressions, then using the smallest error case to determine the best guess for the best fit line of the graph
-- The next Iteration of development is to return the function of the line of best fit - as well as error information
-- And the next Iteration after that will involve a Forior series of multiple functions summed togetehr - which theoretically could mean the error of a graph could be chocked up to a sinosudial term in the true function
+- The next Iteration of development was to return the function of the line of best fit after finding both the function and the parameters of correlation that minimize error
+- And the current Iteration after that involves Forior series regression by computing a best fit function as multiple functions summed together (which can be done by regressing on the error terms) - which theoretically could mean the error of a graph could be chocked up to a sinosudial term in the true function
 
   The Goal here? I would like to ultimately bridge this section of the project into an open source library/package to serve as an aditional tool in our workforces data science toolboxes
