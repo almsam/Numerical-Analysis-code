@@ -1,4 +1,4 @@
-from Plot_Finder import main
+from Plot_Finder import find_best_fit
 import pandas as pd
 
 # import n clean data
@@ -8,4 +8,4 @@ df_filtered = df[["hdlngth", "age"]].dropna()
 x = df_filtered["age"].values; y = df_filtered["hdlngth"].values
 
 # call main from Plot_Finder.py
-# main(x, y)
+find_best_fit(x, y)
