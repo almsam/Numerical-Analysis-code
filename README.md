@@ -24,7 +24,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-### Built By [Samira](https://github.com/almsam) With: [![Py][Py]][PyUrl] using [![Numpy][Numpy]][Numpy-url][![Pandas][Pandas]][Pandas-url][![Scikit-learn][Scikit-learn]][Scikit-learn-url][![Statsmodels][Statsmodels]][Statsmodels-url] &[![SymPy][SymPy]][SymPy-url]
+### Built By [Samira](https://github.com/almsam) With: [![Py][Py]][PyUrl] using [![Numpy][Numpy]][Numpy-url][![Pandas][Pandas]][Pandas-url][![Matplotlib][Matplotlib]][Matplotlib-url][![Statsmodels][Statsmodels]][Statsmodels-url] &[![SymPy][SymPy]][SymPy-url]
 
 [Py]: https://img.shields.io/badge/Python%20-%20%233e50b5?logo=python&logoColor=%23FFDE57&logoSize=auto
 [PyUrl]: https://www.python.org
