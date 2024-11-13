@@ -110,7 +110,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula):
     plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # Modified main function
-def main(x, y):
+def find_best_fit(x, y):
     # error_list = []
 
     # error_list.append(("Linear", linear_regression(x, y)))
@@ -178,4 +178,4 @@ def main(x, y):
 
 
 
-main(x, y)
+# find_best_fit(x, y) #uncomment for debug
