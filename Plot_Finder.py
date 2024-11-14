@@ -175,6 +175,8 @@ def find_best_fit(x, y):
     print(f"\nApproximate function: {min_formula}")
     
     plot_best_fit(x, y, best_method, best_fit_formula)
+    
+    return method_name, min_error, min_formula
 
 
 
