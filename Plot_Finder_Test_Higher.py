@@ -94,35 +94,50 @@ class TestRegressionMethods(unittest.TestCase):
 
 
 
-    # def test_exp_regression_perfect_exp_data(self):
-    #     x = np.linspace(0, 5, 50)
-    #     y = 2 * np.exp(0.5 * x)  # y = 2 * e^(0.5 * x)
-    #     error, formula = exp_regression(x, y)
-    #     self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+    def test_exp_regression_perfect_exp_data(self):
+        print("\n\n\nexp:\n\n\n")
+        x = np.linspace(self.zero, 5, 50)
+        y = 2 * np.exp(0.5 * x)  # y = 2 * e^(0.5 * x)
+        method, error, formula = find_best_fit(x, y)
+        self.assertTrue((method == "Exponential"))
+        print("exp:\nexpected:", "2 * np.exp(0.5 * x)", "\nrecieved: ", str(formula),)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
 
-    # def test_logarithmic_regression_perfect_log_data(self):
-    #     x = np.linspace(1, 10, 50)  # Avoid x = 0 to prevent log(0)
-    #     y = 3 * np.log(x) + 1  # y = 3 * log(x) + 1
-    #     error, formula = logarithmic_regression(x, y)
-    #     self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect logarithmic data")
+    def test_logarithmic_regression_perfect_log_data(self):
+        print("\n\n\nlog:\n\n\n")
+        x = np.linspace(1, 10, 50)  # Avoid x = 0 to prevent log(0)
+        y = 3 * np.log(x) + 1  # y = 3 * log(x) + 1
+        method, error, formula = find_best_fit(x, y)
+        self.assertTrue((method == "Logarithmic"))
+        print("log:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect logarithmic data")
 
-    # def test_sin_regression_perfect_sin_data(self):
-    #     x = np.linspace(0, 2 * np.pi, 50)
-    #     y = 5 * np.sin(x)  # y = 5 * sin(x)
-    #     error, formula = sin_regression(x, y)
-    #     self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect sine data")
+    def test_sin_regression_perfect_sin_data(self):
+        print("\n\n\nsin:\n\n\n")
+        x = np.linspace(self.zero, 2 * np.pi, 50)
+        y = 5 * np.sin(x)  # y = 5 * sin(x)
+        method, error, formula = find_best_fit(x, y)
+        self.assertTrue((method == "Sine"))
+        print("sin:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect sine data")
 
     # def test_logistic_regression_perfect_logistic_data(self):
+    #     print("\n\n\nlogistic:\n\n\n")
     #     x = np.linspace(-6, 6, 50)
     #     y = 1 / (1 + np.exp(-x))  # Standard logistic function
-    #     error, formula = logistic_regression(x, y)
+    #     method, error, formula = find_best_fit(x, y)
+    #     self.assertTrue((method == "Logistic"))
+    #     print("P7:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
     #     self.assertAlmostEqual(error, 0, places=0, msg="Expected zero error for perfect logistic data")
 
-    # def test_loess_regression_perfect_quadratic_data(self):
-    #     x = np.linspace(-5, 5, 50)
-    #     y = 2 * x**2 + 3 * x + 1  # y = 2x^2 + 3x + 1
-    #     error, formula = loess_regression(x, y)
-    #     self.assertLessEqual(error, 1, msg="Expected zero error for LOESS on perfect quadratic data") # expect error under 1
+    def test_loess_regression_perfect_quadratic_data(self):
+        print("\n\n\nLOESS:\n\n\n")
+        x = np.linspace(self.zero, 5, 50)
+        y = 2 * x**2 + 3 * x + 1  # y = 2x^2 + 3x + 1
+        method, error, formula = find_best_fit(x, y)
+        self.assertTrue((method == "LOESS"))
+        print("loess:\nexpected:", "2 * x**2 + 3 * x + 1", "\nrecieved: ", str(formula),)
+        self.assertLessEqual(error, 1, msg="Expected zero error for LOESS on perfect quadratic data") # expect error under 1
 
 
 
