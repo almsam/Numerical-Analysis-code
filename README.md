@@ -73,3 +73,51 @@ age, length
 16, 5.3
 17, 5.6
 ```
+
+Then you can run the script:
+
+Save the script (Plot_Finder.py) to your local machine, & append this to a Python file's import section
+
+```
+from Plot_Finder import find_best_fit
+import pandas as pd
+```
+
+& finally, run ```find_best_fit(x, y)``` on your data, Plot Finder will provide a similar output to:
+
+```
+--- Regression Errors ---
+Linear Error: 2.5064127927953335  
+Quadratic Error: 2.376293313469839
+Cubic Error: 2.3306552613010023
+Exponential Error: 2.5033863710624638
+Logarithmic Error: 2.408240048405719
+Sine Error: 2.5278577442576977
+LOESS Error: 3.5317500644855344
+Polynomial (x^4) Error: 2.3629127943906134
+Polynomial (x^5) Error: 2.3953673780927542
+Polynomial (x^6) Error: 2.357742781477933
+Polynomial (x^7) Error: 2.3560983113517175
+
+The method with the smallest error is: Cubic Regression with an error of 2.3306552613010023
+
+Approximate function: 0.0436070723456402*x**3 - 0.787115855407833*x**2 + 4.5685444988691*x + 85.1575254621457
+
+plotting: 0.0436070723456402*x**3 - 0.787115855407833*x**2 + 4.5685444988691*x + 85.1575254621457
+```
+
+and give you a plot to vizualize the data & regression line provided, 
+
+<!-- IMPROVEMENTS -->
+## Future Improvements
+
+this project aims to be expanded into an open-source library with additional features, including:
+- Support for more regression methods.
+- Option to handle multivariate datasets (more than one independent variable).
+- Enhanced error metrics for model selection (e.g., R², Adjusted R²).
+- Optimization options for fine-tuning parameters such as the LOESS frac value.
+
+<!-- Contribution -->
+## Contribution
+
+Contributions to improve the script or add new features are welcome! Feel free to fork the repository and submit pull requests.
