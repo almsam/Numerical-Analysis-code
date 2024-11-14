@@ -106,7 +106,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula):
     
     # plot our regression curve
     plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
-    plt.xlabel('Age'); plt.ylabel('Head Length')
+    plt.xlabel('X'); plt.ylabel('Y')
     plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # Modified main function
