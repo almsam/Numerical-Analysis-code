@@ -152,7 +152,7 @@ def find_best_fit(x, y):
         error, formula = poly_regression(x, y, degree)
         error_list.append((f"Polynomial (x^{degree})", error, formula))
         if best_method is None or error < min_error:
-            best_method = "Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
+            best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
     
     # Find the method with the least error
     min_error_method = min(error_list, key=lambda x: x[1])
