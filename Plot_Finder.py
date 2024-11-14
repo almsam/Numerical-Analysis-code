@@ -110,7 +110,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula):
     plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # Modified main function
-def main(x, y):
+def find_best_fit(x, y):
     # error_list = []
 
     # error_list.append(("Linear", linear_regression(x, y)))
@@ -152,7 +152,7 @@ def main(x, y):
         error, formula = poly_regression(x, y, degree)
         error_list.append((f"Polynomial (x^{degree})", error, formula))
         if best_method is None or error < min_error:
-            best_method = name; best_fit_formula = formula; min_error = error
+            best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
     
     # Find the method with the least error
     min_error_method = min(error_list, key=lambda x: x[1])
@@ -175,7 +175,9 @@ def main(x, y):
     print(f"\nApproximate function: {min_formula}")
     
     plot_best_fit(x, y, best_method, best_fit_formula)
+    
+    return method_name, min_error, min_formula
 
 
 
-main(x, y)
+# find_best_fit(x, y) #uncomment for debug
