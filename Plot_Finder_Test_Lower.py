@@ -83,7 +83,7 @@ class TestRegressionMethods(unittest.TestCase):
             ("Exponential", exp_regression),
             ("Logarithmic", logarithmic_regression),
             ("Sine", sin_regression),
-            ("LOESS", loess_regression)
+            ("LOESS", loess_regression) #removed but this shall remain as it wont prevent tests
         ]
         for name, method in methods:
             error, formula = method(self.x, self.y)
