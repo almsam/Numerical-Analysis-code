@@ -130,7 +130,7 @@ class TestRegressionMethods(unittest.TestCase):
     #     print("P7:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
     #     self.assertAlmostEqual(error, 0, places=0, msg="Expected zero error for perfect logistic data")
 
-    def test_loess_regression_perfect_quadratic_data(self):
+    def test_loess_regression_perfect_quadratic_data(self): # removed method for now but test remains
         print("\n\n\nLOESS:\n\n\n")
         x = np.linspace(self.zero, 5, 50)
         y = 2 * x**2 + 3 * x + 1  # y = 2x^2 + 3x + 1 # y = 2 * x**2 + 3 * x + 1 + np.random.normal(0, 1, 100)
