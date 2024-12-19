@@ -136,10 +136,6 @@ def find_best_fit(x, y):
         if best_method is None or error < min_error: # if a new best is found
             best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
     
-    # # find the method from list with error minimized
-    # min_error_method = min(error_list, key=lambda x: x[1])
-    # method_name, min_error, min_formula = min_error_method
-    
     # out stuff
     print("\n--- Regression Errors ---")
     for name, error, _ in error_list:
@@ -155,3 +151,7 @@ def find_best_fit(x, y):
 
 
 # a, b, c = find_best_fit(x, y); print(a); print(b); print(c) #uncomment for debug
+
+# # # legacy way to find return vars
+# # find the method from list with error minimized # min_error_method = min(error_list, key=lambda x: x[1]) # method_name, min_error, min_formula = min_error_method
+
