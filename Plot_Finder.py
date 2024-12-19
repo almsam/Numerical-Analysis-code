@@ -103,7 +103,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # Modified main function
-def find_best_fit(x, y):
+def find_best_fit(x, y, plot=False):
 
     methods = [
         ("Linear", linear_regression),
@@ -144,13 +144,14 @@ def find_best_fit(x, y):
     print(f"\nThe method with the smallest error is: {best_method} Regression with an error of {min_error}")
     print(f"\nApproximate function: {best_fit_formula}")
     
-    plot_best_fit(x, y, best_method, best_fit_formula)
+    if(plot):
+        plot_best_fit(x, y, best_method, best_fit_formula)
     
     return best_method, min_error, best_fit_formula
 
 
 
-# a, b, c = find_best_fit(x, y); print(a); print(b); print(c) #uncomment for debug
+# a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
 
 # # # legacy way to find return vars
 # # find the method from list with error minimized # min_error_method = min(error_list, key=lambda x: x[1]) # method_name, min_error, min_formula = min_error_method
