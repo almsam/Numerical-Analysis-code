@@ -25,6 +25,54 @@ Here, \( x_1, x_2, \dots, x_n \) are the predictors, and \( β_1, β_2, \dots, �
 
 ## Concept 2: Estimating Coefficients in Linear Regression
 
+
+### Slope and Intercept
+The Linear Regression Algorithm estimates coefficients using the **least squares method**, minimizing the sum of squared errors ( \( \epsilon \)^2 + \( \epsilon \)^2 + \( \epsilon \)^2 ) between real & predicted values. Since we only have a data set & not a formula, we cannot get the real value of the slope \( β_1 \) - but we can obtain the estimated value \( \hatβ_1 \) (pronounced beta hat 1)
+
+#### Key Calculations
+
+1. **Sum of Deviations (\( S_x \)):**
+   \[
+   S_x = \sum (x_i - \bar{x})
+   \]
+   - \( \bar{x} \) being the mean of \( x \).
+   - & \( x_i \) being the value of the i'th index of x (remember x is a set of the x values of our dataset & not a continuous domain)
+
+
+2. **Sum of Deviations Squared (\( S_{xx} \)):**
+   \[
+   S_{xx} = \sum (x_i - \bar{x})^2
+   \]
+
+3. **Estimated Slope (\( \hat{β}_1 \)):**
+   \[
+   \hat{β}_1 = \frac{S_{xy}}{S_{xx}}
+   \]
+   ( where \( S_{xy} = \sum (x_i - \bar{x})(y_i - \bar{y}) \) )
+
+4. **Estimated Intercept (\( \hat{β}_0 \)):**
+   \[
+   \hat{β}_0 = \bar{y} - \hat{β}_1\bar{x}
+   \]
+
+5. **Overall (\( \hat{y}  =  \hat{β}_0  +  \hat{β}_1*x_1   \)):**
+   \[
+   \hat{y}_i  = b + mx_i =  \hat{β}_0  +  \hat{β}_1*x_i  =  \bar{y} - \hat{β}_1\bar{x} + \hat{β}_1*x_i
+   \]
+
+   \[
+   = \bar{y} - \frac{S_{xy}}{S_{xx}}\bar{x} + \frac{S_{xy}}{S_{xx}}*x_i
+   \]
+
+   \[
+   = \bar{y} - \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}\bar{x} + \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}*x_i
+   \]
+
+   \[
+   = \hat{y}_i  = \bar{y} + \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}(x_i - \bar{x})
+   \]
+& this should be all you need to implement your very own linear regression
+
 ---
 
 ## Concept 3: Non Linear Functions
