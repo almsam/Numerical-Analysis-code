@@ -7,14 +7,10 @@ import matplotlib.pyplot as plt
 from sympy import symbols, sympify, solve, diff, lambdify, exp, log, sin
 
 
-df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv")
-df_filtered = df[["hdlngth", "age"]].dropna()
-y = df_filtered["hdlngth"].values
-x = df_filtered["age"].values
+df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv"); df_filtered = df[["hdlngth", "age"]].dropna()
+y = df_filtered["hdlngth"].values; x = df_filtered["age"].values; age = symbols('x')
 
-age = symbols('x')
-
-# Original regression methods
+# regression methods:
 
 def linear_regression(x, y):
     x = sm.add_constant(x)
@@ -91,93 +87,72 @@ def loess_regression(x, y, frac=0.3):
     return error, "non-parametric"
 
 
-def plot_best_fit(x, y, best_fit_method, best_fit_formula):
+
+
+
+def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     
     print(f"\nplotting: {best_fit_formula}")
 
-    # data points as scatter plot
-    plt.scatter(x, y, label="Data points", color="blue")
+    plt.scatter(x, y, label="Data points", color="blue")        # data points as scatter plot
+    x_range = np.linspace(min(x), max(x), 100)                  # domain for the plot
+    y_range = lambdify(age, best_fit_formula, 'numpy')(x_range) # best-fit formula over x range
     
-    # domain for the regression function
-    x_range = np.linspace(min(x), max(x), 100)
-    
-    # best-fit formula over x
-    y_range = lambdify(age, best_fit_formula, 'numpy')(x_range)
-    
-    # plot our regression curve
+    # plot our regression curve:
     plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
-    plt.xlabel('X'); plt.ylabel('Y')
-    plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
+    plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # Modified main function
-def find_best_fit(x, y):
-    # error_list = []
-
-    # error_list.append(("Linear", linear_regression(x, y)))
-    # error_list.append(("Quadratic", quadratic_regression(x, y)))
-    # error_list.append(("Cubic", cubic_regression(x, y)))
-    
-    # polynomial_errors = poly_regression(x, y)
-    # for i, poly_error in enumerate(polynomial_errors, start=4):
-    #     error_list.append((f"Polynomial (x^{i})", poly_error))
-    
-    # error_list.append(("Exponential", exp_regression(x, y)))
-    # error_list.append(("Logarithmic", logarithmic_regression(x, y)))
-    # error_list.append(("Sine", sin_regression(x, y)))
-    # error_list.append(("LOESS", loess_regression(x, y)))
-
-
+def find_best_fit(x, y, plot=False):
 
     methods = [
         ("Linear", linear_regression),
         ("Quadratic", quadratic_regression),
         ("Cubic", cubic_regression),
+        # polynomial is included
+        
         ("Exponential", exp_regression),
         ("Logarithmic", logarithmic_regression),
         ("Sine", sin_regression),
+        
+        # # removed for now
         # ("Logistic", logistic_regression),
-        ("LOESS", loess_regression)
+        # ("LOESS", loess_regression)
     ]
     
-    error_list = []; best_method = None; best_fit_formula = None
+    error_list = []; best_method = None; best_fit_formula = None # saves candidate for best
     
+    # non polynomial regression
     for name, method in methods:
         error, formula = method(x, y)
         error_list.append((name, error, formula))
-        if best_method is None or error < min_error:
+        if best_method == None or error < min_error: # if a new best is found
             best_method = name; best_fit_formula = formula; min_error = error
     
-    # Polynomial regression for degrees 4 to 7
+    # polynomial regression degrees 4 to 7
     for degree in range(4, 8):
         error, formula = poly_regression(x, y, degree)
         error_list.append((f"Polynomial (x^{degree})", error, formula))
-        if best_method is None or error < min_error:
+        if best_method is None or error < min_error: # if a new best is found
             best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
     
-    # Find the method with the least error
-    min_error_method = min(error_list, key=lambda x: x[1])
-    method_name, min_error, min_formula = min_error_method
-    
-    # print("\n--- Regression Errors ---")
-    # for method_name, error in error_list:
-    #     print(f"{method_name} Error: {error}")
-
-    # Designate the most accurate method
-    # min_error_method = min(error_list, key=lambda x: x[1])
-    # print(f"\nThe method with the smallest error is: {min_error_method[0]} Regression with an error of {min_error_method[1]}")
-    # print(f"\nTherefore, the function is likely a {min_error_method[0]} function")
-    
+    # out stuff
     print("\n--- Regression Errors ---")
     for name, error, _ in error_list:
         print(f"{name} Error: {error}")
-
-    print(f"\nThe method with the smallest error is: {method_name} Regression with an error of {min_error}")
-    print(f"\nApproximate function: {min_formula}")
     
-    plot_best_fit(x, y, best_method, best_fit_formula)
+    print(f"\nThe method with the smallest error is: {best_method} Regression with an error of {min_error}")
+    print(f"\nApproximate function: {best_fit_formula}")
     
-    return method_name, min_error, min_formula
+    if(plot):
+        plot_best_fit(x, y, best_method, best_fit_formula)
+    
+    return best_method, min_error, best_fit_formula
 
 
 
-# find_best_fit(x, y) #uncomment for debug
+# a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
+
+# # # legacy way to find return vars
+# # find the method from list with error minimized # min_error_method = min(error_list, key=lambda x: x[1]) # method_name, min_error, min_formula = min_error_method
+
