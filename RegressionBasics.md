@@ -153,18 +153,45 @@ def cubic_regression(x, y):
 
 ---
 
+### & More regression:
+
+**Just a lightning round over what Plot_Finder.py is doing:**
+
+```python
+
+def poly_regression(x, y, degree):
+    poly_terms = [np.power(x, i) for i in range(1, degree + 1)]
+    X = sm.add_constant(np.column_stack(poly_terms))
+    model = sm.OLS(y, X).fit()
+        ...
+
+def exp_regression(x, y):
+    log_y = np.log(y)
+    X = sm.add_constant(x)
+    model = sm.OLS(log_y, X).fit()
+        ...
+
+def logarithmic_regression(x, y):
+    X = sm.add_constant(np.log(x))
+    model = sm.OLS(y, X).fit()
+        ...
+
+def sin_regression(x, y):
+    sin_x = np.sin(x)
+    X = sm.add_constant(sin_x)
+    model = sm.OLS(y, X).fit()
+        ...
 
 ```
 
 
----
 
 ### Key Takeaways:
 - Polynomial regression uses higher-degree terms (\( x^2, x^3, \dots \)) to capture non-linear relationships.
 - Quadratic regression adds one new feature (\( x^2 \)), while cubic regression adds two (\( x^2 \) and \( x^3 \)).
 - Both methods rely on the same principles as linear regression, with the added complexity of managing more predictors.
 
-This framework is flexible and can be extended to higher degrees, though increasing the polynomial degree too much risks overfitting.
+This framework is flexible and can be extended to higher degrees, though increasing the polynomial degree too much risks over-fitting.
 
 
 
