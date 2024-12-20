@@ -73,9 +73,49 @@ The Linear Regression Algorithm estimates coefficients using the **least squares
    \]
 & this should be all you need to implement your very own linear regression
 
+also keep in mind: this also works for multiple linear regression - if the above evaluates to \(y = m_1x_1 +b\), then the following can be used for \(y = m_1x_1 + m_2x_2 +b\) (consider a table of [y, x1, x2] as oppose to [y, x])
+
+   \[
+   \hat{y}_i  = \bar{y} + \frac{\sum (x_{1i} - \bar{x}_1)(y_i - \bar{y})}{\sum (x_{1i} - \bar{x}_1)^2}(x_{1i} - \bar{x}_1) + \frac{\sum (x_{2i} - \bar{x}_2)(y_i - \bar{y})}{\sum (x_{2i} - \bar{x}_2)^2}(x_{2i} - \bar{x}_2)
+   \]
+
 ---
 
 ## Concept 3: Non Linear Functions
+
+Linear regression works for linear relationships, but what if we find a non-linear pattern along our adventures? For these cases, we use polynomial regression - a generalized form of linear regression. This involves fitting a curve, such as a quadratic (degree 2) or cubic (degree 3) equation, to the data.
+
+### Quadratic Regression
+Quadratic regression models data as:
+\[
+y = β_0 + β_1x + β_2x^2 + \epsilon
+\]
+The process involves adding a new feature \( x^2 \) (the square of the independent variable) and performing linear regression on the extended set of features.
+
+#### Code Walkthrough for Quadratic Regression:
+
+```python
+def quadratic_regression(x, y):
+        # add constant (intercept) and quadratic term (x^2) to the feature set
+    X = sm.add_constant(np.column_stack((x, np.power(x, 2))))
+    
+        # fit an ordinary least squares (OLS) (linear) model
+    model = sm.OLS(y, X).fit()
+    
+        # extract coefficients for intercept, linear, and quadratic terms
+    intercept, linear, quadratic = model.params
+    
+        # calculate mean absolute error between actual and predicted values
+    error = np.mean(np.abs(y - model.predict(X)))
+    
+        # return the error n formula
+    return error, intercept + linear * age + quadratic * age**2
+```
+
+
+
+
+
 
 ---
 
