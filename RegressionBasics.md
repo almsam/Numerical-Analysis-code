@@ -112,6 +112,59 @@ def quadratic_regression(x, y):
     return error, intercept + linear * age + quadratic * age**2
 ```
 
+**Process**:
+1. **X parameter engineering**: We extend \( x \) to include both the original values and their squares (\( x^2 \)).
+2. **Model Fitting**: The `sm.OLS` function performs Ordinary Least Squares regression using \( x \) and \( x^2 \) as features.
+3. **Prediction**: Predictions are made using the equation:
+   \[
+   \hat{y} = β_0 + β_1x + β_2x^2
+   \]
+
+### In other words: Map \([y, x]\) onto \([y, x_1, x_2]\) where \(x_1 = x\) & \(x_2 = x_1 ^ 2\)
+
+---
+
+### Cubic Regression
+Cubic regression extends this approach to include a third cubic term (\( x^3 \)):
+\[
+y = β_0 + β_1x + β_2x^2 + β_3x^3 + \epsilon
+\]
+
+#### Code Walkthrough for Cubic Regression:
+```python
+def cubic_regression(x, y):
+        # add quadratic term (x^2), and cubic term (x^3) to the feature set
+    X = sm.add_constant(np.column_stack((x, np.power(x, 2), np.power(x, 3))))
+    
+        # fit lin model
+    model = sm.OLS(y, X).fit()
+    
+        # extract coefficients for intercept, linear, quadratic, **and cubic** terms
+    intercept, linear, quadratic, cubic = model.params
+    
+        # calculate mean absolute error between actual and predicted values
+    error = np.mean(np.abs(y - model.predict(X)))
+    
+        # return error and the cubic prediction formula
+    return error, intercept + linear * age + quadratic * age**2 + cubic * age**3
+```
+
+**Explanation**: \( x \) is extended to include \( x^2 \) and \( x^3 \) as features -- then we regress on all the parameters
+
+---
+
+
+```
+
+
+---
+
+### Key Takeaways:
+- Polynomial regression uses higher-degree terms (\( x^2, x^3, \dots \)) to capture non-linear relationships.
+- Quadratic regression adds one new feature (\( x^2 \)), while cubic regression adds two (\( x^2 \) and \( x^3 \)).
+- Both methods rely on the same principles as linear regression, with the added complexity of managing more predictors.
+
+This framework is flexible and can be extended to higher degrees, though increasing the polynomial degree too much risks overfitting.
 
 
 
