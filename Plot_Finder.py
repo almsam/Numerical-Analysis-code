@@ -187,9 +187,9 @@ def fourier(x, y, n, plot=False):
 
 
 
-a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
+# a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
 
-a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
+# a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
 
 
 # # # legacy way to find return vars
