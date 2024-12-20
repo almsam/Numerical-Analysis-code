@@ -155,10 +155,12 @@ def fourier(x, y, n, funclist[]):
     # first we need to regress on the data & get the approximation function
     best_method, min_error, best_fit_formula = find_best_fit(x, y, False)
     funclist.append(best_fit_formula)
+    full_formula = best_fit_formula
     
     for i in n:
         # then we need to find the difference between the data set & predicted function
-        # x = x; y = y - f(x) # where f(x) is the function from the regression
+        
+        # y = y - f(x) # x = x # where f(x) is the function from the regression
         if i > 0:
             best_method, min_error, best_fit_formula = find_best_fit(x, y, False) # regress on error
             funclist.append(best_fit_formula)
