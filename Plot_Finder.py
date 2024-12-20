@@ -102,7 +102,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
     plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
-# Modified main function
+# main function
 def find_best_fit(x, y, plot=False):
 
     methods = [
@@ -151,8 +151,28 @@ def find_best_fit(x, y, plot=False):
 
 
 
+def fourier(x, y, n):
+    # first we need to regress on the data & get the approximation function
+    
+    # then we need to find the difference between the data set & predicted function
+        # x = x; y = y - f(x) # where f(x) is the function from the regression
+    
+    #if n>0
+        # best_method, min_error, best_fit_formula = find_best_fit(x, y, n-1) # regress on error
+    
+    # ...
+    
+    # the output should be a list of fuctions
+    
+
+
+
+
+
+
+
+
 # a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
 
 # # # legacy way to find return vars
 # # find the method from list with error minimized # min_error_method = min(error_list, key=lambda x: x[1]) # method_name, min_error, min_formula = min_error_method
-
