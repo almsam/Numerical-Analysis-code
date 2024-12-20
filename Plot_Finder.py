@@ -151,7 +151,7 @@ def find_best_fit(x, y, plot=False):
 
 
 
-def fourier(x, y, n, funclist=None):
+def fourier(x, y, n, plot=False):
     # first we need to regress on the data & get the approximation function
     n = n - 1
     
@@ -168,19 +168,15 @@ def fourier(x, y, n, funclist=None):
     for i in range(n):
         
         print(f"\n______ Iteration {i+2} ______")
-        
         pred_y = lambdify(age, best_fit_formula, 'numpy')(x);   residuals = residuals - pred_y
-        
         best_method, min_error, best_fit_formula = find_best_fit(x, residuals, False) # regress on error
+        
         print(f"current best method : {best_method}")
-        
-        
-        full_formula += best_fit_formula # type: ignore
-        
-        # then we need to find the difference between the data set & predicted function
-        funclist.append(best_fit_formula)
+        funclist.append(best_fit_formula); full_formula += best_fit_formula # type: ignore
     
     # repeat the above until n = 0
+    
+    if(plot): plot_best_fit(x, y, "Fourier Series", full_formula)
     
     return full_formula# the output should be a list of fuctions
 
@@ -191,9 +187,9 @@ def fourier(x, y, n, funclist=None):
 
 
 
-# a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
+a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
 
-a = fourier(x, y, 2); print(a)#; print(b) #uncomment for debug
+a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
 
 
 # # # legacy way to find return vars
