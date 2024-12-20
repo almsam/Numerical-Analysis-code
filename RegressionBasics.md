@@ -75,6 +75,8 @@ The Linear Regression Algorithm estimates coefficients using the **least squares
 
 also keep in mind: this also works for multiple linear regression - if the above evaluates to \(y = m_1x_1 +b\), then the following can be used for \(y = m_1x_1 + m_2x_2 +b\) (consider a table of [y, x1, x2] as oppose to [y, x])
 
+ - **Multiple Regression Formula:**
+
    \[
    \hat{y}_i  = \bar{y} + \frac{\sum (x_{1i} - \bar{x}_1)(y_i - \bar{y})}{\sum (x_{1i} - \bar{x}_1)^2}(x_{1i} - \bar{x}_1) + \frac{\sum (x_{2i} - \bar{x}_2)(y_i - \bar{y})}{\sum (x_{2i} - \bar{x}_2)^2}(x_{2i} - \bar{x}_2)
    \]
@@ -214,7 +216,18 @@ In a typical linear regression on a linear function, the error term \( \epsilon 
 
 **However for \( y = x + \sin(x) \)**:
    - The expected value of the error term \( \epsilon \) is \( E[\epsilon] = \sin(x) \), reflecting the sinusoidal component not captured by the linear model.
-   - How do we reduce the error further? By applying a regression on the error term
+   - How do we reduce the error further? *By applying a regression on the error term*
+
+## **This is the idea for Plot_Finder.py**
+
+ - Step 1: Apply a regression
+    - This should return \( \hat{y}_1 =  \hat{β}_0  +  \hat{β}_1*x_i  \) (assuming linear gives the least error)
+ - Step 2: calculate the error term
+    - \( \epsilon = y_{real} - \hat{y}_{(estimated)} \)
+ - Step 3: Regress the error term & add that to our function
+    - This should return \( \hat{y}_2 =  \hat{β}_0  +  \hat{β}_1*x_i + \hat{β}_2*sin(x_i) \) (assuming sinosudial error)
+ - Finally: Repeat steps 2-3 until a near 0 error or enough terms are calculated
+
 
 ---
 
