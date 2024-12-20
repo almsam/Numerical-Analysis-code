@@ -153,6 +153,7 @@ def find_best_fit(x, y, plot=False):
 
 def fourier(x, y, n, funclist=None):
     # first we need to regress on the data & get the approximation function
+    n = n - 1
     
     print(f"\n______ Iteration {1} ______")
     residuals = y.copy()
@@ -164,7 +165,7 @@ def fourier(x, y, n, funclist=None):
     
     print(f"current best method : {best_method}")
     
-    for i in n:
+    for i in range(n):
         
         print(f"\n______ Iteration {i+2} ______")
         
@@ -181,7 +182,7 @@ def fourier(x, y, n, funclist=None):
     
     # repeat the above until n = 0
     
-    return funclist# the output should be a list of fuctions
+    return full_formula# the output should be a list of fuctions
 
 
 
@@ -191,6 +192,9 @@ def fourier(x, y, n, funclist=None):
 
 
 # a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
+
+a = fourier(x, y, 2); print(a)#; print(b) #uncomment for debug
+
 
 # # # legacy way to find return vars
 # # find the method from list with error minimized # min_error_method = min(error_list, key=lambda x: x[1]) # method_name, min_error, min_formula = min_error_method
