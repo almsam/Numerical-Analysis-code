@@ -229,8 +229,3 @@ In a typical linear regression on a linear function, the error term \( \epsilon 
  - Finally: Repeat steps 2-3 until a near 0 error or enough terms are calculated
 
 
----
-
-
-
-## Summary of Regression Analysis
