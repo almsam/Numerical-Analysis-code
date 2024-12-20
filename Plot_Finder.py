@@ -165,12 +165,20 @@ def fourier(x, y, n, funclist=None):
     print(f"current best method : {best_method}")
     
     for i in n:
+        
+        print(f"\n______ Iteration {i+2} ______")
+        
+        pred_y = lambdify(age, best_fit_formula, 'numpy')(x);   residuals = residuals - pred_y
+        
+        best_method, min_error, best_fit_formula = find_best_fit(x, residuals, False) # regress on error
+        print(f"current best method : {best_method}")
+        
         # then we need to find the difference between the data set & predicted function
         
         # y = y - f(x) # x = x # where f(x) is the function from the regression
-        if i > 0:
-            best_method, min_error, best_fit_formula = find_best_fit(x, y, False) # regress on error
-            funclist.append(best_fit_formula)
+        
+        # best_method, min_error, best_fit_formula = find_best_fit(x, y, False) # regress on error
+        funclist.append(best_fit_formula)
     # repeat the above until n = 0
     
     # the output should be a list of fuctions
