@@ -102,7 +102,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
     plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
-# Modified main function
+# main function
 def find_best_fit(x, y, plot=False):
 
     methods = [
@@ -151,8 +151,46 @@ def find_best_fit(x, y, plot=False):
 
 
 
+def fourier(x, y, n, plot=False):
+    # first we need to regress on the data & get the approximation function
+    n = n - 1
+    
+    print(f"\n______ Iteration {1} ______")
+    residuals = y.copy()
+    full_formula = None
+    
+    best_method, min_error, best_fit_formula = find_best_fit(x, y, False)
+    funclist = []; funclist.append(best_fit_formula)
+    full_formula = best_fit_formula
+    
+    print(f"current best method : {best_method}")
+    
+    for i in range(n):
+        
+        print(f"\n______ Iteration {i+2} ______")
+        pred_y = lambdify(age, best_fit_formula, 'numpy')(x);   residuals = residuals - pred_y
+        best_method, min_error, best_fit_formula = find_best_fit(x, residuals, False) # regress on error
+        
+        print(f"current best method : {best_method}")
+        funclist.append(best_fit_formula); full_formula += best_fit_formula # type: ignore
+    
+    # repeat the above until n = 0
+    
+    if(plot): plot_best_fit(x, y, "Fourier Series", full_formula)
+    
+    return full_formula# the output should be a list of fuctions
+
+
+
+
+
+
+
+
 # a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
+
+# a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
+
 
 # # # legacy way to find return vars
 # # find the method from list with error minimized # min_error_method = min(error_list, key=lambda x: x[1]) # method_name, min_error, min_formula = min_error_method
-
