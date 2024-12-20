@@ -43,6 +43,27 @@ class TestFourierRegression(unittest.TestCase):
     #     # self.assertAlmostEqual(mae, 0, places=5, msg="Expected zero error for perfect linear data")
     #     self.assertGreaterEqual(mae, 0)
 
+    def test_fourier_regression_perfect_linear_data(self):
+        print("\n\n\nFourier:\n\n\n")
+        x = np.linspace(0, 10, 50); x = x[x != 0] #avoid x 0
+        y = 3 * x + 2  # y = 3x + 2
+        formula = fourier(x, y, 1)
+        expected_formula = 3 * symbols("age") + 2
+        # self.assertEqual(method, "Linear")
+        
+        age = symbols("age")
+        full_formula_func = lambdify(age, formula, 'numpy')
+        expected_func = lambdify(age, expected_formula, 'numpy')
+        points = np.linspace(0, 10, 100)  #  points for comparison
+        formula_values = full_formula_func(points)
+        expected_values = expected_func(points)
+
+        # calc mae
+        error = np.mean(np.abs(formula_values - expected_values))
+        
+        print(type(error))
+        # print("Linear:\nexpected:", "3.0*x + 2.0", "\nrecieved: ", str(formula))
+        # self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect linear data")
 
 if __name__ == '__main__':
     unittest.main()
