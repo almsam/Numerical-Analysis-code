@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/almsam/Numerical-Analysis-code.git">
-    <img src="https://github.com/almsam/Numerical-Analysis-code/blob/main/images/logo.png" alt="Logo" width="270" height="270">
+    <img src="https://github.com/almsam/Numerical-Analysis-code/blob/main/images/PF logo.png" alt="Logo" width="270" height="270">
   </a>
 
 <h1 align="center">Numerically Analyzing my Data</h1>
