@@ -3,6 +3,20 @@
 
 ``` Python
 def create_regression_output(sin_terms, exp_terms, log_terms, poly_terms):
+    """
+    makes a structured output for a regression script of any function to return
+
+    params:
+        sin_terms (list of tuples): Each tuple contains (amplitude, frequency, phase)
+        exp_terms (list of tuples): Each tuple contains (coefficient, base)
+        log_terms (list of tuples): Each tuple contains (coefficient, base).
+
+        poly_terms (dictionary): Keys are polynomial powers (int), values are coefficints (float)
+
+    returns:
+        dict: Structured regression output.
+
+    """
 
     return {
         "sin_terms": sin_terms,             # list of (amplitude, frequency, phase)
