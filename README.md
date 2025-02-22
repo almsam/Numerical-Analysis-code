@@ -117,6 +117,8 @@ this project aims to be expanded into an open-source library with additional fea
 - Enhanced error metrics for model selection (e.g., R², Adjusted R²).
 - Optimization options for fine-tuning parameters such as the LOESS frac value.
 
+primarily though - we are currently re building the internal section to implement the lin reg ourselves instead of using sci-kit & stats-models
+
 <!-- Contribution -->
 ## Contribution
 
