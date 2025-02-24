@@ -1,5 +1,5 @@
 import numpy as np
-from regression_standards import (
+from Regression_Standards import (
     print_all_terms,
     print_non_zero_terms,
     add_regression_outputs,
