@@ -47,5 +47,30 @@ class TestLinearRegression(unittest.TestCase):
 
         self.assertIn('x', str(formula))
 
+    def test_exp_regression(self):
+        error, formula = exp_regression(self.x, self.y)
+
+        self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+
+        self.assertIn('x', str(formula))
+
+    def test_log_regression(self):
+        error, formula = logarithmic_regression(self.x, self.y)
+
+        self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+
+        self.assertIn('x', str(formula))
+
+    def test_sin_regression(self):
+        error, formula = sin_regression(self.x, self.y)
+
+        self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+
+        self.assertIn('x', str(formula))
+
+
 if __name__ == '__main__':
     unittest.main()
