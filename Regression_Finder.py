@@ -61,5 +61,16 @@ def exp_regression(x, y):
     def predict(x): return np.exp(intercept + slope * x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    formula = np.exp(intercept) * np.exp(slope * age)
-    return error, formula
+    return error, np.exp(intercept) * np.exp(slope * age)
+
+
+def logarithmic_regression(x, y):
+        # generate polynomial features up to the given degree
+    log_x = np.log(x)
+    X = np.column_stack((np.ones(len(log_x)), log_x))
+    intercept, log_coeff = np.linalg.inv(X.T @ X) @ X.T @ y
+        # then somehow find the error
+    def predict(x): return intercept + log_coeff * np.log(x)
+    error = np.mean(np.abs(y - predict(x)))
+        # and return the result (this time in the new format)
+    return error, intercept + log_coeff * np.log(age)
