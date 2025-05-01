@@ -39,3 +39,14 @@ def cubic_regression(x, y):
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
     return error, intercept + linear * age + quadratic * age**2 + cubic * age**3
+
+
+def poly_regression(x, y, degree):
+        # generate polynomial features up to the given degree
+    X = np.column_stack([x**i for i in range(degree + 1)])
+    beta = np.linalg.inv(X.T @ X) @ X.T @ y
+    def predict(x_input): return sum(beta[i] * x_input**i for i in range(degree + 1))
+        # then somehow find the error
+    error = np.mean(np.abs(y - predict(x)))
+        # and return the result (this time in the new format)
+    return error, predict(age)
