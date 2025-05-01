@@ -15,10 +15,12 @@ def linear_regression(x, y):
     Sxx = np.sum((x - x_mean)**2); Sxy = np.sum((x - x_mean)*(y - y_mean))
     slope = Sxy/Sxx; intercept = y_mean - (slope*x_mean)
     
-    # error = np.mean(np.abs(y - model.predict(x)))
+    def predict(x): return x
     
     # -- # then somehow find the error
-    
+    error = np.mean(np.abs(y - predict(x)))
+
     # return error, intercept + slope * age
-    
+    return error, intercept + slope * age
+
     # -- # and return the result (this time in the new format)
