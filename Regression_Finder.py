@@ -24,7 +24,7 @@ def quadratic_regression(x, y):
     X = np.column_stack((np.ones(len(x)), x, x**2))
     intercept, linear, quadratic = np.linalg.inv(X.T @ X) @ X.T @ y
         # then somehow find the error
-    def predict(x): return (intercept + (linear*x) (quadratic*(x**2)))
+    def predict(x): return (intercept + (linear*x) + (quadratic*(x**2)))
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
     return error, intercept + linear * age + quadratic * age**2
