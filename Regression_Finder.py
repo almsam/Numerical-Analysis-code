@@ -50,3 +50,16 @@ def poly_regression(x, y, degree):
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
     return error, predict(age)
+
+
+def exp_regression(x, y):
+        # generate polynomial features up to the given degree
+    log_y = np.log(y)
+    X = np.column_stack((np.ones(len(x)), x))
+    intercept, slope = np.linalg.inv(X.T @ X) @ X.T @ log_y
+        # then somehow find the error
+    def predict(x): return np.exp(intercept + slope * x)
+    error = np.mean(np.abs(y - predict(x)))
+        # and return the result (this time in the new format)
+    formula = np.exp(intercept) * np.exp(slope * age)
+    return error, formula
