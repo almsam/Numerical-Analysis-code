@@ -9,11 +9,11 @@ y = df_filtered["hdlngth"].values; x = df_filtered["age"].values; age = symbols(
 
 def linear_regression(x, y):
     
-    # x = sm.add_constant(x)
-    # model = sm.OLS(y, x).fit()
-    # intercept, slope = model.params
+    # so first we need to fit the regression & get the m(x) & b
     
-    # -- # so first we need to fit the regression & get the m(x) & b
+    x_mean = np.mean(x); y_mean = np.mean(y)
+    Sxx = np.sum((x - x_mean)**2); Sxy = np.sum((x - x_mean)*(y - y_mean))
+    slope = Sxy/Sxx; intercept = y_mean - (slope*x_mean)
     
     # error = np.mean(np.abs(y - model.predict(x)))
     
