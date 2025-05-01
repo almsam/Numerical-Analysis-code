@@ -28,3 +28,14 @@ def quadratic_regression(x, y):
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
     return error, intercept + linear * age + quadratic * age**2
+
+
+def cubic_regression(x, y):
+        # define cubic term & fit the regression to get ax^3 + bx^2 + cx + d
+    X = np.column_stack((np.ones(len(x)), x, x**2, x**3))
+    intercept, linear, quadratic, cubic = np.linalg.inv(X.T @ X) @ X.T @ y
+    def predict(x): return intercept + linear * x + quadratic * x**2 + cubic * x**3
+        # then somehow find the error
+    error = np.mean(np.abs(y - predict(x)))
+        # and return the result (this time in the new format)
+    return error, intercept + linear * age + quadratic * age**2 + cubic * age**3
