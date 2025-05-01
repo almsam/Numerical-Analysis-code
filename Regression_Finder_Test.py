@@ -39,6 +39,13 @@ class TestLinearRegression(unittest.TestCase):
 
         self.assertIn('x', str(formula))
 
+    def test_poly_regression(self):
+        error, formula = poly_regression(self.x, self.y, 5)
+
+        self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+
+        self.assertIn('x', str(formula))
 
 if __name__ == '__main__':
     unittest.main()
