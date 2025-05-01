@@ -74,3 +74,16 @@ def logarithmic_regression(x, y):
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
     return error, intercept + log_coeff * np.log(age)
+
+
+def sin_regression(x, y):
+        # generate polynomial features up to the given degree
+    sin_x = np.sin(x)
+    X = np.column_stack((np.ones(len(sin_x)), sin_x))
+    intercept, sin_coeff = np.linalg.inv(X.T @ X) @ X.T @ y
+        # then somehow find the error
+    def predict(x): return intercept + sin_coeff * np.sin(x)
+    error = np.mean(np.abs(y - predict(x)))
+    formula = intercept + sin_coeff * np.sin(age)
+        # and return the result (this time in the new format)
+    return error, formula
