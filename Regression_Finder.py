@@ -19,12 +19,10 @@ def linear_regression(x, y):
     return error, intercept + slope * age
 
 
-def quadtatic_regression(x, y):
+def quadratic_regression(x, y):
         # define quadratic term & fit the regression & to get the ax**2 & bx & c
     X = np.column_stack((np.ones(len(x)), x, x**2))
-    
     intercept, linear, quadratic = np.linalg.inv(X.T @ X) @ X.T @ y
-    
         # then somehow find the error
     def predict(x): return (intercept + (linear*x) (quadratic*(x**2)))
     error = np.mean(np.abs(y - predict(x)))
