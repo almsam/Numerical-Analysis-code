@@ -15,6 +15,13 @@ class TestLinearRegression(unittest.TestCase):
         cls.x = df_filtered["age"].values
         cls.y = df_filtered["hdlngth"].values
 
+    def test_linear_regressiont(self):
+        error, formula = linear_regression(self.x, self.y)
+
+        self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+
+        self.assertIn('x', str(formula))
 
 if __name__ == '__main__':
     unittest.main()
