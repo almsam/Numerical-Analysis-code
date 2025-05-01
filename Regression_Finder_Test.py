@@ -15,8 +15,16 @@ class TestLinearRegression(unittest.TestCase):
         cls.x = df_filtered["age"].values
         cls.y = df_filtered["hdlngth"].values
 
-    def test_linear_regressiont(self):
+    def test_linear_regression(self):
         error, formula = linear_regression(self.x, self.y)
+
+        self.assertIsInstance(error, float)
+        self.assertGreater(error, 0)
+
+        self.assertIn('x', str(formula))
+        
+    def test_quadratic_regression(self):
+        error, formula = quadratic_regression(self.x, self.y)
 
         self.assertIsInstance(error, float)
         self.assertGreater(error, 0)
