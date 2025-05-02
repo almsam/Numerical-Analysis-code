@@ -78,7 +78,14 @@ def exp_regression(x, y):
     def predict(x): return np.exp(intercept + slope * x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + (slope * exp(age))
+    coefficient = np.exp(intercept); base = np.exp(slope)
+    regression = {
+        "sin_terms": [(0, 0, 0)],
+        "exponential_terms": [(coefficient, base)],
+        "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {1: 0, 2: 0}
+    }
+    return error, regression # intercept + (slope * exp(age))
 
 
 def logarithmic_regression(x, y):
