@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 import seaborn as sns  
-import statsmodels.api as sm
-import statsmodels.formula.api as smf  # type: ignore
+# import statsmodels.api as sm
+# import statsmodels.formula.api as smf  # type: ignore
 import matplotlib.pyplot as plt
 from sympy import symbols, sympify, solve, diff, lambdify, exp, log, sin
 
@@ -42,10 +42,6 @@ def find_best_fit(x, y, plot=False):
         ("Exponential", exp_regression),
         ("Logarithmic", logarithmic_regression),
         ("Sine", sin_regression),
-        
-        # # removed for now
-        # ("Logistic", logistic_regression),
-        # ("LOESS", loess_regression)
     ]
     
     error_list = []; best_method = None; best_fit_formula = None # saves candidate for best
@@ -118,7 +114,3 @@ def fourier(x, y, n, plot=False):
 # a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
 
 # a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
-
-
-# # # legacy way to find return vars
-# # find the method from list with error minimized # min_error_method = min(error_list, key=lambda x: x[1]) # method_name, min_error, min_formula = min_error_method
