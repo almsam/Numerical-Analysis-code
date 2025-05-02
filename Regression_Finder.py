@@ -115,4 +115,10 @@ def sin_regression(x, y):
     def predict(x): return intercept + sin_coef * np.sin(x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + (sin_coef * sin(age))
+    regression = {
+        "sin_terms": [(sin_coef, 1, 0)],
+        "exponential_terms": [(0, 0)],
+        "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {1: 0, 2: 0}
+    }
+    return error, regression # intercept + (sin_coef * sin(age))
