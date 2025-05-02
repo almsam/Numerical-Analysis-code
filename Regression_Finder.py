@@ -97,7 +97,13 @@ def logarithmic_regression(x, y):
     def predict(x): return intercept + log_coef * np.log(x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + (log_coef * log(age))
+    regression = {
+        "sin_terms": [(0, 0, 0)],
+        "exponential_terms": [(0, 0)],
+        "logarithmic_terms": [(log_coef, np.e)],
+        "polynomial_terms": {1: 0, 2: 0}
+    }
+    return error, regression # intercept + (log_coef * log(age))
 
 
 def sin_regression(x, y):
