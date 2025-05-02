@@ -26,16 +26,16 @@ class TestRegressionStandards(unittest.TestCase):
         print("\n \n \n Testing sympy func for model " + model_name)
         func = generate_sympy_function(model)
         
-        # model.add_regression_outputs()
+        # model.add_regression_outputs() #this test case is skipped
         
-        # self.assertIsNotNone(func)
-        # model.plot_function()
+        self.assertIsNotNone(func)
+        plot_function(model)
         
-        # model.plot_function_data()
-        # results = model.evaluate()
-        # self.assertIn('r_squared', results)
-        # self.assertIn('mae', results)
-        # self.assertIn('rmse', results)
+        plot_function_data(model, self.x, self.y)
+        results = model.evaluate()
+        self.assertIn('r_squared', results)
+        self.assertIn('mae', results)
+        self.assertIn('rmse', results)
 
     def test_linear_standards(self):
         error, regression = linear_regression(self.x, self.y)
