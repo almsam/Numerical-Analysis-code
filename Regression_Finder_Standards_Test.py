@@ -29,10 +29,12 @@ class TestRegressionStandards(unittest.TestCase):
         
         # model.add_regression_outputs() #this test case is skipped
         
-        x_range = (-10, 10)
-        plot_function(model, x_range=x_range)
+        print("\n \n \n Testing graphing model" + model_name)
         
-        plot_function_data(model, self.x, self.y, x_range=x_range)
+        x_range = (-10, 10)
+        plot_function(model, x_range=x_range, title=model_name)
+        
+        plot_function_data(model, self.x, self.y, x_range=x_range, title=model_name)
 
 
     def test_linear_standards(self):

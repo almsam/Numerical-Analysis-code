@@ -72,7 +72,7 @@ def generate_sympy_function(regression_output):
     
     return expr
 
-def plot_function(regression_output, x_range=(-10, 10), num_points=1000):
+def plot_function(regression_output, x_range=(-10, 10), num_points=1000, title="Regression Function"):
     """Plot the regression function."""
     x = np.linspace(x_range[0], x_range[1], num_points)
     y = np.zeros_like(x)
@@ -99,12 +99,12 @@ def plot_function(regression_output, x_range=(-10, 10), num_points=1000):
     plt.figure(figsize=(10, 6))
     plt.plot(x, y)
     plt.grid(True)
-    plt.title('Regression Function')
+    plt.title(title)
     plt.xlabel('x')
     plt.ylabel('y')
     plt.show()
 
-def plot_function_data(regression_output, x_data, y_data, x_range=(-10, 10), num_points=1000):
+def plot_function_data(regression_output, x_data, y_data, x_range=(-10, 10), num_points=1000, title="Regression Function with Data Points"):
     """Plot both the regression function and the original data points."""
     # Plot the continuous function
     x = np.linspace(x_range[0], x_range[1], num_points)
@@ -132,7 +132,7 @@ def plot_function_data(regression_output, x_data, y_data, x_range=(-10, 10), num
     plt.plot(x, y, 'b-', label='Regression Function')
     plt.scatter(x_data, y_data, color='red', alpha=0.5, label='Data Points')
     plt.grid(True)
-    plt.title('Regression Function with Data Points')
+    plt.title(title)
     plt.xlabel('x')
     plt.ylabel('y')
     plt.legend()
