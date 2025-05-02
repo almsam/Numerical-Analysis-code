@@ -27,7 +27,11 @@ def quadratic_regression(x, y):
     def predict(x): return (intercept + (linear*x) + (quadratic*(x**2)))
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + linear * age + quadratic * age**2
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: linear, 2: quadratic}
+    }
+    return error, regression # intercept + linear * age + quadratic * age**2
 
 
 def cubic_regression(x, y):
