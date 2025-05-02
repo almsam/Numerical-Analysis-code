@@ -46,7 +46,11 @@ def cubic_regression(x, y):
         # then somehow find the error
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + linear * age + quadratic * age**2 + cubic * age**3
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: linear, 2: quadratic, 3: cubic}
+    }
+    return error, regression # intercept + linear * age + quadratic * age**2 + cubic * age**3
 
 
 def poly_regression(x, y, degree):
@@ -57,7 +61,12 @@ def poly_regression(x, y, degree):
         # then somehow find the error
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, predict(age)
+    poly_terms = {i: beta[i] for i in range(degree + 1)}
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": poly_terms
+    }
+    return error, regression # predict(age)
 
 
 def exp_regression(x, y):
