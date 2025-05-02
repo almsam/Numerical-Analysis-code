@@ -16,7 +16,11 @@ def linear_regression(x, y):
     def predict(x): return (intercept + (slope*x))
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + slope * age
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: slope}
+    }
+    return error, regression # intercept + slope * age
 
 
 def quadratic_regression(x, y):
