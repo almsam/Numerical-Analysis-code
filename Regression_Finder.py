@@ -16,7 +16,11 @@ def linear_regression(x, y):
     def predict(x): return (intercept + (slope*x))
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + slope * age
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: slope}
+    }
+    return error, regression # intercept + slope * age
 
 
 def quadratic_regression(x, y):
@@ -27,7 +31,11 @@ def quadratic_regression(x, y):
     def predict(x): return (intercept + (linear*x) + (quadratic*(x**2)))
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + linear * age + quadratic * age**2
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: linear, 2: quadratic}
+    }
+    return error, regression # intercept + linear * age + quadratic * age**2
 
 
 def cubic_regression(x, y):
@@ -38,7 +46,11 @@ def cubic_regression(x, y):
         # then somehow find the error
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + linear * age + quadratic * age**2 + cubic * age**3
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: linear, 2: quadratic, 3: cubic}
+    }
+    return error, regression # intercept + linear * age + quadratic * age**2 + cubic * age**3
 
 
 def poly_regression(x, y, degree):
@@ -49,7 +61,12 @@ def poly_regression(x, y, degree):
         # then somehow find the error
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, predict(age)
+    poly_terms = {i: beta[i] for i in range(degree + 1)}
+    regression = {
+        "sin_terms": [(0, 0, 0)], "exponential_terms": [(0, 0)], "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": poly_terms
+    }
+    return error, regression # predict(age)
 
 
 def exp_regression(x, y):
@@ -61,7 +78,14 @@ def exp_regression(x, y):
     def predict(x): return np.exp(intercept + slope * x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + (slope * exp(age))
+    coefficient = np.exp(intercept); base = np.exp(slope)
+    regression = {
+        "sin_terms": [(0, 0, 0)],
+        "exponential_terms": [(coefficient, base)],
+        "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: 0, 2: 0}
+    }
+    return error, regression # intercept + (slope * exp(age))
 
 
 def logarithmic_regression(x, y):
@@ -73,7 +97,13 @@ def logarithmic_regression(x, y):
     def predict(x): return intercept + log_coef * np.log(x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + (log_coef * log(age))
+    regression = {
+        "sin_terms": [(0, 0, 0)],
+        "exponential_terms": [(0, 0)],
+        "logarithmic_terms": [(log_coef, np.e)],
+        "polynomial_terms": {0: intercept, 1: 0, 2: 0}
+    }
+    return error, regression # intercept + (log_coef * log(age))
 
 
 def sin_regression(x, y):
@@ -85,4 +115,10 @@ def sin_regression(x, y):
     def predict(x): return intercept + sin_coef * np.sin(x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    return error, intercept + (sin_coef * sin(age))
+    regression = {
+        "sin_terms": [(sin_coef, 1, 0)],
+        "exponential_terms": [(0, 0)],
+        "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: intercept, 1: 0, 2: 0}
+    }
+    return error, regression # intercept + (sin_coef * sin(age))
