@@ -31,7 +31,7 @@ class TestRegressionStandards(unittest.TestCase):
         
         print("\n \n \n Testing graphing model" + model_name)
         
-        x_range = (-10, 10)
+        x_range = (0, 10)
         plot_function(model, x_range=x_range, title=model_name)
         
         plot_function_data(model, self.x, self.y, x_range=x_range, title=model_name)
