@@ -88,8 +88,9 @@ def plot_function(regression_output, x_range=(-10, 10), num_points=1000):
     # Add logarithmic terms
     for c, b in regression_output["logarithmic_terms"]:
         # Avoid log of negative numbers
-        mask = x > 0
-        y[mask] += c * np.log(b * x[mask])
+        # mask = x > 0
+        z = b * x; mask = z > 0
+        y[mask] += c * np.log(z[mask])
     
     # Add polynomial terms
     for power, coef in regression_output["polynomial_terms"].items():
@@ -119,8 +120,9 @@ def plot_function_data(regression_output, x_data, y_data, x_range=(-10, 10), num
     
     # Add logarithmic terms
     for c, b in regression_output["logarithmic_terms"]:
-        mask = x > 0
-        y[mask] += c * np.log(b * x[mask])
+        # mask = x > 0
+        z = b * x; mask = z > 0
+        y[mask] += c * np.log(z[mask])
     
     # Add polynomial terms
     for power, coef in regression_output["polynomial_terms"].items():
