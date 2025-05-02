@@ -12,6 +12,24 @@ class TestRegressionStandards(unittest.TestCase):
         cls.x = df_filtered["age"].values
         cls.y = df_filtered["hdlngth"].values
 
+    def check_standards_methods(self, model):
+        model.print_all_terms()
+        
+        model.print_non_zero_terms()
+        
+        model.add_regression_outputs()
+        
+        func = model.generate_sympy_function()
+        
+        self.assertIsNotNone(func)
+        model.plot_function()
+        
+        model.plot_function_data()
+        results = model.evaluate()
+        self.assertIn('r_squared', results)
+        self.assertIn('mae', results)
+        self.assertIn('rmse', results)
+
     def test_linear_standards(self):
         error, regression = linear_regression(self.x, self.y)
 
