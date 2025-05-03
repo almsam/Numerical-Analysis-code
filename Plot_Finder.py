@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from sympy import symbols, sympify, solve, diff, lambdify, exp, log, sin
 
 from Regression_Finder import *
+from Regression_Standards import *
+
 
 
 df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv"); df_filtered = df[["hdlngth", "age"]].dropna()
@@ -66,7 +68,7 @@ def find_best_fit(x, y, plot=False):
         print(f"{name} Error: {error}")
     
     print(f"\nThe method with the smallest error is: {best_method} Regression with an error of {min_error}")
-    print(f"\nApproximate function: {best_fit_formula}")
+    print(f"\nApproximate function: {print_non_zero_terms(best_fit_formula)}")
     
     if(plot):
         plot_best_fit(x, y, best_method, best_fit_formula)
@@ -111,6 +113,6 @@ def fourier(x, y, n, plot=False):
 
 
 
-# a, b, c = find_best_fit(x, y, True); print(a); print(b); print(c) #uncomment for debug
+a, b, c = find_best_fit(x, y, False); print(a); print(b); print(c) #uncomment for debug
 
 # a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
