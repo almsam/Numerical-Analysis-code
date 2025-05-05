@@ -5,7 +5,8 @@ from unittest.mock import patch
 from sympy import symbols, exp, log, sin
 import statsmodels.api as sm
 import statsmodels.formula.api as smf  # type: ignore
-from Plot_Finder import linear_regression, quadratic_regression, cubic_regression, poly_regression, exp_regression, logarithmic_regression, sin_regression, find_best_fit
+# from Plot_Finder import linear_regression, quadratic_regression, cubic_regression, poly_regression, exp_regression, logarithmic_regression, sin_regression, find_best_fit
+from Regression_Finder import *
 
 class TestRegressionMethods(unittest.TestCase):
 
@@ -61,11 +62,11 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertGreater(error, 0)
         self.assertIn('x', str(formula))
 
-    def test_loess_regression(self):
-        error, formula = loess_regression(self.x, self.y)
-        self.assertIsInstance(error, float)
-        self.assertGreater(error, 0)
-        self.assertEqual(formula, "non-parametric")
+    # def test_loess_regression(self):
+    #     error, formula = loess_regression(self.x, self.y)
+    #     self.assertIsInstance(error, float)
+    #     self.assertGreater(error, 0)
+    #     self.assertEqual(formula, "non-parametric")
 
     # def test_main_function(self):
     #     # get the printed output
@@ -83,7 +84,7 @@ class TestRegressionMethods(unittest.TestCase):
             ("Exponential", exp_regression),
             ("Logarithmic", logarithmic_regression),
             ("Sine", sin_regression),
-            ("LOESS", loess_regression) #removed but this shall remain as it wont prevent tests
+            # ("LOESS", loess_regression) #removed but this shall remain as it wont prevent tests
         ]
         for name, method in methods:
             error, formula = method(self.x, self.y)
