@@ -1,0 +1,75 @@
+# regression methods:
+
+def linear_regression(x, y):
+    x = sm.add_constant(x)
+    model = sm.OLS(y, x).fit()
+    intercept, slope = model.params
+    error = np.mean(np.abs(y - model.predict(x)))
+    return error, intercept + slope * age
+
+def quadratic_regression(x, y):
+    X = sm.add_constant(np.column_stack((x, np.power(x, 2))))
+    model = sm.OLS(y, X).fit()
+    intercept, linear, quadratic = model.params
+    error = np.mean(np.abs(y - model.predict(X)))
+    return error, intercept + linear * age + quadratic * age**2
+
+def cubic_regression(x, y):
+    X = sm.add_constant(np.column_stack((x, np.power(x, 2), np.power(x, 3))))
+    model = sm.OLS(y, X).fit()
+    intercept, linear, quadratic, cubic = model.params
+    error = np.mean(np.abs(y - model.predict(X)))
+    return error, intercept + linear * age + quadratic * age**2 + cubic * age**3
+
+def poly_regression(x, y, degree):
+    poly_terms = [np.power(x, i) for i in range(1, degree + 1)]
+    X = sm.add_constant(np.column_stack(poly_terms))
+    model = sm.OLS(y, X).fit()
+    params = model.params
+    error = np.mean(np.abs(y - model.predict(X)))
+    polynomial_formula = sum(params[i] * age**i for i in range(degree + 1))
+    return error, polynomial_formula
+
+def exp_regression(x, y):
+    log_y = np.log(y)
+    X = sm.add_constant(x)
+    model = sm.OLS(log_y, X).fit()
+    intercept, slope = model.params
+    error = np.mean(np.abs(y - np.exp(model.predict(X))))
+    # return error, np.exp(intercept) * np.exp(slope * age)
+    formula = exp(intercept) * exp(slope * age) # type: ignore
+    return error, formula
+
+def logarithmic_regression(x, y):
+    X = sm.add_constant(np.log(x))
+    model = sm.OLS(y, X).fit()
+    intercept, log_coeff = model.params
+    error = np.mean(np.abs(y - model.predict(X)))
+    formula = intercept + log_coeff * log(age)
+    return error, formula
+
+def sin_regression(x, y):
+    sin_x = np.sin(x)
+    X = sm.add_constant(sin_x)
+    model = sm.OLS(y, X).fit()
+    intercept, sin_coeff = model.params
+    error = np.mean(np.abs(y - model.predict(X)))
+    formula = intercept + sin_coeff * sin(age)
+    return error, formula
+
+def logistic_regression(x, y):
+    y_transformed = (y - np.min(y)) / (np.max(y) - np.min(y))
+    X = sm.add_constant(x)
+    model = sm.Logit(y_transformed, X).fit()
+    intercept, slope = model.params
+    error = np.mean(np.abs(y_transformed - model.predict(X)))
+    # formula = 1 / (1 + np.exp(-(intercept + slope * age)))
+    age = symbols('age'); formula = 1 / (1 + exp(-(intercept + slope * age))) # type: ignore
+    return error, formula
+
+def loess_regression(x, y, frac=0.3):
+    loess_model = sm.nonparametric.lowess(y, x, frac=frac)
+    pred_loess = loess_model[:, 1]
+    residuals_loess = y - pred_loess
+    error = np.mean(np.abs(residuals_loess))
+    return error, "non-parametric"
