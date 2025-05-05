@@ -26,8 +26,13 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
 
     plt.scatter(x, y, label="Data points", color="blue")        # data points as scatter plot
     x_range = np.linspace(min(x), max(x), 100)                  # domain for the plot
-    y_range = lambdify(age, best_fit_formula, 'numpy')(x_range) # best-fit formula over x range
-    
+    sym_func = generate_sympy_function(best_fit_formula)
+    y_range = lambdify(age, sym_func, 'numpy')(x_range) # best-fit formula over x range
+    y_range = np.nan_to_num(y_range, nan=0.0, posinf=1e6, neginf=-1e6)
+
+    print("Generated expression:", sym_func)
+    print("x_range shape:", x_range.shape); print("y_range shape:", y_range.shape)
+
     # plot our regression curve:
     plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
     plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
@@ -113,6 +118,6 @@ def fourier(x, y, n, plot=False):
 
 
 
-a, b, c = find_best_fit(x, y, False); print(a); print(b); print(c) #uncomment for debug
+a, b, c = find_best_fit(x, y, True); print(a); print(b); print_non_zero_terms(c) #uncomment for debug
 
 # a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
