@@ -4,15 +4,7 @@ from sympy import symbols, sin, exp, log, sympify, Piecewise
 
 def print_all_terms(regression_output):
     """Print all terms in the regression output."""
-    print("All terms in regression:")
-    for key, value in regression_output.items():
-        print(f"{key}:")
-        if key == "polynomial_terms":
-            for power, coef in value.items():
-                print(f"  {coef}x^{power}")
-        else:
-            for term in value:
-                print(f"  {term}")
+    print(get_all_terms(regression_output))
 
 def get_all_terms(regression_output):
     """Get all terms in the regression output as a string object."""
@@ -29,20 +21,7 @@ def get_all_terms(regression_output):
 
 def print_non_zero_terms(regression_output):
     """Print only non-zero terms in the regression output."""
-    print("Non-zero terms in regression:")
-    for key, value in regression_output.items():
-        if key == "polynomial_terms":
-            non_zero = {p: c for p, c in value.items() if abs(c) > 1e-10}
-            if non_zero:
-                print(f"{key}:")
-                for power, coef in non_zero.items():
-                    print(f"  {coef}x^{power}")
-        else:
-            non_zero = [term for term in value if any(abs(x) > 1e-10 for x in term)]
-            if non_zero:
-                print(f"{key}:")
-                for term in non_zero:
-                    print(f"  {term}")
+    print(get_non_zero_terms(regression_output))
 
 def get_non_zero_terms(regression_output):
     """Get all non-zero terms in the regression output as a string object."""
@@ -55,7 +34,7 @@ def get_non_zero_terms(regression_output):
                 for power, coef in non_zero.items():
                     lines.append(f"  {coef}x^{power}")
         else:
-            non_zero = [term for term in value if any(abs(x) > tol for x in term)]
+            non_zero = [term for term in value if any(abs(x) > 1e-10 for x in term)]
             if non_zero:
                 lines.append(f"{key}:")
                 for term in non_zero:
