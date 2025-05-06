@@ -19,22 +19,22 @@ def get_all_terms(regression_output):
                 lines.append(f"  {term}")
     return "\n".join(lines)
 
-def print_non_zero_terms(regression_output):
+def print_non_zero_terms(regression_output, tolerance=1e-10):
     """Print only non-zero terms in the regression output."""
-    print(get_non_zero_terms(regression_output))
+    print(get_non_zero_terms(regression_output, tolerance))
 
-def get_non_zero_terms(regression_output):
+def get_non_zero_terms(regression_output, tolerance=1e-10):
     """Get all non-zero terms in the regression output as a string object."""
     lines = ["Non-zero terms in regression:"]
     for key, value in regression_output.items():
         if key == "polynomial_terms":
-            non_zero = {p: c for p, c in value.items() if abs(c) > 1e-10}
+            non_zero = {p: c for p, c in value.items() if abs(c) > tolerance}
             if non_zero:
                 lines.append(f"{key}:")
                 for power, coef in non_zero.items():
                     lines.append(f"  {coef}x^{power}")
         else:
-            non_zero = [term for term in value if any(abs(x) > 1e-10 for x in term)]
+            non_zero = [term for term in value if any(abs(x) > tolerance for x in term)]
             if non_zero:
                 lines.append(f"{key}:")
                 for term in non_zero:
