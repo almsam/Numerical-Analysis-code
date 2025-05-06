@@ -14,6 +14,18 @@ def print_all_terms(regression_output):
             for term in value:
                 print(f"  {term}")
 
+def get_all_terms(regression_output):
+    lines = ["All terms in regression:"]
+    for key, value in regression_output.items():
+        lines.append(f"{key}:")
+        if key == "polynomial_terms":
+            for power, coef in value.items():
+                lines.append(f"  {coef}x^{power}")
+        else:
+            for term in value:
+                lines.append(f"  {term}")
+    return "\n".join(lines)
+
 def print_non_zero_terms(regression_output):
     """Print only non-zero terms in the regression output."""
     print("Non-zero terms in regression:")
@@ -30,6 +42,8 @@ def print_non_zero_terms(regression_output):
                 print(f"{key}:")
                 for term in non_zero:
                     print(f"  {term}")
+
+
 
 def add_regression_outputs(reg1, reg2):
     """Add two regression outputs together."""
