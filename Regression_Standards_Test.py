@@ -1,7 +1,7 @@
 import numpy as np
 from Regression_Standards import (
-    print_all_terms,
-    print_non_zero_terms,
+    print_all_terms, get_all_terms,
+    print_non_zero_terms, get_non_zero_terms,
     add_regression_outputs,
     generate_sympy_function,
     plot_function,
@@ -26,9 +26,15 @@ def test_regression_standards():
 
     print("\nTesting print_all_terms:")
     print_all_terms(regression1)
+    
+    print("\nTesting get_all_terms:")
+    print(get_all_terms(regression1))
 
     print("\nTesting print_non_zero_terms:")
     print_non_zero_terms(regression1)
+
+    print("\nTesting get_non_zero_terms:")
+    print(get_non_zero_terms(regression1))
 
     print("\nTesting add_regression_outputs:")
     combined = add_regression_outputs(regression1, regression2)
