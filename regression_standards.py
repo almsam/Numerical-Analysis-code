@@ -15,6 +15,7 @@ def print_all_terms(regression_output):
                 print(f"  {term}")
 
 def get_all_terms(regression_output):
+    """Get all terms in the regression output as a string object."""
     lines = ["All terms in regression:"]
     for key, value in regression_output.items():
         lines.append(f"{key}:")
@@ -44,6 +45,7 @@ def print_non_zero_terms(regression_output):
                     print(f"  {term}")
 
 def get_non_zero_terms(regression_output):
+    """Get all non-zero terms in the regression output as a string object."""
     lines = ["Non-zero terms in regression:"]
     for key, value in regression_output.items():
         if key == "polynomial_terms":
