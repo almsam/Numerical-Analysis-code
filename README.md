@@ -113,6 +113,7 @@ and give you a plot to vizualize the data & regression line provided,
 
 this project aims to be expanded into an open-source library with additional features, including:
 - Support for more regression methods.
+- Support for Time series functions in additional to mathematical ones (such as AR/MA & eventially ARMA/ARIMA/SARIMA)
 - Option to handle multivariate datasets (more than one independent variable).
 - Enhanced error metrics for model selection (e.g., R², Adjusted R²).
 - Optimization options for fine-tuning parameters such as the LOESS frac value.
