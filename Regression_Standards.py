@@ -77,7 +77,7 @@ def generate_sympy_function(regression_output):
     # Add logarithmic terms
     for c, b in regression_output["logarithmic_terms"]:
         # expr += c * log(b * x)
-        expr += Piecewise((c * log(b * x), b * x > 0), (0, True))
+        expr += Piecewise((c * log(b * x), b * x > 0), (0, True)) # type: ignore # type ignore for now - see #72
     
     # Add polynomial terms
     for power, coef in regression_output["polynomial_terms"].items():
