@@ -33,7 +33,7 @@ def find_min_max(func, range_start, range_end):
 def calculate_derivative(x_val, func):
     x = symbols('x')
     deriv = diff(func, x)
-    return float(deriv.subs(x, x_val))
+    return float(deriv.subs(x, x_val)) # type: ignore
 
 
 
