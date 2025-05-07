@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sympy import symbols, sin, exp, log, sympify, Piecewise
 
+# Debug note: verify this file is spelt "Regression_Standards.py" - capital R capital S
+
 def print_all_terms(regression_output):
     """Print all terms in the regression output."""
     print(get_all_terms(regression_output))
