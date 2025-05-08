@@ -54,7 +54,7 @@ class TestRegressionStandards(unittest.TestCase):
         self.check_standards_methods(regression, "poly")
 
     def test_sin_standards(self):
-        error, regression = exp_regression(self.x, self.y)
+        error, regression = sin_regression(self.x, self.y)
         self.check_standards_methods(regression, "sin")
 
     def test_log_standards(self):
