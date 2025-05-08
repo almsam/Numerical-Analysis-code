@@ -80,6 +80,7 @@ def exp_regression(x, y):
     regression = {
         "sin_terms": [(0, 0, 0)],
         "exponential_terms": [(coefficient, base)],
+
         "logarithmic_terms": [(0, 0)],
         "polynomial_terms": {0: intercept, 1: 0, 2: 0}
     }
@@ -98,7 +99,7 @@ def logarithmic_regression(x, y):
     regression = {
         "sin_terms": [(0, 0, 0)],
         "exponential_terms": [(0, 0)],
-        "logarithmic_terms": [(log_coef, np.e)],
+        "logarithmic_terms": [(log_coef, 1)], #np.e)],
         "polynomial_terms": {0: intercept, 1: 0, 2: 0}
     }
     return error, regression # intercept + (log_coef * log(age))
