@@ -96,7 +96,7 @@ class TestRegressionMethods(unittest.TestCase):
             error_list.append((f"Polynomial (x^{degree})", error, formula))
         
         min_error_method = min(error_list, key=lambda x: x[1])
-        self.assertIn(min_error_method[0], ['Linear', 'Quadratic', 'Cubic', 'Exponential', 'Logarithmic', 'Sine', 'LOESS'])
+        self.assertIn(min_error_method[0], ['Linear', 'Quadratic', 'Cubic', 'Exponential', 'Logarithmic', 'Sine']) # , 'LOESS'])
         self.assertIsInstance(min_error_method[1], float)
         self.assertGreater(min_error_method[1], 0)
 
