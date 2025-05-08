@@ -30,8 +30,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     y_range = lambdify(age, sym_func, 'numpy')(x_range) # best-fit formula over x range
     y_range = np.nan_to_num(y_range, nan=0.0, posinf=1e6, neginf=-1e6)
 
-    print("Generated expression:", sym_func)
-    print("x_range shape:", x_range.shape); print("y_range shape:", y_range.shape)
+    print("Generated expression:", sym_func) # print("x_range shape:", x_range.shape); print("y_range shape:", y_range.shape)
 
     # plot our regression curve:
     plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
@@ -73,7 +72,7 @@ def find_best_fit(x, y, plot=False):
         print(f"{name} Error: {error}")
     
     print(f"\nThe method with the smallest error is: {best_method} Regression with an error of {min_error}")
-    print(f"\nApproximate function: {print_non_zero_terms(best_fit_formula)}")
+    print(f"\nApproximate function: {get_non_zero_terms(best_fit_formula)}")
     
     if(plot):
         plot_best_fit(x, y, best_method, best_fit_formula)
@@ -118,6 +117,6 @@ def fourier(x, y, n, plot=False):
 
 
 
-a, b, c = find_best_fit(x, y, True); print(a); print(b); print_non_zero_terms(c) #uncomment for debug
+# a, b, c = find_best_fit(x, y, True); print(a); print(b); print_non_zero_terms(c) #uncomment for debug
 
 # a = fourier(x, y, 8, True); print(a)#; print(b) #uncomment for debug
