@@ -51,7 +51,7 @@
 
 ### Plot Finder
 - After completing a lab in 1st year physics to derive a formula for a tenis balls flight by collecting data in a video, I realzied the lack of frameworks in place to detrmine the relationship between variables
-- Enter Plot Finder: [Plot_Finder.py](https://github.com/almsam/Numerical-Analysis-code/blob/main/Plot_Finder.py) runs a linear, quadratic, cubic, higher polynomial, exponential, logarithmic, Loess, & sinosudial regressions, then using the smallest error case to determine the best guess for the best fit line of the graph
+- Enter Plot Finder: [Plot_Finder.py](https://github.com/almsam/Numerical-Analysis-code/blob/main/Plot_Finder.py) runs a linear, quadratic, cubic, higher polynomial, exponential/logarithmic, & sinosudial regressions, then using the smallest error case to determine the best guess for the best fit line of the graph
 - The next Iteration of development was to return the function of the line of best fit after finding both the function and the parameters of correlation that minimize error
 - And the current Iteration after that involves Forior series regression by computing a best fit function as multiple functions summed together (which can be done by regressing on the error terms) - which theoretically could mean the error of a graph could be chocked up to a sinosudial term in the true function
 
@@ -87,23 +87,26 @@ import pandas as pd
 
 ```
 --- Regression Errors ---
-Linear Error: 2.5064127927953335  
-Quadratic Error: 2.376293313469839
-Cubic Error: 2.3306552613010023
-Exponential Error: 2.5033863710624638
-Logarithmic Error: 2.408240048405719
-Sine Error: 2.5278577442576977
-LOESS Error: 3.5317500644855344
-Polynomial (x^4) Error: 2.3629127943906134
-Polynomial (x^5) Error: 2.3953673780927542
-Polynomial (x^6) Error: 2.357742781477933
-Polynomial (x^7) Error: 2.3560983113517175
+Linear Error: 2.0246226158591294
+Quadratic Error: 2.0246226158591285
+Cubic Error: 0.3109195299270055
+Exponential Error: nan
+Logarithmic Error: 3.1262440605310577
+Sine Error: 1.6706774852437434e-15
+Polynomial (x^4) Error: 0.31091952992724387
+Polynomial (x^5) Error: 0.020809849465414663
+Polynomial (x^6) Error: 0.02080984937930931
+Polynomial (x^7) Error: 0.0007876614786412887
 
-The method with the smallest error is: Cubic Regression with an error of 2.3306552613010023
+The method with the smallest error is: Sine Regression with an error of 1.6706774852437434e-15
+Non-zero terms in regression:
+sin_terms:
+  (4.999999999999997, 1, 0)
 
-Approximate function: 0.0436070723456402*x**3 - 0.787115855407833*x**2 + 4.5685444988691*x + 85.1575254621457
+Approximate function: None
 
-plotting: 0.0436070723456402*x**3 - 0.787115855407833*x**2 + 4.5685444988691*x + 85.1575254621457
+plotting: {'sin_terms': [(4.999999999999997, 1, 0)], 'exponential_terms': [(0, 0)], 'logarithmic_terms': [(0, 0)], 'polynomial_terms': {0: -7.806255641895632e-17, 1: 0, 2: 
+0}}
 ```
 
 and give you a plot to vizualize the data & regression line provided, 
@@ -113,6 +116,7 @@ and give you a plot to vizualize the data & regression line provided,
 
 this project aims to be expanded into an open-source library with additional features, including:
 - Support for more regression methods.
+- Support for Time series functions in additional to mathematical ones (such as AR/MA & eventially ARMA/ARIMA/SARIMA)
 - Option to handle multivariate datasets (more than one independent variable).
 - Enhanced error metrics for model selection (e.g., R², Adjusted R²).
 - Optimization options for fine-tuning parameters such as the LOESS frac value.
