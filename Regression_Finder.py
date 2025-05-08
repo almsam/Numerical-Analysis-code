@@ -79,10 +79,10 @@ def exp_regression(x, y):
     coefficient = np.exp(intercept); base = np.exp(slope)
     regression = {
         "sin_terms": [(0, 0, 0)],
-        "exponential_terms": [(coefficient, base)],
+        "exponential_terms": [(coefficient, base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)],
 
         "logarithmic_terms": [(0, 0)],
-        "polynomial_terms": {0: intercept, 1: 0, 2: 0}
+        "polynomial_terms": {0: 0, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
     }
     return error, regression # intercept + (slope * exp(age))
 
