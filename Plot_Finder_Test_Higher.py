@@ -26,6 +26,7 @@ class TestRegressionMethods(unittest.TestCase):
     #     plt.scatter(x, y, label="Data Points", color="blue"); plt.plot(x, predicted_y, label="Fitted Curve", color="red")
     #     plt.title(title); plt.xlabel("x"); plt.ylabel("y"); plt.legend(); plt.show()
 
+# simple
 
     def test_linear_regression_perfect_linear_data(self):
         print("\n\n\nLinear:\n\n\n")
@@ -56,7 +57,7 @@ class TestRegressionMethods(unittest.TestCase):
         print("Cubic:\nexpected:", "x**3 - 2 * x**2 + 3 * x + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect cubic data")
 
-
+# polynomial
 
     def test_polynomial_regression_perfect_quartic_data(self):
         print("\n\n\nP4:\n\n\n")
@@ -94,7 +95,7 @@ class TestRegressionMethods(unittest.TestCase):
         print("P7:\nexpected:", "x**7 + x**6 + x**5 + x**4 - x**3 + 2 * x**2 + x + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=3, msg="Expected zero error for perfect p7 data")
 
-
+# special
 
     def test_exp_regression_perfect_exp_data(self):
         print("\n\n\nexp:\n\n\n")
