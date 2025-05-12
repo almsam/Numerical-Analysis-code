@@ -1,3 +1,3 @@
-"PF logo" is the project logo (for now)
+"PF logo.png" is the project logo (for now)
 
-"exp and log offset" is info on a bug fix from a while ago
+"exp and log offset.png" is info on a bug fix from a while ago
