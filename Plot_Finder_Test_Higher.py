@@ -97,6 +97,8 @@ class TestRegressionMethods(unittest.TestCase):
 
 # special
 
+# exp
+
     def test_exp_regression_perfect_exp_data(self):
         print("\n\n\nexp:\n\n\n")
         x = np.linspace(self.zero, 5, 50)
@@ -106,6 +108,8 @@ class TestRegressionMethods(unittest.TestCase):
         print("exp:\nexpected:", "2 * np.exp(0.5 * x)", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
 
+# log
+
     def test_logarithmic_regression_perfect_log_data(self):
         print("\n\n\nlog:\n\n\n")
         x = np.linspace(1, 10, 50)  # Avoid x = 0 to prevent log(0)
@@ -114,6 +118,8 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertTrue((method == "Logarithmic"))
         print("log:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect logarithmic data")
+
+# sin
 
     def test_sin_regression_perfect_sin_data(self):
         print("\n\n\nsin:\n\n\n")
