@@ -29,9 +29,11 @@ class TestRegressionMethods(unittest.TestCase):
 # simple
 
     def test_nonperfect_fit_returns_nonzero_error(self):
+        print("\n\n\nNonzero:\n\n\n")
         x = np.linspace(0, 10, 50)
         y = x**2 + np.random.normal(0, 5, 50)
         method, error, formula = find_best_fit(x, y, True)
+        # self.assertEqual(method, "Linear")
         self.assertGreater(error, 0.1)
 
 
