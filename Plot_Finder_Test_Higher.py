@@ -131,7 +131,13 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertEqual(method, "Exponential")
         self.assertAlmostEqual(error, 0, places=5)
 
-    
+    def test_exp_regression_positive_quadrant(self):
+        x = np.linspace(1, 10, 50)
+        y = 2.2 * np.exp(0.2 * x)
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Exponential")
+        self.assertAlmostEqual(error, 0, places=5)
+
 
 # log
 
