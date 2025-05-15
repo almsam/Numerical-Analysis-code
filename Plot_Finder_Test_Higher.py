@@ -122,21 +122,21 @@ class TestRegressionMethods(unittest.TestCase):
         y = 4 * np.exp(0.3 * x)
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
-        self.assertAlmostEqual(error, 0, places=5)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
 
     def test_exp_regression_centered_around_zero(self):
         x = np.linspace(-2, 2, 50)
         y = 1.5 * np.exp(0.7 * x)
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
-        self.assertAlmostEqual(error, 0, places=5)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
 
     def test_exp_regression_positive_quadrant(self):
         x = np.linspace(1, 10, 50)
         y = 2.2 * np.exp(0.2 * x)
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
-        self.assertAlmostEqual(error, 0, places=5)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
 
 
 # log
