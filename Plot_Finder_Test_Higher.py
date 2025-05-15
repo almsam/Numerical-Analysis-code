@@ -117,6 +117,16 @@ class TestRegressionMethods(unittest.TestCase):
         print("exp:\nexpected:", "2 * np.exp(0.5 * x)", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
 
+    def test_exp_regression_shifted_left(self):
+        x = np.linspace(-5, 0, 50)
+        y = 4 * np.exp(0.3 * x)
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Exponential")
+        self.assertAlmostEqual(error, 0, places=5)
+
+
+
+
 # log
 
     def test_logarithmic_regression_perfect_log_data(self):
