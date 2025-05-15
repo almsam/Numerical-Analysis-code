@@ -1,0 +1,15 @@
+before debugging exp once & for all, here is the tldr of the code bases current state
+
+test cases:
+
+
+
+
+code block:
+```
+def exp_regression(x, y):
+
+```
+
+
+feel free to propose a change to the code block to make the test cases return proper output
