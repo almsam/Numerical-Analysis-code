@@ -37,7 +37,25 @@ recieved:  {'sin_terms': [(0, 0, 0)], 'exponential_terms': [(4.000000000000006, 
 
 code block:
 ```
+
 def exp_regression(x, y):
+        # generate polynomial features up to the given degree
+    log_y = np.log(y)
+    X = np.column_stack((np.ones(len(x)), x))
+    intercept, slope = np.linalg.inv(X.T @ X) @ X.T @ log_y
+        # then somehow find the error
+    def predict(x): return np.exp(intercept + slope * x)
+    error = np.mean(np.abs(y - predict(x)))
+        # and return the result (this time in the new format)
+    coefficient = np.exp(intercept); base = np.exp(slope)
+    regression = {
+        "sin_terms": [(0, 0, 0)],
+        "exponential_terms": [(coefficient, base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)],
+
+        "logarithmic_terms": [(0, 0)],
+        "polynomial_terms": {0: 0, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
+    }
+    return error, regression # intercept + (slope * exp(age))
 
 ```
 
