@@ -26,6 +26,16 @@ class TestRegressionMethods(unittest.TestCase):
     #     plt.scatter(x, y, label="Data Points", color="blue"); plt.plot(x, predicted_y, label="Fitted Curve", color="red")
     #     plt.title(title); plt.xlabel("x"); plt.ylabel("y"); plt.legend(); plt.show()
 
+# simple
+
+    def test_nonperfect_fit_returns_nonzero_error(self):
+        print("\n\n\nNonzero:\n\n\n")
+        x = np.linspace(0, 10, 50)
+        y = x**2 + np.random.normal(0, 5, 50)
+        method, error, formula = find_best_fit(x, y, True)
+        # self.assertEqual(method, "Linear")
+        self.assertGreater(error, 0.1)
+
 
     def test_linear_regression_perfect_linear_data(self):
         print("\n\n\nLinear:\n\n\n")
@@ -56,7 +66,7 @@ class TestRegressionMethods(unittest.TestCase):
         print("Cubic:\nexpected:", "x**3 - 2 * x**2 + 3 * x + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect cubic data")
 
-
+# polynomial
 
     def test_polynomial_regression_perfect_quartic_data(self):
         print("\n\n\nP4:\n\n\n")
@@ -94,7 +104,9 @@ class TestRegressionMethods(unittest.TestCase):
         print("P7:\nexpected:", "x**7 + x**6 + x**5 + x**4 - x**3 + 2 * x**2 + x + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=3, msg="Expected zero error for perfect p7 data")
 
+# special
 
+# exp
 
     def test_exp_regression_perfect_exp_data(self):
         print("\n\n\nexp:\n\n\n")
@@ -105,6 +117,33 @@ class TestRegressionMethods(unittest.TestCase):
         print("exp:\nexpected:", "2 * np.exp(0.5 * x)", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
 
+    def test_exp_regression_shifted_left(self):
+        x = np.linspace(-5, 0, 50)
+        y = 4 * np.exp(0.3 * x)
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Exponential")
+        print("exp:\nexpected:", "4 * np.exp(0.3 * x)", "\nrecieved: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+
+    def test_exp_regression_centered_around_zero(self):
+        x = np.linspace(-2, 2, 50)
+        y = 1.5 * np.exp(0.7 * x)
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Exponential")
+        print("exp:\nexpected:", "1.5 * np.exp(0.7 * x)", "\nrecieved: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+
+    def test_exp_regression_positive_quadrant(self):
+        x = np.linspace(1, 10, 50)
+        y = 2.2 * np.exp(0.2 * x)
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Exponential")
+        print("exp:\nexpected:", "2.2 * np.exp(0.2 * x)", "\nrecieved: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+
+
+# log
+
     def test_logarithmic_regression_perfect_log_data(self):
         print("\n\n\nlog:\n\n\n")
         x = np.linspace(1, 10, 50)  # Avoid x = 0 to prevent log(0)
@@ -113,6 +152,8 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertTrue((method == "Logarithmic"))
         print("log:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect logarithmic data")
+
+# sin
 
     def test_sin_regression_perfect_sin_data(self):
         print("\n\n\nsin:\n\n\n")
