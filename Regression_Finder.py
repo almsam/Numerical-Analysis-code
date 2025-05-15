@@ -76,11 +76,10 @@ def exp_regression(x, y):
     def predict(x): return np.exp(intercept + slope * x)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
-    coefficient = np.exp(intercept)#; base = np.exp(slope)
+    coefficient = np.exp(intercept)#; base = np.exp(slope) #removed base to eliminate massive bug
     regression = {
         "sin_terms": [(0, 0, 0)],
-        "exponential_terms": [(coefficient, slope)], # base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)],
-
+        "exponential_terms": [(coefficient, slope)], # base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)], #removed base to eliminate massive bug
         "logarithmic_terms": [(0, 0)],
         "polynomial_terms": {0: 0, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
     }
