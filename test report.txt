@@ -2,6 +2,36 @@ before debugging exp once & for all, here is the tldr of the code bases current 
 
 test cases:
 
+# test_exp_regression_centered_around_zero
+
+expected: 1.5 * np.exp(0.7 * x) 
+recieved:  {'sin_terms': [(0, 0, 0)], 'exponential_terms': [(1.5, 0.6107013790800848)], 'logarithmic_terms': [(0, 0)], 'polynomial_terms': {0: 0, 1: 0, 2: 0}}
+
+
+
+# test_exp_regression_perfect_exp_data
+
+expected: 2 * np.exp(0.5 * x) 
+recieved:  {'sin_terms': [(0, 0, 0)], 'exponential_terms': [(2.0, 0.4999999999999999)], 'logarithmic_terms': [(0, 0)], 'polynomial_terms': {0: 0, 1: 0, 2: 0}}
+
+
+
+# test_exp_regression_positive_quadrant
+
+expected: 2.2 * np.exp(0.2 * x) 
+recieved:  {'sin_terms': [(0, 0, 0)], 'exponential_terms': [(2.199999999999996, 0.37040911034085894)], 'logarithmic_terms': [(0, 0)], 'polynomial_terms': 
+{0: 0, 1: 0, 2: 0}}
+.c:\Users\samia\OneDrive\Desktop\Numerical-Analysis-code\Regression_Finder.py:92: RuntimeWarning: divide by zero encountered in log
+  log_x = np.log(x)
+c:\Users\samia\OneDrive\Desktop\Numerical-Analysis-code\Regression_Finder.py:96: RuntimeWarning: divide by zero encountered in log
+  def predict(x): return intercept + log_coef * np.log(x)
+
+
+
+# test_exp_regression_shifted_left
+
+expected: 4 * np.exp(0.3 * x) 
+recieved:  {'sin_terms': [(0, 0, 0)], 'exponential_terms': [(4.000000000000006, 0.4093653765389911)], 'logarithmic_terms': [(0, 0)], 'polynomial_terms': {0: 0, 1: 0, 2: 0}}
 
 
 
