@@ -124,8 +124,14 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertEqual(method, "Exponential")
         self.assertAlmostEqual(error, 0, places=5)
 
+    def test_exp_regression_centered_around_zero(self):
+        x = np.linspace(-2, 2, 50)
+        y = 1.5 * np.exp(0.7 * x)
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Exponential")
+        self.assertAlmostEqual(error, 0, places=5)
 
-
+    
 
 # log
 
