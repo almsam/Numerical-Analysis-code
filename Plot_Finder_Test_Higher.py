@@ -123,7 +123,7 @@ class TestRegressionMethods(unittest.TestCase):
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
         print("exp:\nexpected:", "4 * np.exp(0.3 * x)", "\nrecieved: ", str(formula))
-        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect left shift exponential data")
 
     def test_exp_regression_centered_around_zero(self):
         x = np.linspace(-2, 2, 50)
@@ -131,7 +131,7 @@ class TestRegressionMethods(unittest.TestCase):
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
         print("exp:\nexpected:", "1.5 * np.exp(0.7 * x)", "\nrecieved: ", str(formula))
-        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect center zero exponential data")
 
     def test_exp_regression_positive_quadrant(self):
         x = np.linspace(1, 10, 50)
@@ -139,7 +139,7 @@ class TestRegressionMethods(unittest.TestCase):
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
         print("exp:\nexpected:", "2.2 * np.exp(0.2 * x)", "\nrecieved: ", str(formula))
-        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect positive exponential data")
 
 
 # log
