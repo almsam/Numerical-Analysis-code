@@ -23,9 +23,36 @@ class TestRegressionMethods(unittest.TestCase):
         cls.zero = 0.000000000000001
 
     
-    
-    
-    
+    def test_linear_q1(self):
+        print("\n\n\nLinear:\n\n\n")
+        x = np.linspace(0, 10, 50); x = x[x != 0] #avoid x 0
+        y = 3 * x + 2  # y = 3x + 2
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Linear")
+        print("Linear:\nexpected:", "3.0*x + 2.0", "\nrecieved: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q1 linear data")
+    def test_linear_q2(self):
+        x = np.linspace(-10, 0, 50); x = x[x != 0]  # avoid x = 0
+        y = 3 * x + 2
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Linear")
+        print("Linear Q2:\nexpected:", "3.0*x + 2.0", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q2 linear data")
+    def test_linear_q3(self):
+        x = np.linspace(-10, -1, 50)
+        y = -2 * x - 3  # Another line with both x and y negative
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Linear")
+        print("Linear Q3:\nexpected:", "-2.0*x - 3.0", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q3 linear data")
+    def test_linear_q4(self):
+        x = np.linspace(1, 10, 50)
+        y = -2 * x + 5  # y is negative, x is positive
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Linear")
+        print("Linear Q4:\nexpected:", "-2.0*x + 5.0", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q4 linear data")
+
     
     
     
