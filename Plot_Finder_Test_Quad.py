@@ -64,7 +64,6 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertIn(method, ["Quadratic", "Cubic"])
         print("Quadratic Q1:\nexpected:", "x**2 + 2*x + 1", "\nreceived: ", str(formula))
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q1 quadratic data")
-
     def test_quadratic_q2(self):
         x = np.linspace(-5, -0.1, 50)
         y = x**2 - 3 * x + 2  # Opens upward, y > 0
@@ -72,7 +71,6 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertIn(method, ["Quadratic", "Cubic"])
         print("Quadratic Q2:\nexpected:", "x**2 - 3*x + 2", "\nreceived: ", str(formula))
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q2 quadratic data")
-
     def test_quadratic_q3(self):
         x = np.linspace(-5, -0.1, 50)
         y = -x**2 - 2 * x - 3  # Opens downward, all y < 0
@@ -80,7 +78,6 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertIn(method, ["Quadratic", "Cubic"])
         print("Quadratic Q3:\nexpected:", "-x**2 - 2*x - 3", "\nreceived: ", str(formula))
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q3 quadratic data")
-
     def test_quadratic_q4(self):
         x = np.linspace(0.1, 5, 50)
         y = -x**2 + 3 * x - 2  # Opens downward, mostly y < 0
