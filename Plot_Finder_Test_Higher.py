@@ -167,7 +167,12 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertEqual(method, "Logarithmic")
         self.assertAlmostEqual(error, 0, places=5)
 
-
+    def test_log_regression_shifted_upward(self):
+        x = np.linspace(1, 15, 50)
+        y = 3.3 * np.log(x) + 7
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Logarithmic")
+        self.assertAlmostEqual(error, 0, places=5)
 
 # sin
 
