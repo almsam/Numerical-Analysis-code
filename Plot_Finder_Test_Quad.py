@@ -22,7 +22,8 @@ class TestRegressionMethods(unittest.TestCase):
         cls.x = df_filtered["age"].values
         cls.zero = 0.000000000000001
 
-    
+######################### linear #################################
+
     def test_linear_q1(self):
         print("\n\n\nLinear:\n\n\n")
         x = np.linspace(0, 10, 50); x = x[x != 0] #avoid x 0
@@ -53,7 +54,40 @@ class TestRegressionMethods(unittest.TestCase):
         print("Linear Q4:\nexpected:", "-2.0*x + 5.0", "\nreceived: ", str(formula))
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q4 linear data")
 
-    
+######################### quadratic #################################
+
+    def test_quadratic_q1(self):
+        print("\n\n\nQuadratic Q1:\n\n\n")
+        x = np.linspace(0.1, 5, 50)
+        y = x**2 + 2 * x + 1  # Opens upward, all y > 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertIn(method, ["Quadratic", "Cubic"])
+        print("Quadratic Q1:\nexpected:", "x**2 + 2*x + 1", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q1 quadratic data")
+
+    def test_quadratic_q2(self):
+        x = np.linspace(-5, -0.1, 50)
+        y = x**2 - 3 * x + 2  # Opens upward, y > 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertIn(method, ["Quadratic", "Cubic"])
+        print("Quadratic Q2:\nexpected:", "x**2 - 3*x + 2", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q2 quadratic data")
+
+    def test_quadratic_q3(self):
+        x = np.linspace(-5, -0.1, 50)
+        y = -x**2 - 2 * x - 3  # Opens downward, all y < 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertIn(method, ["Quadratic", "Cubic"])
+        print("Quadratic Q3:\nexpected:", "-x**2 - 2*x - 3", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q3 quadratic data")
+
+    def test_quadratic_q4(self):
+        x = np.linspace(0.1, 5, 50)
+        y = -x**2 + 3 * x - 2  # Opens downward, mostly y < 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertIn(method, ["Quadratic", "Cubic"])
+        print("Quadratic Q4:\nexpected:", "-x**2 + 3*x - 2", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q4 quadratic data")
     
     
 
