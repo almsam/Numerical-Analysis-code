@@ -121,6 +121,46 @@ class TestRegressionMethods(unittest.TestCase):
         print("Cubic Q4:\nexpected:", "-x**3 + x**2 - 2*x + 3", "\nreceived: ", str(formula))
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q4 cubic data")
 
+######################### p4 #################################
+
+def test_polynomial_p4_q1(self):
+    x = np.linspace(0.1, 3, 50)
+    y = x**4 + x**2 + 1
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^4)")
+    print("P4 Q1:\nexpected:", "x**4 + x**2 + 1", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p4q1 data")
+def test_polynomial_p4_q2(self):
+    x = np.linspace(-3, -0.1, 50)
+    y = x**4 - 2 * x**2 + 1
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^4)")
+    print("P4 Q2:\nexpected:", "x**4 - 2*x**2 + 1", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p4q2 data")
+def test_polynomial_p4_q3(self):
+    x = np.linspace(-3, -0.1, 50)
+    y = -x**4 - x**2 - 2
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^4)")
+    print("P4 Q3:\nexpected:", "-x**4 - x**2 - 2", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p4q3 data")
+def test_polynomial_p4_q4(self):
+    x = np.linspace(0.1, 3, 50)
+    y = -x**4 + x**2 - 1
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^4)")
+    print("P4 Q4:\nexpected:", "-x**4 + x**2 - 1", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p4q4 data")
+
+######################### p5 #################################
+
+
+
+######################### p6 #################################
+
+
+######################### p7 #################################
+
 
 
 if __name__ == '__main__':
