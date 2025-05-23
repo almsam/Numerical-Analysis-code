@@ -160,6 +160,15 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertEqual(method, "Logarithmic")
         self.assertAlmostEqual(error, 0, places=5)
 
+    def test_log_regression_near_one(self):
+        x = np.linspace(1.1, 5, 50)
+        y = 0.8 * np.log(x) + 2
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Logarithmic")
+        self.assertAlmostEqual(error, 0, places=5)
+
+
+
 # sin
 
     def test_sin_regression_perfect_sin_data(self):
