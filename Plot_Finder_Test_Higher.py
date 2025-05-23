@@ -153,6 +153,13 @@ class TestRegressionMethods(unittest.TestCase):
         print("log:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect logarithmic data")
 
+    def test_log_regression_positive_x_large_values(self):
+        x = np.linspace(10, 100, 50)
+        y = 2.5 * np.log(x) - 4
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Logarithmic")
+        self.assertAlmostEqual(error, 0, places=5)
+
 # sin
 
     def test_sin_regression_perfect_sin_data(self):
