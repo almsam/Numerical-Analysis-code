@@ -85,8 +85,42 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertIn(method, ["Quadratic", "Cubic"])
         print("Quadratic Q4:\nexpected:", "-x**2 + 3*x - 2", "\nreceived: ", str(formula))
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q4 quadratic data")
-    
-    
+
+######################### cubic #################################
+
+    def test_cubic_q1(self):
+        print("\n\n\nCubic Q1:\n\n\n")
+        x = np.linspace(0.1, 5, 50)
+        y = x**3 + 2 * x**2 + x + 1  # All x > 0, y > 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Cubic")
+        print("Cubic Q1:\nexpected:", "x**3 + 2*x**2 + x + 1", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q1 cubic data")
+    def test_cubic_q2(self):
+        print("\n\n\nCubic Q2:\n\n\n")
+        x = np.linspace(-5, -0.1, 50)
+        y = -x**3 - x**2 + 2 * x - 1  # x < 0, mostly y > 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Cubic")
+        print("Cubic Q2:\nexpected:", "-x**3 - x**2 + 2*x - 1", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q2 cubic data")
+    def test_cubic_q3(self):
+        print("\n\n\nCubic Q3:\n\n\n")
+        x = np.linspace(-5, -0.1, 50)
+        y = -x**3 - 2 * x**2 - x - 2  # x < 0, y < 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Cubic")
+        print("Cubic Q3:\nexpected:", "-x**3 - 2*x**2 - x - 2", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q3 cubic data")
+    def test_cubic_q4(self):
+        print("\n\n\nCubic Q4:\n\n\n")
+        x = np.linspace(0.1, 5, 50)
+        y = -x**3 + x**2 - 2 * x + 3  # x > 0, y < 0
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Cubic")
+        print("Cubic Q4:\nexpected:", "-x**3 + x**2 - 2*x + 3", "\nreceived: ", str(formula))
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for q4 cubic data")
+
 
 
 if __name__ == '__main__':
