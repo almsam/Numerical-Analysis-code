@@ -185,6 +185,34 @@ def test_polynomial_p5_q4(self):
 
 ######################### p6 #################################
 
+def test_polynomial_p6_q1(self):
+    x = np.linspace(0.1, 3, 50)
+    y = x**6 + x**4 + x**2
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^6)")
+    print("P6 Q1:\nexpected:", "x**6 + x**4 + x**2", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p6q1 data")
+def test_polynomial_p6_q2(self):
+    x = np.linspace(-3, -0.1, 50)
+    y = x**6 - x**4 + x**2
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^6)")
+    print("P6 Q2:\nexpected:", "x**6 - x**4 + x**2", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p6q2 data")
+def test_polynomial_p6_q3(self):
+    x = np.linspace(-3, -0.1, 50)
+    y = -x**6 - x**4 - x**2
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^6)")
+    print("P6 Q3:\nexpected:", "-x**6 - x**4 - x**2", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p6q3 data")
+def test_polynomial_p6_q4(self):
+    x = np.linspace(0.1, 3, 50)
+    y = -x**6 + x**4 - x**2
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^6)")
+    print("P6 Q4:\nexpected:", "-x**6 + x**4 - x**2", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for p6q4 data")
 
 ######################### p7 #################################
 
