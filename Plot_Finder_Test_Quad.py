@@ -274,10 +274,32 @@ def test_exp_q4(self):
     self.assertEqual(method, "Exponential")
     self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for exp q4 data")
 
-
 ######################### log #################################
 
-
+def test_log_q1(self):
+    x = np.linspace(1, 10, 50)
+    y = 2 * np.log(x) + 5
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Logarithmic")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for log q1 data")
+def test_log_q2(self):
+    x = np.linspace(1, 10, 50)
+    y = -2 * np.log(x) + 5
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Logarithmic")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for log q2 data")
+def test_log_q3(self):
+    x = np.linspace(1, 10, 50)
+    y = -2 * np.log(x) - 5
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Logarithmic")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for log q3 data")
+def test_log_q4(self):
+    x = np.linspace(1, 10, 50)
+    y = 2 * np.log(x) - 5
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Logarithmic")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for log q4 data")
 
 ######################### sin #################################
 
