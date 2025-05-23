@@ -303,6 +303,30 @@ def test_log_q4(self):
 
 ######################### sin #################################
 
+def test_sin_q1(self):
+    x = np.linspace(0, np.pi / 2, 50)
+    y = 4 * np.sin(x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Sine")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for sin q1 data")
+def test_sin_q2(self):
+    x = np.linspace(np.pi / 2, np.pi, 50)
+    y = 4 * np.sin(x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Sine")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for sin q2 data")
+def test_sin_q3(self):
+    x = np.linspace(np.pi, 3 * np.pi / 2, 50)
+    y = 4 * np.sin(x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Sine")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for sin q3 data")
+def test_sin_q4(self):
+    x = np.linspace(3 * np.pi / 2, 2 * np.pi, 50)
+    y = 4 * np.sin(x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Sine")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for sin q4 data")
 
 
 if __name__ == '__main__':
