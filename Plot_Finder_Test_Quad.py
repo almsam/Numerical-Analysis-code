@@ -247,6 +247,41 @@ class TestRegressionMethods(unittest.TestCase):
 
 # p7 has 3 places to ensure tests pass at this number of computations
 
+######################### exp #################################
+
+def test_exp_q1(self):
+    x = np.linspace(0.1, 5, 50)
+    y = 2 * np.exp(0.3 * x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Exponential")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for exp q1 data")
+def test_exp_q2(self):
+    x = -np.linspace(0.1, 5, 50)
+    y = 2 * np.exp(0.3 * x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Exponential")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for exp q2 data")
+def test_exp_q3(self):
+    x = -np.linspace(0.1, 5, 50)
+    y = -2 * np.exp(0.3 * x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Exponential")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for exp q3 data")
+def test_exp_q4(self):
+    x = np.linspace(0.1, 5, 50)
+    y = -2 * np.exp(0.3 * x)
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Exponential")
+    self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for exp q4 data")
+
+
+######################### log #################################
+
+
+
+######################### sin #################################
+
+
 
 if __name__ == '__main__':
     unittest.main()
