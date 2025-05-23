@@ -216,6 +216,37 @@ def test_polynomial_p6_q4(self):
 
 ######################### p7 #################################
 
+def test_polynomial_p7_q1(self):
+    x = np.linspace(0.1, 3, 50)
+    y = x**7 + x**5 + x**3 + x
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^7)")
+    print("P7 Q1:\nexpected:", "x**7 + x**5 + x**3 + x", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=4)
+
+def test_polynomial_p7_q2(self):
+    x = np.linspace(-3, -0.1, 50)
+    y = -x**7 + x**5 - x**3 + x
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^7)")
+    print("P7 Q2:\nexpected:", "-x**7 + x**5 - x**3 + x", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=4)
+
+def test_polynomial_p7_q3(self):
+    x = np.linspace(-3, -0.1, 50)
+    y = -x**7 - x**5 - x**3 - x
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^7)")
+    print("P7 Q3:\nexpected:", "-x**7 - x**5 - x**3 - x", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=4)
+
+def test_polynomial_p7_q4(self):
+    x = np.linspace(0.1, 3, 50)
+    y = x**7 - x**5 + x**3 - x
+    method, error, formula = find_best_fit(x, y, True)
+    self.assertEqual(method, "Polynomial (x^7)")
+    print("P7 Q4:\nexpected:", "x**7 - x**5 + x**3 - x", "\nreceived:", str(formula))
+    self.assertAlmostEqual(error, 0, places=4)
 
 
 if __name__ == '__main__':
