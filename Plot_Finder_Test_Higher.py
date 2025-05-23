@@ -158,6 +158,7 @@ class TestRegressionMethods(unittest.TestCase):
         y = 2.5 * np.log(x) - 4
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Logarithmic")
+        print("log:\nexpected:", "2.5 * np.log(x) - 4", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5)
 
     def test_log_regression_near_one(self):
@@ -165,6 +166,7 @@ class TestRegressionMethods(unittest.TestCase):
         y = 0.8 * np.log(x) + 2
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Logarithmic")
+        print("log:\nexpected:", "0.8 * np.log(x) + 2", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5)
 
     def test_log_regression_shifted_upward(self):
@@ -172,6 +174,7 @@ class TestRegressionMethods(unittest.TestCase):
         y = 3.3 * np.log(x) + 7
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Logarithmic")
+        print("log:\nexpected:", "3.3 * np.log(x) + 7", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5)
 
 # sin
