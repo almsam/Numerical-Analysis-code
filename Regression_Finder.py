@@ -78,18 +78,39 @@ def exp_regression(x, y):
     log_y = np.log(y)
     X = np.column_stack((np.ones(len(x)), x))
     intercept, slope = np.linalg.inv(X.T @ X) @ X.T @ log_y
-        # then somehow find the error
-    def predict(x): return np.exp(intercept + slope * x) - shift
-    error = np.mean(np.abs(y - (np.exp(intercept + slope * x))))
-        # and return the result (this time in the new format)
-    coefficient = np.exp(intercept)#; base = np.exp(slope) #removed base to eliminate massive bug
-    regression = {
-        "sin_terms": [(0, 0, 0)],
-        "exponential_terms": [(coefficient, slope)], # base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)], #removed base to eliminate massive bug
-        "logarithmic_terms": [(0, 0)],
-        "polynomial_terms": {0: -shift, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
-    }
-    return error, regression # intercept + (slope * exp(age))
+    
+    #     # then somehow find the error
+    # def predict(x): return np.exp(intercept + slope * x) - shift
+    # error = np.mean(np.abs(y - (np.exp(intercept + slope * x))))
+    #     # and return the result (this time in the new format)
+    # coefficient = np.exp(intercept)#; base = np.exp(slope) #removed base to eliminate massive bug
+    # regression = {
+    #     "sin_terms": [(0, 0, 0)],
+    #     "exponential_terms": [(coefficient, slope)], # base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)], #removed base to eliminate massive bug
+    #     "logarithmic_terms": [(0, 0)],
+    #     "polynomial_terms": {0: -shift, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
+    # }
+    # return error, regression # intercept + (slope * exp(age))
+    
+    
+    def build_result(sign=1.0):
+        predicted = sign * np.exp(intercept + slope * x) - shift
+        error = np.mean(np.abs(y - predicted))
+        coefficient = sign * np.exp(intercept)
+        regression = {
+            "sin_terms": [(0, 0, 0)],
+            "exponential_terms": [(coefficient, slope)],
+            "logarithmic_terms": [(0, 0)],
+            "polynomial_terms": {0: -shift, 1: 0, 2: 0}
+        }
+        return error, regression
+
+    # Try both +exp and -exp fits, return the one with lower error
+    pos_error, pos_reg = build_result(sign=1.0)
+    neg_error, neg_reg = build_result(sign=-1.0)
+
+    return (pos_error, pos_reg) if pos_error < neg_error else (neg_error, neg_reg)
+
 
 
 def logarithmic_regression(x, y):
