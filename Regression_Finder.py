@@ -69,19 +69,25 @@ def poly_regression(x, y, degree):
 
 def exp_regression(x, y):
         # generate polynomial features up to the given degree
+    
+    shift = 0
+    if np.any(y <= 0):
+        shift = abs(np.min(y)) + 1e-6
+        y = y + shift
+    
     log_y = np.log(y)
     X = np.column_stack((np.ones(len(x)), x))
     intercept, slope = np.linalg.inv(X.T @ X) @ X.T @ log_y
         # then somehow find the error
-    def predict(x): return np.exp(intercept + slope * x)
-    error = np.mean(np.abs(y - predict(x)))
+    def predict(x): return np.exp(intercept + slope * x) - shift
+    error = np.mean(np.abs(y - (np.exp(intercept + slope * x))))
         # and return the result (this time in the new format)
     coefficient = np.exp(intercept)#; base = np.exp(slope) #removed base to eliminate massive bug
     regression = {
         "sin_terms": [(0, 0, 0)],
         "exponential_terms": [(coefficient, slope)], # base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)], #removed base to eliminate massive bug
         "logarithmic_terms": [(0, 0)],
-        "polynomial_terms": {0: 0, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
+        "polynomial_terms": {0: -shift, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
     }
     return error, regression # intercept + (slope * exp(age))
 
