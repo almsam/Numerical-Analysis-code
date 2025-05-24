@@ -75,9 +75,9 @@ def generate_sympy_function(regression_output):
         expr += c * exp(b * x)
     
     # Add logarithmic terms
-    for c, b in regression_output["logarithmic_terms"]:
+    for c, shift in regression_output["logarithmic_terms"]:
         # expr += c * log(b * x)
-        expr += Piecewise((c * log(b * x), b * x > 0), (0, True)) # type: ignore # type ignore for now - see #72
+        expr += Piecewise((c * log(x + shift), x + shift > 0), (0, True)) # type: ignore # type ignore for now - see #72
     
     # Add polynomial terms
     for power, coef in regression_output["polynomial_terms"].items():
@@ -99,10 +99,10 @@ def plot_function(regression_output, x_range=(-10, 10), num_points=1000, title="
         y += c * np.exp(b * x)
     
     # Add logarithmic terms
-    for c, b in regression_output["logarithmic_terms"]:
+    for c, shift in regression_output["logarithmic_terms"]:
         # Avoid log of negative numbers
         # mask = x > 0
-        z = b * x; mask = z > 0
+        z = x + shift; mask = z > 0
         y[mask] += c * np.log(z[mask])
     
     # Add polynomial terms
@@ -132,9 +132,9 @@ def plot_function_data(regression_output, x_data, y_data, x_range=(-10, 10), num
         y += c * np.exp(b * x)
     
     # Add logarithmic terms
-    for c, b in regression_output["logarithmic_terms"]:
+    for c, shift in regression_output["logarithmic_terms"]:
         # mask = x > 0
-        z = b * x; mask = z > 0
+        z = x + shift; mask = z > 0
         y[mask] += c * np.log(z[mask])
     
     # Add polynomial terms
