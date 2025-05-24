@@ -69,36 +69,68 @@ def poly_regression(x, y, degree):
 
 def exp_regression(x, y):
         # generate polynomial features up to the given degree
+    
+    shift = 0
+    if np.any(y <= 0):
+        shift = abs(np.min(y)) + 1e-6
+        y = y + shift
+    
     log_y = np.log(y)
     X = np.column_stack((np.ones(len(x)), x))
     intercept, slope = np.linalg.inv(X.T @ X) @ X.T @ log_y
-        # then somehow find the error
-    def predict(x): return np.exp(intercept + slope * x)
-    error = np.mean(np.abs(y - predict(x)))
-        # and return the result (this time in the new format)
-    coefficient = np.exp(intercept)#; base = np.exp(slope) #removed base to eliminate massive bug
-    regression = {
-        "sin_terms": [(0, 0, 0)],
-        "exponential_terms": [(coefficient, slope)], # base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)], #removed base to eliminate massive bug
-        "logarithmic_terms": [(0, 0)],
-        "polynomial_terms": {0: 0, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
-    }
-    return error, regression # intercept + (slope * exp(age))
+    
+    #     # then somehow find the error
+    # def predict(x): return np.exp(intercept + slope * x) - shift
+    # error = np.mean(np.abs(y - (np.exp(intercept + slope * x))))
+    #     # and return the result (this time in the new format)
+    # coefficient = np.exp(intercept)#; base = np.exp(slope) #removed base to eliminate massive bug
+    # regression = {
+    #     "sin_terms": [(0, 0, 0)],
+    #     "exponential_terms": [(coefficient, slope)], # base/(2*np.sqrt(np.e)))], # (coefficient/(2*np.sqrt(np.e)), base/(2*np.sqrt(np.e)))], # coefficient, base)], #removed base to eliminate massive bug
+    #     "logarithmic_terms": [(0, 0)],
+    #     "polynomial_terms": {0: -shift, 1: 0, 2: 0} # {0: intercept, 1: 0, 2: 0}
+    # }
+    # return error, regression # intercept + (slope * exp(age))
+    
+    
+    def build_result(sign=1.0):
+        predicted = sign * np.exp(intercept + slope * x) - shift
+        error = np.mean(np.abs(y - predicted))
+        coefficient = sign * np.exp(intercept)
+        regression = {
+            "sin_terms": [(0, 0, 0)],
+            "exponential_terms": [(coefficient, slope)],
+            "logarithmic_terms": [(0, 0)],
+            "polynomial_terms": {0: -shift, 1: 0, 2: 0}
+        }
+        return error, regression
+
+    # Try both +exp and -exp fits, return the one with lower error
+    pos_error, pos_reg = build_result(sign=1.0)
+    neg_error, neg_reg = build_result(sign=-1.0)
+
+    return (pos_error, pos_reg) if pos_error < neg_error else (neg_error, neg_reg)
+
 
 
 def logarithmic_regression(x, y):
         # generate polynomial features up to the given degree
-    log_x = np.log(x)
+    # Determine shift if any x values are non-positive
+    shift = 0
+    if np.any(x <= 0):
+        shift = abs(np.min(x)) + 1e-6; x_shifted = x + shift  # ensure all values are > 0
+    else: x_shifted = x.copy()  # no shift case
+    log_x = np.log(x_shifted)
     X = np.column_stack((np.ones(len(log_x)), log_x))
     intercept, log_coef = np.linalg.inv(X.T @ X) @ X.T @ y
         # then somehow find the error
-    def predict(x): return intercept + log_coef * np.log(x)
+    def predict(x): return intercept + log_coef * np.log(x + shift)
     error = np.mean(np.abs(y - predict(x)))
         # and return the result (this time in the new format)
     regression = {
         "sin_terms": [(0, 0, 0)],
         "exponential_terms": [(0, 0)],
-        "logarithmic_terms": [(log_coef, 1)], #np.e)],
+        "logarithmic_terms": [(log_coef, shift)], #np.e)],
         "polynomial_terms": {0: intercept, 1: 0, 2: 0}
     }
     return error, regression # intercept + (log_coef * log(age))

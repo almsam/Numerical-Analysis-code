@@ -123,7 +123,7 @@ class TestRegressionMethods(unittest.TestCase):
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
         print("exp:\nexpected:", "4 * np.exp(0.3 * x)", "\nrecieved: ", str(formula))
-        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect left shift exponential data")
 
     def test_exp_regression_centered_around_zero(self):
         x = np.linspace(-2, 2, 50)
@@ -131,7 +131,7 @@ class TestRegressionMethods(unittest.TestCase):
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
         print("exp:\nexpected:", "1.5 * np.exp(0.7 * x)", "\nrecieved: ", str(formula))
-        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect center zero exponential data")
 
     def test_exp_regression_positive_quadrant(self):
         x = np.linspace(1, 10, 50)
@@ -139,7 +139,7 @@ class TestRegressionMethods(unittest.TestCase):
         method, error, formula = find_best_fit(x, y, True)
         self.assertEqual(method, "Exponential")
         print("exp:\nexpected:", "2.2 * np.exp(0.2 * x)", "\nrecieved: ", str(formula))
-        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect exponential data")
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect positive exponential data")
 
 
 # log
@@ -152,6 +152,30 @@ class TestRegressionMethods(unittest.TestCase):
         self.assertTrue((method == "Logarithmic"))
         print("log:\nexpected:", "3 * np.log(x) + 1", "\nrecieved: ", str(formula),)
         self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect logarithmic data")
+
+    def test_log_regression_positive_x_large_values(self):
+        x = np.linspace(10, 100, 50)
+        y = 2.5 * np.log(x) - 4
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Logarithmic")
+        print("log:\nexpected:", "2.5 * np.log(x) - 4", "\nrecieved: ", str(formula),)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect x large logarithmic data")
+
+    def test_log_regression_near_one(self):
+        x = np.linspace(1.1, 5, 50)
+        y = 0.8 * np.log(x) + 2
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Logarithmic")
+        print("log:\nexpected:", "0.8 * np.log(x) + 2", "\nrecieved: ", str(formula),)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect near 1 logarithmic data")
+
+    def test_log_regression_shifted_upward(self):
+        x = np.linspace(1, 15, 50)
+        y = 3.3 * np.log(x) + 7
+        method, error, formula = find_best_fit(x, y, True)
+        self.assertEqual(method, "Logarithmic")
+        print("log:\nexpected:", "3.3 * np.log(x) + 7", "\nrecieved: ", str(formula),)
+        self.assertAlmostEqual(error, 0, places=5, msg="Expected zero error for perfect shifted up logarithmic data")
 
 # sin
 
