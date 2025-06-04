@@ -37,7 +37,7 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # main function
-def find_best_fit(x, y, plot=False):
+def find_best_fit(x, y, plot=False, maxPolynomial=7):
 
     methods = [
         ("Linear", linear_regression),
@@ -60,11 +60,12 @@ def find_best_fit(x, y, plot=False):
             best_method = name; best_fit_formula = formula; min_error = error
     
     # polynomial regression degrees 4 to 7
-    for degree in range(4, 8):
-        error, formula = poly_regression(x, y, degree)
-        error_list.append((f"Polynomial (x^{degree})", error, formula))
-        if best_method is None or error < min_error: # if a new best is found
-            best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
+    if(maxPolynomial>3): # if 4 or more then it prints the necessary terms
+        for degree in range(4, (maxPolynomial+1)):
+            error, formula = poly_regression(x, y, degree)
+            error_list.append((f"Polynomial (x^{degree})", error, formula))
+            if best_method is None or error < min_error: # if a new best is found
+                best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
     
     # out stuff
     print("\n--- Regression Errors ---")
