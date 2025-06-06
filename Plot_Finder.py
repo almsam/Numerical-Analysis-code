@@ -37,18 +37,20 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # main function
-def find_best_fit(x, y, plot=False, maxPolynomial=7):
+def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
 
-    methods = [
-        ("Linear", linear_regression),
-        ("Quadratic", quadratic_regression),
-        ("Cubic", cubic_regression),
+    all_methods = {
+        "linear": ("Linear", linear_regression),
+        "quadratic": ("Quadratic", quadratic_regression),
+        "cubic": ("Cubic", cubic_regression),
         # polynomial is included
         
-        ("Exponential", exp_regression),
-        ("Logarithmic", logarithmic_regression),
-        ("Sine", sin_regression),
-    ]
+        "exponential": ("Exponential", exp_regression),
+        "logarithmic": ("Logarithmic", logarithmic_regression),
+        "sine": ("Sine", sin_regression),
+    }
+
+    # methods = [ ("Linear", linear_regression), ("Quadratic", quadratic_regression), ("Cubic", cubic_regression), ("Exponential", exp_regression), ("Logarithmic", logarithmic_regression), ("Sine", sin_regression), ]
     
     error_list = []; best_method = None; best_fit_formula = None # saves candidate for best
     
