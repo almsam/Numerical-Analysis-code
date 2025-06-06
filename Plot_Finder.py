@@ -52,6 +52,9 @@ def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
 
     # methods = [ ("Linear", linear_regression), ("Quadratic", quadratic_regression), ("Cubic", cubic_regression), ("Exponential", exp_regression), ("Logarithmic", logarithmic_regression), ("Sine", sin_regression), ]
     
+    if isinstance(methods, str): methods = [m.strip().lower() for m in methods.split(",")] #cleanup input
+
+    
     error_list = []; best_method = None; best_fit_formula = None # saves candidate for best
     
     # non polynomial regression
