@@ -71,7 +71,7 @@ def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
     error_list = []; best_method = None; best_fit_formula = None # saves candidate for best
     
     # non polynomial regression
-    for name, method in methods:
+    for name, method in selected_methods:
         error, formula = method(x, y)
         error_list.append((name, error, formula))
         if best_method == None or error < min_error: # if a new best is found
