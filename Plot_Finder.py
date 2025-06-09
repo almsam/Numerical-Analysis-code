@@ -100,9 +100,9 @@ def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
 
 
 
-def fourier(x, y, n, plot=False, maxPolynomial=7, methods="all"):
+def fourier(x, y, Iterations=2, plot=False, maxPolynomial=7, methods="all"):
     # first we need to regress on the data & get the approximation function
-    n = n - 1
+    Iterations = Iterations - 1
     
     print(f"\n______ Iteration {1} ______")
     residuals = y.copy()
@@ -114,7 +114,7 @@ def fourier(x, y, n, plot=False, maxPolynomial=7, methods="all"):
     
     print(f"current best method : {best_method}")
     
-    for i in range(n):
+    for i in range(Iterations):
         
         print(f"\n______ Iteration {i+2} ______")
         pred_y = lambdify(age, best_fit_formula, 'numpy')(x);   residuals = residuals - pred_y
