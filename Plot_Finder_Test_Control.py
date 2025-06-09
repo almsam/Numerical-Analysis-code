@@ -33,7 +33,12 @@ class TestBestFitParameters(unittest.TestCase):
         method, error, formula = find_best_fit(self.x, self.y, methods="linear, exponential", maxPolynomial=3)
         self.assertNotEqual(method, "Sine", msg="Sine should not be tested when not requested")
 
-
+    def test_high_degree_polynomial_win(self):
+        """Test that high-degree polynomials can win with appropriate data."""
+        x = np.linspace(0, 2, 100)
+        y = 5 * x**5 - 3 * x**3 + x + 1  # 5th degree poly
+        method, error, formula = find_best_fit(x, y, maxPolynomial=6)
+        self.assertIn("x^5", method, msg="Expected 5th-degree polynomial to be selected")
 
 
 if __name__ == '__main__':
