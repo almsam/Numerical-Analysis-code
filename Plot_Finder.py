@@ -37,34 +37,53 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
 
 # main function
-def find_best_fit(x, y, plot=False):
+def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
 
-    methods = [
-        ("Linear", linear_regression),
-        ("Quadratic", quadratic_regression),
-        ("Cubic", cubic_regression),
+    all_methods = {
+        "linear": ("Linear", linear_regression),
+        "quadratic": ("Quadratic", quadratic_regression),
+        "cubic": ("Cubic", cubic_regression),
         # polynomial is included
         
-        ("Exponential", exp_regression),
-        ("Logarithmic", logarithmic_regression),
-        ("Sine", sin_regression),
-    ]
+        "exponential": ("Exponential", exp_regression),
+        "logarithmic": ("Logarithmic", logarithmic_regression),
+        "sine": ("Sine", sin_regression),
+    }
+
+    # methods = [ ("Linear", linear_regression), ("Quadratic", quadratic_regression), ("Cubic", cubic_regression), ("Exponential", exp_regression), ("Logarithmic", logarithmic_regression), ("Sine", sin_regression), ]
+    
+    if isinstance(methods, str): methods = [m.strip().lower() for m in methods.split(",")] #cleanup input
+    
+    selected_methods = []
+    if "all" in methods:
+        if maxPolynomial >= 1: selected_methods.append(("Linear", linear_regression))
+        if maxPolynomial >= 2: selected_methods.append(("Quadratic", quadratic_regression))
+        if maxPolynomial >= 3: selected_methods.append(("Cubic", cubic_regression))
+        for key in ["exponential", "logarithmic", "sine"]: selected_methods.append(all_methods[key])
+    else:
+        for key in methods:
+            if key in all_methods:
+                if key == "linear": selected_methods.append(all_methods[key])
+                elif key == "quadratic": selected_methods.append(all_methods[key])
+                elif key == "cubic": selected_methods.append(all_methods[key])
+                elif key not in ["linear", "quadratic", "cubic"]: selected_methods.append(all_methods[key]) #adds exp, log, or sin
     
     error_list = []; best_method = None; best_fit_formula = None # saves candidate for best
     
     # non polynomial regression
-    for name, method in methods:
+    for name, method in selected_methods:
         error, formula = method(x, y)
         error_list.append((name, error, formula))
         if best_method == None or error < min_error: # if a new best is found
             best_method = name; best_fit_formula = formula; min_error = error
     
     # polynomial regression degrees 4 to 7
-    for degree in range(4, 8):
-        error, formula = poly_regression(x, y, degree)
-        error_list.append((f"Polynomial (x^{degree})", error, formula))
-        if best_method is None or error < min_error: # if a new best is found
-            best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
+    if(maxPolynomial>3): # if 4 or more then it prints the necessary terms
+        for degree in range(4, (maxPolynomial+1)):
+            error, formula = poly_regression(x, y, degree)
+            error_list.append((f"Polynomial (x^{degree})", error, formula))
+            if best_method is None or error < min_error: # if a new best is found
+                best_method = f"Polynomial (x^{degree})"; best_fit_formula = formula; min_error = error
     
     # out stuff
     print("\n--- Regression Errors ---")
@@ -81,25 +100,25 @@ def find_best_fit(x, y, plot=False):
 
 
 
-def fourier(x, y, n, plot=False):
+def fourier(x, y, Iterations=2, plot=False, maxPolynomial=7, methods="all"):
     # first we need to regress on the data & get the approximation function
-    n = n - 1
+    Iterations = Iterations - 1
     
     print(f"\n______ Iteration {1} ______")
     residuals = y.copy()
     full_formula = None
     
-    best_method, min_error, best_fit_formula = find_best_fit(x, y, False)
+    best_method, min_error, best_fit_formula = find_best_fit(x, y, False, maxPolynomial=maxPolynomial, methods=methods)
     funclist = []; funclist.append(best_fit_formula)
     full_formula = best_fit_formula
     
     print(f"current best method : {best_method}")
     
-    for i in range(n):
+    for i in range(Iterations):
         
         print(f"\n______ Iteration {i+2} ______")
         pred_y = lambdify(age, best_fit_formula, 'numpy')(x);   residuals = residuals - pred_y
-        best_method, min_error, best_fit_formula = find_best_fit(x, residuals, False) # regress on error
+        best_method, min_error, best_fit_formula = find_best_fit(x, residuals, False, maxPolynomial=maxPolynomial, methods=methods) # regress on error
         
         print(f"current best method : {best_method}")
         funclist.append(best_fit_formula); full_formula += best_fit_formula # type: ignore
