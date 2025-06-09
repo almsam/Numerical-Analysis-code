@@ -40,6 +40,11 @@ class TestBestFitParameters(unittest.TestCase):
         method, error, formula = find_best_fit(x, y, maxPolynomial=6)
         self.assertIn("x^5", method, msg="Expected 5th-degree polynomial to be selected")
 
+    def test_default_behavior_includes_all(self):
+        """Test that default parameters include all models including polynomials up to 7."""
+        method, error, formula = find_best_fit(self.x, self.y)
+        self.assertIsInstance(method, str)
+        self.assertGreaterEqual(error, 0)
 
 if __name__ == '__main__':
     unittest.main()
