@@ -18,6 +18,20 @@ class TestBestFitParameters(unittest.TestCase):
         else:
             self.assertNotIn("Polynomial", method)
 
+    def test_methods_filter_includes_only_exponential(self):
+        """Test that only exponential method is considered."""
+        method, error, formula = find_best_fit(self.x, self.y, methods="exponential", maxPolynomial=1)
+        self.assertEqual(method, "Exponential", msg="Only 'Exponential' should be used")
+
+    def test_methods_filter_combined_methods(self):
+        """Test that linear and logarithmic are the only ones used."""
+        method, error, formula = find_best_fit(self.x, self.y, methods="linear, logarithmic", maxPolynomial=1)
+        self.assertIn(method, ["Linear", "Logarithmic"], msg="Only 'Linear' and 'Logarithmic' should be considered")
+
+
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
