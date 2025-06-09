@@ -28,7 +28,10 @@ class TestBestFitParameters(unittest.TestCase):
         method, error, formula = find_best_fit(self.x, self.y, methods="linear, logarithmic", maxPolynomial=1)
         self.assertIn(method, ["Linear", "Logarithmic"], msg="Only 'Linear' and 'Logarithmic' should be considered")
 
-
+    def test_sine_excluded_when_not_requested(self):
+        """Test that sine regression is excluded when not in method list."""
+        method, error, formula = find_best_fit(self.x, self.y, methods="linear, exponential", maxPolynomial=3)
+        self.assertNotEqual(method, "Sine", msg="Sine should not be tested when not requested")
 
 
 
