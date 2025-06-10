@@ -20,7 +20,7 @@ y = df_filtered["hdlngth"].values; x = df_filtered["age"].values; age = symbols(
 
 
 
-def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
+def plot_best_fit(x, y, best_fit_method_name="Best Fit Method", best_fit_formula): # plot our function:
     
     print(f"\nplotting: {best_fit_formula}")
 
@@ -33,8 +33,8 @@ def plot_best_fit(x, y, best_fit_method, best_fit_formula): # plot our function:
     print("Generated expression:", sym_func) # print("x_range shape:", x_range.shape); print("y_range shape:", y_range.shape)
 
     # plot our regression curve:
-    plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method} Regression')  # Best-fit curve
-    plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method} Regression'); plt.legend(); plt.show()
+    plt.plot(x_range, y_range, color='red', label=f'Best fit: {best_fit_method_name} Regression')  # Best-fit curve
+    plt.xlabel('X'); plt.ylabel('Y'); plt.title(f'{best_fit_method_name} Regression'); plt.legend(); plt.show()
 
 # main function
 def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
