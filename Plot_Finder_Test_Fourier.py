@@ -21,10 +21,9 @@ class TestFourierRegression(unittest.TestCase):
         # formula = find_fourier(self.x, self.y, 8, True)
         print("\n\n\nLinear:\n\n\n")
         x = np.linspace(0, 10, 50); x = x[x != 0] #avoid x 0
-        y = 3 * x + 2 + (1*np.sin(5*x)) # y = 3x + 2 + 4 * exp(0.3 * x)
-        funclist, formula = find_fourier(x, y, Iterations=1, plot=True, maxPolynomial=3, methods="all")#(x, y, True)
+        y = 3 * x + 2  # y = 3x + 2
+        formula = find_fourier(x, y, True)
         print(formula)
-        print(funclist)
         self.assertTrue(True, msg="Linear test passes")
         # self.assertEqual(method, "Linear")
         # print("Linear:\nexpected:", "3.0*x + 2.0", "\nrecieved: ", str(formula))
