@@ -100,7 +100,7 @@ def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
 
 
 
-def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=7, methods="all"):
+def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=3, methods="all"):
     # first we need to regress on the data & get the approximation function
     Iterations = Iterations - 1
     
@@ -127,7 +127,7 @@ def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=7, methods="all")
     
     if(plot): plot_best_fit(x, y, "Fourier Series", full_formula)
     
-    return full_formula# the output should be a list of fuctions
+    return funclist, full_formula# the output should be a list of fuctions
 
 
 
