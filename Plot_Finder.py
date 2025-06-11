@@ -20,7 +20,7 @@ y = df_filtered["hdlngth"].values; x = df_filtered["age"].values; age = symbols(
 
 
 
-def plot_best_fit(x, y, best_fit_method_name="Best Fit Method", best_fit_formula): # plot our function:
+def plot_best_fit(x, y, best_fit_method_name="Best Fit Method", best_fit_formula=None): # plot our function:
     
     print(f"\nplotting: {best_fit_formula}")
 
