@@ -5,7 +5,7 @@ from unittest.mock import patch
 from sympy import symbols, lambdify, exp, log, sin
 import statsmodels.api as sm
 import statsmodels.formula.api as smf  # type: ignore
-from Plot_Finder import find_best_fit, plot_best_fit, find_fourier
+from Plot_Finder import *
 # from Numerical_Methods import *
 import matplotlib.pyplot as plt
 
