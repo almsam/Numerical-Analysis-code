@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sympy import symbols
 
-df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv"); df_filtered = df[["hdlngth", "age"]].dropna()
+df = pd.read_csv("data/possum.csv"); df_filtered = df[["hdlngth", "age"]].dropna()
 y = df_filtered["hdlngth"].values; x = df_filtered["age"].values; age = symbols('x')
 
 def linear_regression(x, y):
