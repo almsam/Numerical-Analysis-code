@@ -7,7 +7,7 @@ class TestRegressionStandards(unittest.TestCase):
 
     @classmethod
     def setUp(cls):
-        df = pd.read_csv("c:/Users/samia/OneDrive/Desktop/Numerical-Analysis-code/data/possum.csv")
+        df = pd.read_csv("data/possum.csv")
         df_filtered = df[["hdlngth", "age"]].dropna()
         cls.x = df_filtered["age"].values
         cls.y = df_filtered["hdlngth"].values
