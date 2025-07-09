@@ -17,6 +17,7 @@ x1 = x1[x1 != 0]  # Remove zero to avoid log issues
 y1 = 2 * x1 + 3
 
 # OPTIONAL: add some noise
+np.random.seed(0)  # Set seed for reproducibility
 y1 += np.random.normal(0, 1, len(y1))
 
 # Use PlotFinder to find the best fit; this automatically tests multiple regression methods and return the one with the lowest error;
