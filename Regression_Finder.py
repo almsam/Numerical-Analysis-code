@@ -66,10 +66,8 @@ def poly_regression(x, y, degree):
     }
     return error, regression # predict(age)
 
-
 def exp_regression(x, y):
-        # generate polynomial features up to the given degree
-    
+    # Handle non-positive y values
     shift = 0
     if np.any(y <= 0):
         shift = abs(np.min(y)) + 1e-6
@@ -79,6 +77,26 @@ def exp_regression(x, y):
     X = np.column_stack((np.ones(len(x)), x))
     intercept, slope = np.linalg.inv(X.T @ X) @ X.T @ log_y
     
+    # Function to build the result with correct base conversion
+    def build_result(sign=1.0):
+        predicted = sign * np.exp(intercept + slope * x) - shift
+        error = np.mean(np.abs(y - predicted))
+        coefficient = sign * np.exp(intercept)
+        # No conversion needed - slope is already the exponent
+        regression = {
+            "sin_terms": [(0, 0, 0)],
+            "exponential_terms": [(coefficient, slope)],  # Use slope directly
+            "logarithmic_terms": [(0, 0)],
+            "polynomial_terms": {0: -shift, 1: 0, 2: 0}
+        }
+        return error, regression
+
+    # Try both +exp and -exp fits, return the one with lower error
+    pos_error, pos_reg = build_result(sign=1.0)
+    neg_error, neg_reg = build_result(sign=-1.0)
+
+    return (pos_error, pos_reg) if pos_error < neg_error else (neg_error, neg_reg)
+
     #     # then somehow find the error
     # def predict(x): return np.exp(intercept + slope * x) - shift
     # error = np.mean(np.abs(y - (np.exp(intercept + slope * x))))
