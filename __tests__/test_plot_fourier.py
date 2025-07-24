@@ -58,6 +58,7 @@ print(f"\nTest 4:")
 print(f"Test 4-1 returned: {funclist4[0]}")
 print(f"Test 4-2 returned: {funclist4[1]}")
 print(f"Test 4-3 returned: {funclist4[2]}")
+print(f"Test 4-4 returned: {funclist4[3]}")
 
 # print(f"Test 2 found {funclist2} components")
 
