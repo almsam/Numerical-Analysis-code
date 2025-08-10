@@ -1,9 +1,6 @@
 from numpy import arange
 from sympy import lambdify, symbols
 
-# def central_difference_approx(func, x, h):
-#     return (func(x+h) - func(x-h)) / (2*h)
-
 def bisection_search(func, range_start, range_end, tolerance=1e-6, max_iter=1000):
     x = symbols('x')
     f = lambdify(x, func)
