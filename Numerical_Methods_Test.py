@@ -1,8 +1,9 @@
 import unittest
+from math import sqrt
 import numpy as np
 from unittest.mock import patch
-from sympy import symbols, exp, log, sin, sympify
-from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative # type: ignore
+from sympy import symbols, exp, log, sin, sympify, pi
+from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all # type: ignore
 
 class TestMathFunctions(unittest.TestCase):
     
@@ -27,6 +28,11 @@ class TestMathFunctions(unittest.TestCase):
         # derivative
         self.assertAlmostEqual(calculate_derivative(0, func), 3.0, places=2)
 
+        # bisection
+        roots = bisection_all(func, -100, 100, 0.5)
+        self.assertEqual(len(roots), 1)
+        self.assertAlmostEqual(roots[0], (- 2 / 3), places=2)
+
     @patch('builtins.input', return_value="2*x**2 + 4*x + 1")
     def test_quadratic_function(self, mock_input):
         # f(x) = 2x^2 + 4x + 1
@@ -44,6 +50,12 @@ class TestMathFunctions(unittest.TestCase):
         # derivative
         self.assertAlmostEqual(calculate_derivative(0, func), 4.0, places=2)
 
+        # bisection
+        roots = bisection_all(func, -100, 100, 0.5)
+        self.assertEqual(len(roots), 2)
+        self.assertAlmostEqual(roots[1], (- 2 + sqrt(2)) / 2, places=2)
+        self.assertAlmostEqual(roots[0], (- 2 - sqrt(2)) / 2, places=2)
+
     @patch('builtins.input', return_value="exp(x)")
     def test_exponential_function(self, mock_input):
         # f(x) = exp(x)
@@ -60,6 +72,10 @@ class TestMathFunctions(unittest.TestCase):
         
         # derivative
         self.assertAlmostEqual(calculate_derivative(1, func), float(exp(1)), places=2)
+
+        # bisection
+        roots = bisection_all(func, -100, 100, 0.5)
+        self.assertEqual(len(roots), 0)
 
     @patch('builtins.input', return_value="log(x)")
     def test_logarithmic_function(self, mock_input):
@@ -79,6 +95,11 @@ class TestMathFunctions(unittest.TestCase):
         # derivative
         self.assertAlmostEqual(calculate_derivative(1, func), 1.0, places=2)
 
+        # bisection
+        roots = bisection_all(func, 0, 100, 0.1)
+        self.assertEqual(len(roots), 1)
+        self.assertAlmostEqual(roots[0], 1, places=2)
+
     @patch('builtins.input', return_value="sin(x)")
     def test_sine_function(self, mock_input):
         # f(x) = sin(x)
@@ -95,6 +116,13 @@ class TestMathFunctions(unittest.TestCase):
         
         # derivative
         self.assertAlmostEqual(calculate_derivative(3.14159 / 2, func), 0.0, places=2)
+
+        # bisection
+        roots = bisection_all(func, -5, 5, 0.1)
+        self.assertEqual(len(roots), 3)
+        self.assertAlmostEqual(roots[0], float(-pi), places=2)
+        self.assertAlmostEqual(roots[1], 0, places=2)
+        self.assertAlmostEqual(roots[2], float(pi), places=2)
 
 if __name__ == "__main__":
     unittest.main()
