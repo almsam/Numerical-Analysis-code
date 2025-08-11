@@ -1,9 +1,9 @@
-from math import isinf, isnan
-from numpy import arange
+import math
+import numpy as np
 from sympy import lambdify, symbols
 
 def shift_away_from_inf(f, x, step=1e-6, direction=1):
-    while isinf(f(x)) or isnan(f(x)):
+    while math.isinf(f(x)) or math.isnan(f(x)):
         x += step * direction
     return x
 
@@ -31,7 +31,7 @@ def bisection_all(func, range_start, range_end, step, tolerance=1e-6, max_iter=1
     x = symbols('x')
     f = lambdify(x, func)
 
-    for x in arange(range_start, range_end, step):
+    for x in np.arange(range_start, range_end, step):
         # a = x
         # b = x + step
         a = shift_away_from_inf(f, x, direction=1)
