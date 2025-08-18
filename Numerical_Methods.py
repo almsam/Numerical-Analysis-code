@@ -82,6 +82,25 @@ def bisection_all(func, range_start, range_end, step, tolerance=1e-6, max_iter=1
     # print(roots)
     return roots
 
+def trapezoid(func, range_start, range_end, num_traps=1000):
+    range_start = np.float64(range_start)
+    range_end = np.float64(range_end)
+    step_size = (range_end - range_start) / num_traps
+    x = symbols('x')
+    f = lambdify(x, func)
+
+    # calc: step_size / 2 ( f(range_start) + 2(Σf(x_i)) + f(range_end) )
+    # -> ((f(range_start) + f(range_end)) / 2 + Σf(x_i)) * step size
+    area_sum = f(range_start) + f(range_end) * 0.5
+
+    for i in range(1, num_traps):
+        x_i = range_start + i * step_size
+        area_sum += f(x_i)
+
+    return area_sum * step_size
+    
+
+
 
 
 def main():
