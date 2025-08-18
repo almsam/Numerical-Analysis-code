@@ -82,7 +82,7 @@ def bisection_all(func, range_start, range_end, step, tolerance=1e-6, max_iter=1
     # print(roots)
     return roots
 
-def trapezoid(func, range_start, range_end, num_traps=1000):
+def trapezoid_basic(func, range_start, range_end, num_traps=1500):
     range_start = np.float64(range_start)
     range_end = np.float64(range_end)
     step_size = (range_end - range_start) / num_traps
@@ -99,7 +99,25 @@ def trapezoid(func, range_start, range_end, num_traps=1000):
 
     return area_sum * step_size
     
+def trapezoid(func, range_start, range_end, init_num_traps=1000, tolerance=1e-5, max_iter=1000):
+    n = init_num_traps
+    prev_approx = trapezoid_basic(func, range_start, range_end, n)
+    current_approx = 0
 
+    if(max_iter <= 0):
+        raise Exception("Please ensure max_iter is greater than 0.")
+
+    for iter in range(max_iter):
+        n *= 2 # double trapezoid number
+        current_approx = trapezoid_basic(func, range_start, range_end, n)
+
+        # result stabilized?
+        if abs(current_approx - prev_approx) < tolerance:
+            return current_approx
+
+        prev_approx = current_approx
+
+    return current_approx
 
 
 
