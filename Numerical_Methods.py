@@ -82,6 +82,55 @@ def bisection_all(func, range_start, range_end, step, tolerance=1e-6, max_iter=1
     # print(roots)
     return roots
 
+def trapezoid_basic(func, range_start, range_end, num_traps=1500):
+    x = symbols('x')
+    f = lambdify(x, func)
+    range_start = np.float64(range_start)
+    range_end = np.float64(range_end)
+
+    range_start = shift_away_from_inf(f, range_start, step=1e-10, direction=1)
+    range_end = shift_away_from_inf(f, range_end, step=1e-10, direction=-1)
+
+    step_size = (range_end - range_start) / num_traps
+
+    # calc: step_size / 2 ( f(range_start) + 2(Σf(x_i)) + f(range_end) )
+    # -> ((f(range_start) + f(range_end)) / 2 + Σf(x_i)) * step size
+    area_sum = f(range_start) + f(range_end) * 0.5
+
+    for i in range(1, num_traps):
+        x_i = range_start + i * step_size
+        area_sum += f(x_i)
+
+    return area_sum * step_size
+    
+def trapezoid(func, range_start, range_end, init_num_traps=1000, tolerance=1e-5, max_iter=1000):
+    n = init_num_traps
+    x = symbols('x')
+    f = lambdify(x, func)
+    range_start = np.float64(range_start)
+    range_end = np.float64(range_end)
+
+    range_start = shift_away_from_inf(f, range_start, step=1e-10, direction=1)
+    range_end = shift_away_from_inf(f, range_end, step=1e-10, direction=-1)
+
+    prev_approx = trapezoid_basic(func, range_start, range_end, n)
+    current_approx = 0
+
+    if(max_iter <= 0):
+        raise Exception("Please ensure max_iter is greater than 0.")
+
+    for iter in range(max_iter):
+        n *= 2 # double trapezoid number
+        current_approx = trapezoid_basic(func, range_start, range_end, n)
+
+        # result stabilized?
+        if abs(current_approx - prev_approx) < tolerance:
+            return current_approx
+
+        prev_approx = current_approx
+
+    return current_approx
+
 
 
 def main():

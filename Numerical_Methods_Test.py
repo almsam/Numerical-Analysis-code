@@ -3,7 +3,7 @@ from math import sqrt
 import numpy as np
 from unittest.mock import patch
 from sympy import symbols, exp, log, sin, sympify, pi
-from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all # type: ignore
+from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all, trapezoid # type: ignore
 
 class TestMathFunctions(unittest.TestCase):
     
@@ -33,6 +33,11 @@ class TestMathFunctions(unittest.TestCase):
         self.assertEqual(len(roots), 1)
         self.assertAlmostEqual(roots[0], (- 2 / 3), places=2)
 
+        # trapezoid
+        trapezoid_area = trapezoid(func, -2, 2)
+        self.assertAlmostEqual(trapezoid_area, 8, places=2)
+
+
     @patch('builtins.input', return_value="2*x**2 + 4*x + 1")
     def test_quadratic_function(self, mock_input):
         # f(x) = 2x^2 + 4x + 1
@@ -56,6 +61,10 @@ class TestMathFunctions(unittest.TestCase):
         self.assertAlmostEqual(roots[1], (- 2 + sqrt(2)) / 2, places=2)
         self.assertAlmostEqual(roots[0], (- 2 - sqrt(2)) / 2, places=2)
 
+        # trapezoid
+        trapezoid_area = trapezoid(func, -2, 2)
+        self.assertAlmostEqual(trapezoid_area, 14 + 2/3, places=2)
+
     @patch('builtins.input', return_value="exp(x)")
     def test_exponential_function(self, mock_input):
         # f(x) = exp(x)
@@ -77,12 +86,15 @@ class TestMathFunctions(unittest.TestCase):
         roots = bisection_all(func, -100, 100, 0.5)
         self.assertEqual(len(roots), 0)
 
+        # trapezoid
+        trapezoid_area = trapezoid(func, -2, 2)
+        self.assertAlmostEqual(trapezoid_area, 7.2537, places=2) # 7.2537208
+
     @patch('builtins.input', return_value="log(x)")
     def test_logarithmic_function(self, mock_input):
         # f(x) = ln(x), only defined for x > 0
         func = input_function()
         
-        # evaluate
         # evaluate
         self.assertAlmostEqual(evaluate_function(func, 1), 0.0, places=2)
         self.assertAlmostEqual(evaluate_function(func, float(exp(1))), 1.0, places=2)
@@ -99,6 +111,10 @@ class TestMathFunctions(unittest.TestCase):
         roots = bisection_all(func, 0, 100, 0.1)
         self.assertEqual(len(roots), 1)
         self.assertAlmostEqual(roots[0], 1, places=2)
+
+        # trapezoid
+        trapezoid_area = trapezoid(func, 0, 2)
+        self.assertAlmostEqual(trapezoid_area, -0.6137, places=2) # 0.6137
 
     @patch('builtins.input', return_value="sin(x)")
     def test_sine_function(self, mock_input):
@@ -123,6 +139,10 @@ class TestMathFunctions(unittest.TestCase):
         self.assertAlmostEqual(roots[0], float(-pi), places=2)
         self.assertAlmostEqual(roots[1], 0, places=2)
         self.assertAlmostEqual(roots[2], float(pi), places=2)
+
+        # trapezoid
+        trapezoid_area = trapezoid(func, -pi, 2*pi)
+        self.assertAlmostEqual(trapezoid_area, -2, places=2) # 0.6137
 
 if __name__ == "__main__":
     unittest.main()
