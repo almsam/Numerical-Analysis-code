@@ -140,8 +140,8 @@ def simpsons_rule(func, range_start, range_end, num_subintervals):
     range_start = np.float64(range_start)
     range_end = np.float64(range_end)
 
-    range_start = shift_away_from_inf(f, range_start, step=1e-10, direction=1)
-    range_end = shift_away_from_inf(f, range_end, step=1e-10, direction=-1)
+    range_start = shift_away_from_inf(f, range_start, step=1e-14, direction=1)
+    range_end = shift_away_from_inf(f, range_end, step=1e-14, direction=-1)
 
     step_size = (range_end - range_start) / num_subintervals
 
