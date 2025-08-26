@@ -3,7 +3,7 @@ from math import sqrt
 import numpy as np
 from unittest.mock import patch
 from sympy import symbols, exp, log, sin, sympify, pi
-from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all, trapezoid # type: ignore
+from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all, trapezoid, simpsons_rule # type: ignore
 
 class TestMathFunctions(unittest.TestCase):
     
@@ -37,6 +37,10 @@ class TestMathFunctions(unittest.TestCase):
         trapezoid_area = trapezoid(func, -2, 2)
         self.assertAlmostEqual(trapezoid_area, 8, places=2)
 
+        # simpsons
+        simpsons_area = simpsons_rule(func, -2, 2, 10)
+        self.assertAlmostEqual(simpsons_area, 8, places=2)
+
 
     @patch('builtins.input', return_value="2*x**2 + 4*x + 1")
     def test_quadratic_function(self, mock_input):
@@ -65,6 +69,10 @@ class TestMathFunctions(unittest.TestCase):
         trapezoid_area = trapezoid(func, -2, 2)
         self.assertAlmostEqual(trapezoid_area, 14 + 2/3, places=2)
 
+        # simpsons
+        simpsons_area = simpsons_rule(func, -2, 2, 10)
+        self.assertAlmostEqual(simpsons_area, 14 + 2/3, places=2)
+
     @patch('builtins.input', return_value="exp(x)")
     def test_exponential_function(self, mock_input):
         # f(x) = exp(x)
@@ -89,6 +97,10 @@ class TestMathFunctions(unittest.TestCase):
         # trapezoid
         trapezoid_area = trapezoid(func, -2, 2)
         self.assertAlmostEqual(trapezoid_area, 7.2537, places=2) # 7.2537208
+
+        # simpsons
+        simpsons_area = simpsons_rule(func, -2, 2, 10)
+        self.assertAlmostEqual(simpsons_area, 7.2537, places=2)
 
     @patch('builtins.input', return_value="log(x)")
     def test_logarithmic_function(self, mock_input):
@@ -115,6 +127,12 @@ class TestMathFunctions(unittest.TestCase):
         # trapezoid
         trapezoid_area = trapezoid(func, 0, 2)
         self.assertAlmostEqual(trapezoid_area, -0.6137, places=2) # 0.6137
+
+    
+        # Not working... 
+        # simpsons - this is not a good use for simpson's method
+        # simpsons_area = simpsons_rule(func, 0, 2, 300)
+        # self.assertAlmostEqual(simpsons_area, -0.6137, places=2)
 
     @patch('builtins.input', return_value="sin(x)")
     def test_sine_function(self, mock_input):
@@ -143,6 +161,10 @@ class TestMathFunctions(unittest.TestCase):
         # trapezoid
         trapezoid_area = trapezoid(func, -pi, 2*pi)
         self.assertAlmostEqual(trapezoid_area, -2, places=2) # 0.6137
+
+        # simpsons
+        simpsons_area = simpsons_rule(func, -pi, 2*pi, 20)
+        self.assertAlmostEqual(simpsons_area, -2, places=2)
 
 if __name__ == "__main__":
     unittest.main()
