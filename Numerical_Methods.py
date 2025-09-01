@@ -148,6 +148,12 @@ def newton_method(func, guess, multiplicity=1, tolerance=1e-5, max_iter=1000):
     prev_x = guess
     current_x = guess
     for _ in range(max_iter):
+        if np.isinf(f(prev_x)):
+            if not np.isinf(f(prev_x+1e-6)):
+                prev_x = shift_away_from_inf(f, guess, direction=1)
+            else:
+                prev_x = shift_away_from_inf(f, guess, direction=-1)
+
         fx = f(prev_x)
         fpx = f_prime(prev_x)
 
@@ -157,9 +163,12 @@ def newton_method(func, guess, multiplicity=1, tolerance=1e-5, max_iter=1000):
         current_x = prev_x - multiplicity * fx / fpx
 
         if abs(current_x - prev_x) < tolerance:
+        # if abs(f(current_x)) < tolerance:
             return current_x
+        prev_x = current_x
 
-    return current_x
+    raise ValueError("Newton's Method did not converge in the set number of iterations")
+    # return current_x
 
 
 
