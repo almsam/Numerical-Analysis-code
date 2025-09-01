@@ -117,7 +117,7 @@ def trapezoid(func, range_start, range_end, init_num_traps=1000, tolerance=1e-5,
     current_approx = 0
 
     if(max_iter <= 0):
-        raise Exception("Please ensure max_iter is greater than 0.")
+        raise ValueError("Please ensure max_iter is greater than 0.")
 
     for iter in range(max_iter):
         n *= 2 # double trapezoid number
