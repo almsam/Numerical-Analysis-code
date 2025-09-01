@@ -132,7 +132,7 @@ def trapezoid(func, range_start, range_end, init_num_traps=1000, tolerance=1e-5,
     return current_approx
 
 
-def newton(func, guess, multiplicity=1, tolerance=1e-5, max_iter=1000):
+def newton_method(func, guess, multiplicity=1, tolerance=1e-5, max_iter=1000):
     x = symbols('x')
     f = lambdify(x, func)
     guess = np.float64(guess)
