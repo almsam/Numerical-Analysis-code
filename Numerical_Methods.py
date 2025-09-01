@@ -132,6 +132,38 @@ def trapezoid(func, range_start, range_end, init_num_traps=1000, tolerance=1e-5,
     return current_approx
 
 
+def newton(func, guess, multiplicity=1, tolerance=1e-5, max_iter=1000):
+    x = symbols('x')
+    f = lambdify(x, func)
+    guess = np.float64(guess)
+    if np.isinf(f(x)):
+        if not np.isinf(f(x+1e-6)):
+            guess = shift_away_from_inf(f, guess, direction=1)
+        else:
+            guess = shift_away_from_inf(f, guess, direction=-1)
+
+    func_prime = diff(func, x)
+    f_prime = lambdify(x, func_prime)
+
+    prev_x = guess
+    current_x = guess
+    for _ in range(max_iter):
+        fx = f(prev_x)
+        fpx = f_prime(prev_x)
+
+        if fpx == 0:
+           raise ValueError("Derivative is zero - no convergence") 
+
+        current_x = prev_x - multiplicity * fx / fpx
+
+        if abs(current_x - prev_x) < tolerance:
+            return current_x
+
+    return current_x
+
+
+
+
 
 def main():
     user_func = input_function()
