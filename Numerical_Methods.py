@@ -136,8 +136,8 @@ def newton_method(func, guess, multiplicity=1, tolerance=1e-5, max_iter=1000):
     x = symbols('x')
     f = lambdify(x, func)
     guess = np.float64(guess)
-    if np.isinf(f(x)):
-        if not np.isinf(f(x+1e-6)):
+    if np.isinf(f(guess)):
+        if not np.isinf(f(guess+1e-6)):
             guess = shift_away_from_inf(f, guess, direction=1)
         else:
             guess = shift_away_from_inf(f, guess, direction=-1)
