@@ -117,7 +117,7 @@ def trapezoid(func, range_start, range_end, init_num_traps=1000, tolerance=1e-5,
     current_approx = 0
 
     if(max_iter <= 0):
-        raise Exception("Please ensure max_iter is greater than 0.")
+        raise ValueError("Please ensure max_iter is greater than 0.")
 
     for iter in range(max_iter):
         n *= 2 # double trapezoid number
@@ -130,6 +130,30 @@ def trapezoid(func, range_start, range_end, init_num_traps=1000, tolerance=1e-5,
         prev_approx = current_approx
 
     return current_approx
+
+def simpsons_rule(func, range_start, range_end, num_subintervals):
+    if num_subintervals % 2 != 0:
+        raise ValueError("Number of subintervals must be even.")
+
+    x = symbols('x')
+    f = lambdify(x, func)
+    range_start = np.float64(range_start)
+    range_end = np.float64(range_end)
+
+    range_start = shift_away_from_inf(f, range_start, step=1e-14, direction=1)
+    range_end = shift_away_from_inf(f, range_end, step=1e-14, direction=-1)
+
+    step_size = (range_end - range_start) / num_subintervals
+
+    result = f(range_start) + f(range_end)
+    x_points = [range_start + i*step_size for i in range(num_subintervals+1)]
+    y_points = [f(val) for val in x_points]
+    #TODO: figure out the interior sum (the one multiplied by 4s and 2s) 
+    result += 4 * sum(y_points[i] for i in range(1, num_subintervals, 2))
+    result += 2 * sum(y_points[i] for i in range(2, num_subintervals-1, 2))
+
+    return (step_size / 3) * result
+
 
 
 
