@@ -91,7 +91,7 @@ def find_best_fit(x, y, plot=False, maxPolynomial=7, methods="all"):
     return best_method, min_error, best_fit_formula
 
 
-def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=3, methods="all"):
+def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=3, methods="all", verbose=False):
     """
     Perform iterative regression to decompose data into multiple components (Fourier-like series).
     
@@ -126,7 +126,8 @@ def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=3, methods="all")
     # Adjust iterations (since first iteration is counted separately)
     Iterations = Iterations - 1
     
-    print(f"\n______ Iteration {1} ______")
+    if verbose:
+        print(f"\n______ Iteration {1} ______")
     
     # Initialize variables
     residuals = y.copy()  # Start with original y values
@@ -144,11 +145,13 @@ def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=3, methods="all")
     full_formula = best_fit_formula
     cumulative_formulas.append(full_formula)  # Store first approximation
     
-    print(f"current best method : {best_method}")
+    if verbose:
+        print(f"current best method : {best_method}")
     
     # Subsequent iterations: fit the residuals
     for i in range(Iterations):
-        print(f"\n______ Iteration {i+2} ______")
+        if verbose:
+            print(f"\n______ Iteration {i+2} ______")
         
         # Calculate predictions from current best fit formula
         pred_y = lambdify(age, generate_sympy_function(best_fit_formula), 'numpy')(x)
@@ -161,7 +164,8 @@ def find_fourier(x, y, Iterations=2, plot=False, maxPolynomial=3, methods="all")
             x, residuals, False, maxPolynomial=maxPolynomial, methods=methods
         )
         
-        print(f"current best method : {best_method}")
+        if verbose:
+            print(f"current best method : {best_method}")
         
         # Add new component to our lists
         funclist.append(best_fit_formula)
