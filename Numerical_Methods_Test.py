@@ -3,7 +3,7 @@ from math import sqrt
 import numpy as np
 from unittest.mock import patch
 from sympy import symbols, exp, log, sin, sympify, pi
-from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all, trapezoid, simpsons_rule # type: ignore
+from Numerical_Methods import input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all, newton_method, trapezoid, simpsons_rule # type: ignore
 
 class TestMathFunctions(unittest.TestCase):
     
@@ -32,6 +32,12 @@ class TestMathFunctions(unittest.TestCase):
         roots = bisection_all(func, -100, 100, 0.5)
         self.assertEqual(len(roots), 1)
         self.assertAlmostEqual(roots[0], (- 2 / 3), places=2)
+
+        # Newton
+        root = newton_method(func, 0)
+        self.assertAlmostEqual(root, (-2 / 3), places=2)
+        root = newton_method(func, 500)
+        self.assertAlmostEqual(root, (-2 / 3), places=2)
 
         # trapezoid
         trapezoid_area = trapezoid(func, -2, 2)
@@ -65,6 +71,13 @@ class TestMathFunctions(unittest.TestCase):
         self.assertAlmostEqual(roots[1], (- 2 + sqrt(2)) / 2, places=2)
         self.assertAlmostEqual(roots[0], (- 2 - sqrt(2)) / 2, places=2)
 
+        # Newton
+        root = newton_method(func, -10)
+        self.assertAlmostEqual(root, (- 2 - sqrt(2)) / 2, places=2)
+        root = newton_method(func, 0)
+        self.assertAlmostEqual(root, (- 2 + sqrt(2)) / 2, places=2)
+        self.assertRaises(ValueError, newton_method, func, -1) # derivative is zero here
+
         # trapezoid
         trapezoid_area = trapezoid(func, -2, 2)
         self.assertAlmostEqual(trapezoid_area, 14 + 2/3, places=2)
@@ -93,6 +106,11 @@ class TestMathFunctions(unittest.TestCase):
         # bisection
         roots = bisection_all(func, -100, 100, 0.5)
         self.assertEqual(len(roots), 0)
+
+        # Newton
+        self.assertRaises(ValueError, newton_method, func, -50) # derivative is zero here
+        self.assertRaises(ValueError, newton_method, func, 0) # derivative is zero here
+        self.assertRaises(ValueError, newton_method, func, 50) # derivative is zero here
 
         # trapezoid
         trapezoid_area = trapezoid(func, -2, 2)
@@ -123,6 +141,14 @@ class TestMathFunctions(unittest.TestCase):
         roots = bisection_all(func, 0, 100, 0.1)
         self.assertEqual(len(roots), 1)
         self.assertAlmostEqual(roots[0], 1, places=2)
+
+        # Newton
+        root = newton_method(func, 2, max_iter=5000)
+        self.assertAlmostEqual(root, 1, places=2)
+        self.assertRaises(ValueError, newton_method, func, -50) # derivative is zero here
+
+        # Fails if Newton's method goes too far into an undefined zone
+        # root = newton_method(func, 10, max_iter=5000)
 
         # trapezoid
         trapezoid_area = trapezoid(func, 0, 2)
@@ -157,6 +183,14 @@ class TestMathFunctions(unittest.TestCase):
         self.assertAlmostEqual(roots[0], float(-pi), places=2)
         self.assertAlmostEqual(roots[1], 0, places=2)
         self.assertAlmostEqual(roots[2], float(pi), places=2)
+        
+        # Newton
+        root = newton_method(func, 1)
+        self.assertAlmostEqual(root, 0, places=2)
+        root = newton_method(func, -3)
+        self.assertAlmostEqual(root, float(-pi), places=2)
+        root = newton_method(func, 3)
+        self.assertAlmostEqual(root, float(pi), places=2)
 
         # trapezoid
         trapezoid_area = trapezoid(func, -pi, 2*pi)
