@@ -62,7 +62,7 @@
 First, install the dependecies:
 
 ```
-pip install numpy pandas seaborn matplotlib statsmodels sympy
+pip install -r requirements.txt
 ```
 
 Next, prepare your data with an independent & dependent variabke: example CSV:
