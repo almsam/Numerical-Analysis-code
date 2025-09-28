@@ -194,6 +194,23 @@ def newton_method(func, guess, multiplicity=1, tolerance=1e-5, max_iter=1000):
     raise ValueError("Newton's Method did not converge in the set number of iterations")
     # return current_x
 
+def euler_ode_approx(func, init_y, init_t, step_size=0.01, step_num=1000):
+    """Returns the Euler approximation of the solution to an ODE. """
+    # dy/dt = f(t,y); y(t_0) = y_0
+    y, t = symbols('y,t')
+    f = lambdify((y, t), func)
+    y_list = [init_y]
+    t_list = [init_t]
+    y = init_y
+    t = init_t
+
+    for n in range(step_num):
+        y = y + step_size * f(t, y)
+        t = t + step_size
+        y_list.append(y)
+        t_list.append(t)
+
+    return y_list, t_list
 
 
 
