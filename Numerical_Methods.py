@@ -198,14 +198,14 @@ def euler_ode_approx(func, init_y, init_t, step_size=0.01, step_num=1000):
     """Returns the Euler approximation of the solution to an ODE. """
     # dy/dt = f(t,y); y(t_0) = y_0
     y_sym, t_sym = symbols('y,t')
-    f = lambdify((y_sym, t_sym), func)
+    f = lambdify((t_sym, y_sym), func)
     y_list = [init_y]
     t_list = [init_t]
     y = init_y
     t = init_t
 
     for n in range(step_num):
-        y = y + step_size * f(y, t)
+        y = y + step_size * f(t, y)
         t = t + step_size
         y_list.append(y)
         t_list.append(t)
