@@ -3,7 +3,7 @@ from math import sqrt, exp
 import numpy as np
 from unittest.mock import patch
 from sympy import symbols, exp, log, sin, cos, sympify, pi
-from Numerical_Methods import euler_ode_approx, input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all, newton_method, trapezoid, simpsons_rule # type: ignore
+from Numerical_Methods import euler_ode_approx, heun_ode_approx, input_function, evaluate_function, find_min_max, calculate_derivative, bisection_all, newton_method, trapezoid, simpsons_rule # type: ignore
 
 class TestMathFunctions(unittest.TestCase):
     
@@ -200,26 +200,36 @@ class TestMathFunctions(unittest.TestCase):
         simpsons_area = simpsons_rule(func, -pi, 2*pi, 20)
         self.assertAlmostEqual(simpsons_area, -2, places=2)
 
-    # @patch('builtins.input', return_value="y")
-    # def test_ode_approx(self, mock_input):
-    def test_ode_approx(self):
-        # func = input_function()
+    def test_ode_approx_exp(self):
         # label y_sym and t_sym to avoid overloading/name clobbering
         y_sym, t_sym = symbols("y, t")
 
         # dy/dt = y; y(0) = 1; y = e^t
         func = y_sym
+
         y_vals, t_vals = euler_ode_approx(func, 1, 0, step_size=0.05, step_num=20)
         for y, t in zip(y_vals, t_vals):
             exact = exp(t)
-            # exact = np.float64(exp(t_val))
             error = abs(y - exact)
             # print(f"exact y:{exact}; calc'd y:{y}; error:{error}")
             self.assertLess(error, 0.1)
 
 
+        y_vals, t_vals = heun_ode_approx(func, 1, 0, step_size=0.05, step_num=20)
+        for y, t in zip(y_vals, t_vals):
+            exact = exp(t)
+            error = abs(y - exact)
+            # print(f"exact y:{exact}; calc'd y:{y}; error:{error}")
+            self.assertLess(error, 0.1)
+
+
+    def test_ode_approx_exp2(self):
+        # label y_sym and t_sym to avoid overloading/name clobbering
+        y_sym, t_sym = symbols("y, t")
+
         # dy/dt = -2y; y(0) = 1; y = e^-2t
         func = -2 * y_sym
+
         y_vals, t_vals = euler_ode_approx(func, 1, 0, step_size=0.05, step_num=20)
         for y, t in zip(y_vals, t_vals):
             exact = exp(-2 * t)
@@ -228,13 +238,34 @@ class TestMathFunctions(unittest.TestCase):
             self.assertLess(error, 0.1)
 
 
-        # dy/dt = y; y(0) = 0; y = sin(t)
+        y_vals, t_vals = heun_ode_approx(func, 1, 0, step_size=0.05, step_num=20)
+        for y, t in zip(y_vals, t_vals):
+            exact = exp(-2 * t)
+            error = abs(y - exact)
+            # print(f"exact y:{exact}; calc'd y:{y}; error:{error}")
+            self.assertLess(error, 0.1)
+
+
+    def test_ode_approx_sin(self):
+        # label y_sym and t_sym to avoid overloading/name clobbering
+        y_sym, t_sym = symbols("y, t")
+
+        # dy/dt = cos(y); y(0) = 0; y = sin(t)
         func = cos(y_sym)
+
         y_vals, t_vals = euler_ode_approx(func, 0, 0, step_size=0.05, step_num=20)
         for y, t in zip(y_vals, t_vals):
             exact = sin(t)
             error = abs(y - exact)
-            print(f"exact y:{exact}; calc'd y:{y}; error:{error}")
+            # print(f"exact y:{exact}; calc'd y:{y}; error:{error}")
+            self.assertLess(error, 0.1)
+
+
+        y_vals, t_vals = heun_ode_approx(func, 0, 0, step_size=0.05, step_num=20)
+        for y, t in zip(y_vals, t_vals):
+            exact = sin(t)
+            error = abs(y - exact)
+            # print(f"exact y:{exact}; calc'd y:{y}; error:{error}")
             self.assertLess(error, 0.1)
 
 
