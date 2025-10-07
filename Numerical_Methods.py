@@ -212,6 +212,25 @@ def euler_ode_approx(func, init_y, init_t, step_size=0.01, step_num=1000):
 
     return y_list, t_list
 
+def heun_ode_approx(func, init_y, init_t, step_size=0.01, step_num=1000):
+    """Returns the Heun approximation of the solution to an ODE. """
+    # dy/dt = f(t,y); y(t_0) = y_0
+    y_sym, t_sym = symbols('y,t')
+    f = lambdify((t_sym, y_sym), func)
+    y_list = [init_y]
+    t_list = [init_t]
+    y = init_y
+    t = init_t
+
+    for n in range(step_num):
+        # y = y + step_size * f(t, y)
+        y_intermediate = y + step_size * f(t, y)
+        y = y + step_size / 2 * (f(t, y) + f(t + step_size, y_intermediate))
+        t = t + step_size
+        y_list.append(y)
+        t_list.append(t)
+
+    return y_list, t_list
 
 
 
